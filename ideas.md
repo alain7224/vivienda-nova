@@ -74,3 +74,5 @@ El símbolo es un **monograma N/V** hecho con dos aperturas rectangulares y una 
 - El lenguaje de plano será estructural: cada capítulo incorpora cotas, coordenadas, guías o numeración que orientan el recorrido.
 - La fotografía privilegia la arquitectura habitable —luz, proporción, umbrales y materiales— por encima de escenas costeras o de piscina.
 - Terracota Nova se reserva para acciones, precios, numeración clave y un único momento editorial de gran escala: la banda de datos.
+- El monograma geométrico NV se repite como firma en portada, cabeceras y administración para evitar una marca fragmentada.
+- Los estados vacíos son pausas curatoriales: retícula de plano, trazos de cota y copy que comunica una selección en evolución.
