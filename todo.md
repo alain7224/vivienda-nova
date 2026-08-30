@@ -49,3 +49,15 @@
 - [x] Corregir el fondo global y el sobredesplazamiento final para evitar la franja clara bajo el pie.
 - [x] Verificar en capturas móvil y escritorio que el pie llega hasta el borde del documento.
 - [x] Confirmar en Safari o Chrome móvil reales, tras recargar, que ya no aparece una franja blanca al final.
+- [x] Añadir acciones de compartir una vivienda por WhatsApp, Facebook, X y copia de enlace.
+- [x] Validar con pruebas los enlaces de compartir y conservar la composición pública en escritorio y móvil.
+- [x] Preparar el manifiesto y los recursos para instalar Vivienda Nova como aplicación web.
+- [x] Añadir una ayuda de instalación adaptada a Android, iPhone/iPad y ordenadores.
+- [x] Validar la configuración instalable y conservar el funcionamiento de la web en navegador.
+- [x] Añadir en el pie de página el botón «Instalar aplicación» con confirmación nativa en navegadores compatibles.
+- [x] Mostrar una guía breve de Safari solo en iPhone/iPad, donde la instalación requiere el menú Compartir.
+- [x] Distinguir Safari de otros navegadores en iPhone/iPad antes de mostrar las instrucciones de instalación.
+- [x] Probar desde la interfaz el botón de instalación y su guía alternativa sin aceptar ni instalar la aplicación.
+- [x] Comprobar el cuadro de ayuda de instalación en pie de página móvil y escritorio.
+- [x] Revisar visualmente el control y la guía de instalación dentro del pie de página en escritorio y móvil.
+- [x] Verificar visualmente en móvil la guía de instalación abierta sin desbordar el pie de página.

@@ -234,10 +234,19 @@ h2 em { color: #d95f42; font-style: italic; }
 .form-error { color: #a83f31; font-size: 11px; font-weight: 700; margin: -4px 0 0; }
 .contact-form select { appearance: none; }
 
-.site-footer { align-items: center; background: #112f3f; color: #fffdf8; display: flex; justify-content: space-between; padding: 29px clamp(22px, 6.6vw, 112px); }
+.site-footer { align-items: center; background: #112f3f; color: #fffdf8; display: flex; flex-wrap: wrap; gap: 18px 30px; justify-content: space-between; padding: 29px clamp(22px, 6.6vw, 112px); }
 .site-footer p { color: rgba(255,255,255,.56); font-size: 9px; font-weight: 700; letter-spacing: .08em; margin: 0; text-transform: uppercase; }
-.site-footer > div { display: flex; gap: 20px; }
+.site-footer__links { display: flex; gap: 20px; }
 .site-footer a { color: rgba(255,255,255,.77); font-size: 9px; }
+.install-app-control { position: relative; }
+.install-app-trigger { align-items: center; background: #d95f42; color: #fffdf8; display: inline-flex; font-size: 9px; font-weight: 800; gap: 7px; letter-spacing: .08em; min-height: 34px; padding: 9px 12px; text-transform: uppercase; transition: background .18s, transform .16s cubic-bezier(.23,1,.32,1); }
+.install-app-trigger:hover { background: #ed7455; }
+.install-app-trigger:active { transform: scale(.97); }
+.install-app-guide { background: #fffdf8; bottom: calc(100% + 12px); box-shadow: 0 14px 34px rgba(0,0,0,.24); color: #112f3f; display: flex; gap: 14px; max-width: 310px; padding: 13px; position: absolute; right: 0; width: max-content; z-index: 12; }
+.install-app-guide > div { align-items: flex-start; display: flex; gap: 8px; }
+.install-app-guide > div > svg { color: #d95f42; flex: 0 0 auto; margin-top: 1px; }
+.install-app-guide p { color: #334a55; font-size: 10px; font-weight: 600; letter-spacing: 0; line-height: 1.45; margin: 0; text-transform: none; }
+.install-app-guide > button { color: #112f3f; flex: 0 0 auto; padding: 1px; }
 
 .property-dialog-backdrop { align-items: center; background: rgba(17,47,63,.73); display: flex; inset: 0; justify-content: center; padding: 22px; position: fixed; z-index: 20; }
 .property-dialog { background: #fffdf8; box-shadow: 0 28px 70px rgba(0,0,0,.3); display: grid; grid-template-columns: 1fr 1fr; max-width: 910px; position: relative; width: 100%; }
@@ -250,6 +259,17 @@ h2 em { color: #d95f42; font-style: italic; }
 .dialog-specs span { align-items: center; color: #4f5f66; display: flex; font-size: 10px; font-weight: 700; gap: 5px; }
 .dialog-specs .dialog-property-type { color: #c6563d; letter-spacing: .06em; text-transform: uppercase; }
 .dialog-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.property-share { border-top: 1px solid #d5d0c7; margin-top: 23px; padding-top: 16px; }
+.property-share > p { align-items: center; color: #68747a; display: flex; font-size: 10px; font-weight: 800; gap: 7px; letter-spacing: .1em; margin: 0 0 10px; text-transform: uppercase; }
+.property-share > p svg { color: #d95f42; }
+.property-share__actions { display: flex; flex-wrap: wrap; gap: 7px; }
+.property-share__button { align-items: center; background: #fffdf8; border: 1px solid #c9c4b9; color: #112f3f; display: inline-flex; font-size: 10px; font-weight: 800; gap: 5px; letter-spacing: .035em; min-height: 34px; padding: 7px 10px; transition: background .18s, border-color .18s, color .18s, transform .16s cubic-bezier(.23,1,.32,1); }
+.property-share__button:hover { background: #112f3f; border-color: #112f3f; color: #fffdf8; }
+.property-share__button:active { transform: scale(.97); }
+.property-share__button--whatsapp { border-color: #5eae82; color: #12643c; }
+.property-share__button--whatsapp:hover { background: #16864b; border-color: #16864b; }
+.property-share__button--native { border-color: #d95f42; color: #b84c32; }
+.property-share__button--native:hover { background: #d95f42; border-color: #d95f42; }
 .dialog-close { align-items: center; background: #fffdf8; color: #112f3f; display: flex; height: 36px; justify-content: center; position: absolute; right: 12px; top: 12px; transition: background .2s, color .2s; width: 36px; z-index: 1; }
 .dialog-close:hover { background: #d95f42; color: #fffdf8; }
 
@@ -308,8 +328,9 @@ h2 em { color: #d95f42; font-style: italic; }
   .contact-section { gap: 45px; grid-template-columns: 1fr; padding: 75px 22px; }
   .plan-reference--contact { left: 22px; top: 24px; }
   .contact-intro h2 { font-size: 61px; }
-  .site-footer { align-items: flex-start; flex-direction: column; gap: 24px; padding: 30px 22px; }
-  .site-footer > div { gap: 16px; }
+  .site-footer { align-items: flex-start; flex-direction: column; gap: 20px; padding: 30px 22px; }
+  .site-footer__links { flex-wrap: wrap; gap: 12px 16px; }
+  .install-app-guide { bottom: calc(100% + 10px); left: 0; right: auto; width: min(310px, calc(100vw - 44px)); }
   .property-dialog { display: block; max-height: calc(100vh - 44px); overflow: auto; }
   .property-dialog > img { display: block; height: 245px; max-height: none; }
   .dialog-copy { padding: 32px 25px; }
