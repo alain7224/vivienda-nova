@@ -46,3 +46,6 @@
 - [x] Comprobar en ordenador que WhatsApp abre wa.me con el número y mensaje correctos.
 - [x] Abrir el menú móvil y comprobar el acceso de WhatsApp visible y funcional.
 - [x] Comprobar el enlace de WhatsApp del menú adaptable con el número y mensaje correctos.
+- [x] Corregir el fondo global y el sobredesplazamiento final para evitar la franja clara bajo el pie.
+- [x] Verificar en capturas móvil y escritorio que el pie llega hasta el borde del documento.
+- [x] Confirmar en Safari o Chrome móvil reales, tras recargar, que ya no aparece una franja blanca al final.
