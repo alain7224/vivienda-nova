@@ -41,3 +41,8 @@
 - [x] Añadir un teléfono de contacto editable en la parte superior de la web con acceso directo a llamada.
 - [x] Validar la visibilidad y el comportamiento del teléfono en ordenador y móvil.
 - [x] Publicar temporalmente +34 611 248 122 como contacto superior editable.
+- [x] Añadir acceso directo a WhatsApp con el mismo número visible de la cabecera.
+- [x] Validar el acceso de WhatsApp en ordenador y móvil.
+- [x] Comprobar en ordenador que WhatsApp abre wa.me con el número y mensaje correctos.
+- [x] Abrir el menú móvil y comprobar el acceso de WhatsApp visible y funcional.
+- [x] Comprobar el enlace de WhatsApp del menú adaptable con el número y mensaje correctos.
