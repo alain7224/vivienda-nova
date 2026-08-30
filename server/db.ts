@@ -31,7 +31,10 @@ export function getDefaultPublicSiteSettings() {
     bannerRotationSeconds: 5,
     cardStyle: "flat" as const,
     enabledLocales: "es,en,nl,de,sv,no,fr,ro,ru,zh-CN,de-CH,fr-CH,it-CH",
-    heroVideos: "[]",
+    heroVideos: JSON.stringify([{
+      label: "Costa Blanca Norte",
+      url: "/manus-storage/costa-blanca-profesional_6d70f226.mp4",
+    }]),
   };
 }
 

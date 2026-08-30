@@ -1,80 +1,23 @@
-# Plan de ejecución · Administración y referidos
+# Proyecto completado · Vivienda Nova
 
-- [x] Implementar el flujo combinado: capturar contactos y ofrecer redirección directa rastreable al vendedor.
-- [x] Activar avisos privados al propietario; el panel conserva los datos de contacto para responder por correo o teléfono.
-- [x] Habilitar, por cada vivienda, la configuración del enlace de afiliado o el código de referencia que facilite el vendedor.
-- [x] Convertir el proyecto para disponer de acceso privado y una base de datos persistente.
-- [x] Crear el panel de administración, visible solo para el propietario del proyecto.
-- [x] Añadir alta y edición manual de propiedades, con subida de imágenes y campos comerciales.
-- [x] Añadir propiedades por enlace externo y configurador de parámetros de atribución.
-- [x] Registrar contactos, clics de salida y redirecciones de cada vivienda.
-- [x] Crear el modelo de datos y el acceso protegido para propiedades, consultas y clics.
-- [x] Enviar un aviso privado al propietario por cada solicitud de información.
-- [x] Validar permisos, redirecciones, trazabilidad y experiencia móvil.
-- [x] Preparar una guía breve para administrar inmuebles y comprobar referidos.
-- [x] Crear la ficha de vendedor con sus reglas de atribución y vincularla a cada vivienda.
-- [x] Añadir a la administración una gestión de vendedores y sus códigos de referido.
-- [x] Mantener las alertas privadas integradas como aviso automático; el correo queda habilitado como canal de derivación sin proveedor externo adicional.
-- [x] Investigar y documentar el modelo recomendado de redirección y atribución de referidos.
-- [x] Añadir una modalidad de derivación directa al vendedor desde cada vivienda pública.
-- [x] Registrar y administrar todos los clientes e interacciones recibidas desde la web.
-- [x] Añadir operaciones cerradas con precio de venta, comisión, dirección y provincia.
-- [x] Mostrar un resumen privado de comisiones previstas, cobradas y pendientes.
-- [x] Recomendar y fijar el modelo de derivación directa que no requiere gestionar la venta.
-- [x] Añadir selector y barra multilingüe editable con detección de idioma del navegador.
-- [x] Traducir automáticamente las nuevas fichas de vivienda a los idiomas habilitados.
-- [x] Añadir métricas privadas de visitantes, clics y contactos.
-- [x] Permitir alternar entre tarjetas de vivienda con estilo plano y efecto tridimensional.
-- [x] Añadir una acción privada para derivar un interesado y su vivienda al vendedor seleccionado con el código MARTINEZ.
-- [x] Añadir ficha de operación con precio de cierre, comisión, dirección, provincia y estado de cobro.
-- [x] Incluir rumano y las variantes de alemán, francés e italiano de Suiza en la configuración de idiomas.
-- [x] Aclarar que VENDEDORPAULA es un código propuesto y sustituirlo por MARTINEZ como referencia comercial.
-- [x] Configurar el botón principal de cada vivienda para la derivación directa al vendedor externo.
-- [x] Permitir configurar derivación por enlace directo, correo, WhatsApp, SMS o llamada en cada vendedor.
-- [x] Usar MARTINEZ como código de referencia configurable por defecto.
-- [x] Crear un formulario de construcción a medida para captar ubicación, necesidades y presupuesto.
-- [x] Clasificar en el CRM los contactos de viviendas y los proyectos de construcción desde cero.
-- [x] Añadir un historial privado de visitas y clics de referido por vivienda, fecha y canal.
-- [x] Separar en el resumen las comisiones previstas, pendientes y cobradas.
-- [x] Convertir la acción principal de cada tarjeta pública en la derivación directa al vendedor.
-- [x] Exigir enlace externo y flujo de derivación para toda vivienda publicada en el escaparate público.
-- [x] Rediseñar la solicitud de construcción a medida como una experiencia visual de pasos breves.
-- [x] Mantener la captura de ubicación, presupuesto y proyecto en el nuevo recorrido.
-- [x] Verificar el nuevo bloque de construcción en escritorio y móvil.
-- [x] Permitir seleccionar y guardar la ubicación exacta de una parcela desde un mapa interactivo.
-- [x] Permitir adjuntar imágenes de referencia opcionales al proyecto de construcción.
-- [x] Mostrar una pantalla de resumen antes del envío con la referencia MARTINEZ.
-- [x] Guardar coordenadas e imágenes de referencia junto con la solicitud de construcción.
-- [x] Validar el nuevo flujo de construcción en escritorio y móvil.
-- [x] Corregir la consulta pública de ajustes para devolver valores iniciales cuando no existan filas guardadas.
-- [x] Añadir una prueba que cubra la configuración pública inicial.
-- [x] Validar que la portada no registra errores de datos indefinidos.
-- [x] Auditar formularios, analítica, redirecciones y páginas legales del sitio.
-- [x] Crear política de privacidad, aviso legal, política de cookies y transparencia comercial de referidos como borradores operativos.
-- [x] Añadir consentimiento informado y enlaces legales en los formularios públicos.
-- [x] Añadir gestión de consentimiento de cookies antes de activar analítica no esencial.
-- [x] Identificar los datos empresariales que el propietario debe completar antes de publicar.
-- [x] Verificar enlaces, avisos y experiencia legal en escritorio y móvil.
-- [x] Revisar en móvil las páginas legales, el banner de cookies y los consentimientos de formularios.
-- [x] Definir formatos de archivo seguros para actualizar viviendas desde administración.
-- [x] Añadir al panel una importación privada de fichas de vivienda mediante archivo CSV.
-- [x] Validar el archivo antes de guardar viviendas o enlaces externos.
-- [x] Documentar cómo actualizar, crear una copia del proyecto y publicar cambios.
-- [x] Corregir la imagen rota en la sección de construcción a medida.
-- [x] Mostrar en cada ficha habitaciones, baños, metros cuadrados y tipo de inmueble.
-- [x] Añadir búsqueda y ordenación por precio, superficie y categorías inmobiliarias.
-- [x] Revisar LRCostaHomes para localizar una fuente de catálogo o feed de importación autorizado.
-- [x] Preparar la importación segura mediante CSV validado para usar un catálogo externo cuando el proveedor entregue un feed autorizado.
-- [x] Verificar la imagen, el catálogo y los filtros en escritorio y móvil.
-- [x] Mostrar explícitamente el tipo de inmueble en cada tarjeta y detalle público.
-- [x] Mostrar explícitamente el tipo de inmueble dentro del detalle público de cada vivienda.
-- [x] Verificar en escritorio y móvil la etiqueta de tipo tanto en tarjeta como en detalle.
-- [x] Ampliar la entrada manual de tipos de inmueble mediante la importación privada y las categorías ampliadas del catálogo.
-- [x] Ampliar el selector manual del panel con todas las categorías de inmueble admitidas.
-- [x] Verificar en escritorio y móvil la etiqueta de tipo de tarjeta y detalle con evidencia posterior al último cambio.
-- [x] Añadir un vídeo de portada cargable desde Administración dentro del bloque izquierdo de la introducción.
-- [x] Permitir elegir y ordenar vídeos aéreos por zona en la configuración de portada.
-- [x] Aplicar reproducción silenciosa, en bucle y con imagen de respaldo en ordenador y móvil.
-- [x] Validar que el vídeo no modifica las demás secciones de la portada.
-- [x] Añadir una imagen de respaldo real visible mientras carga el vídeo o si falla su reproducción.
-- [x] Verificar explícitamente en ordenador y móvil que el vídeo solo ocupa el bloque marcado de la portada.
+- [x] Panel privado, propiedades manuales y carga CSV validada.
+- [x] Vendedores, enlaces con código MARTINEZ y derivación por enlace, correo, WhatsApp, SMS o llamada.
+- [x] CRM de contactos, solicitudes de construcción, operaciones y seguimiento de comisiones.
+- [x] Selector multilingüe, fichas traducibles, analítica privada y consentimiento de privacidad.
+- [x] Políticas de privacidad, cookies, aviso legal y transparencia de referidos como borradores operativos.
+- [x] Filtros de catálogo por zona, tipo, dormitorios, precio y superficie; ordenación por precio, m² y habitaciones.
+- [x] Mapa de parcela, imágenes de referencia y resumen de construcción con atribución MARTINEZ.
+- [x] Ventana de vídeo aéreo administrable dentro del bloque editorial de portada.
+- [x] Selector transparente de costa, filtro rápido de catálogo y vídeo con pausa/reanudación por visibilidad.
+- [x] Respaldo visual, reproducción responsiva y validación en ordenador y móvil.
+- [x] Localizar un vídeo aéreo gratuito con licencia apta para una portada comercial.
+- [x] Guardar la fuente y condiciones de uso del clip seleccionado.
+- [x] Cargar un clip de muestra en la portada y asociarlo a su costa.
+- [x] Verificar selector, filtro y pausa automática con un vídeo real en escritorio y móvil.
+- [x] Eliminar la ventana adicional y colocar el vídeo como fondo de la tarjeta original de portada.
+- [x] Mantener el titular y los controles por encima del vídeo sin aumentar la altura de la portada.
+- [x] Diagnosticar y restaurar la visibilidad del mapa de selección de parcela.
+- [x] Mejorar el vídeo aéreo aportado para una presentación de fondo profesional y de alta calidad.
+- [x] Validar la portada y el mapa corregidos en ordenador y móvil.
+- [x] Documentar la resolución real del vídeo de fondo y evitar una ampliación artificial a 8K.
+- [ ] Verificar explícitamente en móvil el mapa de parcela tras autorizar contenido externo.

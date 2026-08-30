@@ -32,8 +32,10 @@ export default function CookieConsent({ onChange }: { onChange: (preferences: Co
 
   useEffect(() => {
     const reopen = () => { const stored = readCookiePreferences() ?? preferences; setPreferences(stored); setVisible(true); setOpen(true); };
+    const allowExternalContent = () => save({ ...preferences, externalContent: true });
     window.addEventListener("vivienda-nova:cookie-settings", reopen);
-    return () => window.removeEventListener("vivienda-nova:cookie-settings", reopen);
+    window.addEventListener("vivienda-nova:allow-external-content", allowExternalContent);
+    return () => { window.removeEventListener("vivienda-nova:cookie-settings", reopen); window.removeEventListener("vivienda-nova:allow-external-content", allowExternalContent); };
   }, [preferences]);
 
   if (!visible) return null;

@@ -1,0 +1,22 @@
+/* Casa & Plano: panel de costa ligero, transparente y superpuesto sobre un clip aéreo compacto. */
+.hero-coast-video { background: #d8d2c7 url("/manus-storage/vivienda-nova-card-loft_e25a829a.jpg") center / cover no-repeat; inset: 0; isolation: isolate; margin: 0; overflow: hidden; position: absolute; width: 100%; z-index: 0; }
+.hero-coast-video > video { height: 100%; inset: 0; object-fit: cover; position: absolute; width: 100%; z-index: 0; }
+.hero-coast-video__shade { background: linear-gradient(112deg, rgba(6,29,41,.84) 0%, rgba(6,29,41,.62) 45%, rgba(6,29,41,.16) 100%); inset: 0; pointer-events: none; position: absolute; z-index: 1; }
+.hero-coast-video__fallback { align-items: flex-start; color: #fffdf8; display: flex; flex-direction: column; height: 100%; inset: 0; justify-content: center; padding: 17px; position: absolute; z-index: 0; }
+.hero-coast-video__fallback span { font-size: 7px; font-weight: 800; letter-spacing: .12em; }
+.hero-coast-video__fallback strong { font-family: "DM Serif Display", serif; font-size: clamp(16px, 2.3vw, 23px); line-height: .9; margin: 5px 0; max-width: 250px; }
+.hero-coast-video__fallback p { font-size: 8px; margin: 0; opacity: .85; }
+.hero-coast-video__controls { align-items: flex-start; display: flex; gap: 6px; left: 10px; position: absolute; top: 10px; z-index: 4; }
+.coast-picker { position: relative; }
+.coast-picker > button, .play-toggle, .hero-coast-video__filter { align-items: center; backdrop-filter: blur(10px); background: rgba(255,253,248,.84); border: 1px solid rgba(255,255,255,.7); color: #112f3f; display: flex; font-family: "Manrope", sans-serif; font-size: 8px; font-weight: 800; gap: 6px; letter-spacing: .055em; text-transform: uppercase; }
+.coast-picker > button { min-height: 32px; padding: 5px 8px; text-align: left; }
+.coast-picker > button span { color: #667277; font-size: 7px; }
+.coast-picker > button strong { font-size: 8px; }
+.play-toggle { height: 32px; justify-content: center; width: 32px; }
+.coast-picker__menu { backdrop-filter: blur(14px); background: rgba(17,47,63,.92); box-shadow: 0 12px 26px rgba(4,25,34,.25); display: grid; left: 0; min-width: 185px; padding: 5px; position: absolute; top: 37px; z-index: 4; }
+.coast-picker__menu button, .coast-picker__menu span { background: transparent; border: 0; color: #fffdf8; font-family: "Manrope", sans-serif; font-size: 9px; padding: 8px; text-align: left; }
+.coast-picker__menu button:hover, .coast-picker__menu button.is-active { background: #d95f42; }
+.hero-coast-video__filter { bottom: 12px; left: 12px; min-height: 27px; padding: 5px 8px; position: absolute; z-index: 4; }
+.hero-coast-video__caption { bottom: 13px; color: #fffdf8; display: flex; font-size: 7px; font-weight: 800; justify-content: space-between; letter-spacing: .09em; position: absolute; right: 12px; text-transform: uppercase; width: 83px; z-index: 4; }
+.hero-coast-video__caption i { font-style: normal; opacity: .78; }
+@media (max-width: 700px) { .coast-picker > button { max-width: 178px; } .hero-coast-video__caption { display: none; } .hero-coast-video__filter { font-size: 7px; } }
