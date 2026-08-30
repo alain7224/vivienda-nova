@@ -56,3 +56,7 @@
 - [x] Identificar los datos empresariales que el propietario debe completar antes de publicar.
 - [x] Verificar enlaces, avisos y experiencia legal en escritorio y móvil.
 - [x] Revisar en móvil las páginas legales, el banner de cookies y los consentimientos de formularios.
+- [x] Definir formatos de archivo seguros para actualizar viviendas desde administración.
+- [x] Añadir al panel una importación privada de fichas de vivienda mediante archivo CSV.
+- [x] Validar el archivo antes de guardar viviendas o enlaces externos.
+- [x] Documentar cómo actualizar, crear una copia del proyecto y publicar cambios.

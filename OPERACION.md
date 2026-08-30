@@ -10,6 +10,12 @@ Selecciona **«Añadir vivienda»** en el área privada. Completa los datos del 
 
 La misma ficha permite introducir una URL de imagen alojada externamente. Esta opción es útil cuando cuentas con autorización del propietario de la imagen y deseas reutilizarla desde su ubicación original.
 
+## Actualizar varias viviendas con un archivo
+
+En el área privada, utiliza **«Importar CSV»** para crear varias viviendas desde un archivo. Primero descarga la plantilla CSV, complétala con una fila por vivienda y vuelve a cargarla. La plataforma mostrará una vista previa y los errores antes de guardar nada. El archivo acepta separador por coma o punto y coma y debe contener, como mínimo, título, ciudad, zona, precio, precio numérico, dormitorios, baños, superficie, descripción, URL de imagen, estado y flujo de derivación.
+
+Una vivienda marcada como **publicada** debe incluir una URL del vendedor y un flujo de derivación `redirect` o `both`. Carga imágenes mediante la ficha individual o utiliza una URL de imagen autorizada dentro del archivo. La importación está disponible solo en tu administración privada.
+
 ## Enlazar con el vendedor principal
 
 Primero crea la ficha del **vendedor** en la administración y guarda por escrito el canal, parámetro y código que acepta. El código inicial de Vivienda Nova es **`MARTINEZ`**, pero se puede cambiar en cada vendedor o vivienda. Después vincula ese vendedor a cada vivienda y añade la URL exacta de la oferta, si el canal es enlace directo.
@@ -48,6 +54,12 @@ Cuando el vendedor confirme que una venta se ha cerrado, abre **«Añadir operac
 ## Publicar la web
 
 Cuando quieras hacerla visible en internet, abre el panel del proyecto, guarda una versión y utiliza el botón **Publish**. La plataforma incluye alojamiento y una dirección pública; puedes comenzar con esa dirección sin contratar un proveedor externo. Después podrás conectar un dominio propio desde **Settings → Domains** si lo deseas. Antes de publicar, crea al menos un vendedor y una vivienda publicada para que el escaparate no aparezca vacío.
+
+Las actualizaciones de contenido que hagas desde **`/admin`** —viviendas, vendedores, imágenes, operaciones o ajustes visuales— se guardan en la base de datos y no requieren editar el código. Si cambias el diseño, las funciones o los textos estructurales, guarda una nueva versión del proyecto y vuelve a utilizar **Publish** para actualizar la versión pública.
+
+## Copia y control del proyecto
+
+Conserva una copia de la web desde el área de **Code** o conecta el proyecto a un repositorio de GitHub desde **Settings → GitHub**. Si la web utiliza el alojamiento incluido, su funcionamiento depende de ese servicio de alojamiento; el dominio que compres en un registrador externo sigue bajo tu control. Para trasladar la aplicación a otro proveedor se requiere exportar el código, configurar las variables de entorno y adaptar el despliegue al nuevo proveedor.
 
 ## Información que debes pedir a cada vendedor
 
