@@ -166,6 +166,8 @@ export const siteSettings = mysqlTable("siteSettings", {
   bannerRotationSeconds: int("bannerRotationSeconds").default(5).notNull(),
   cardStyle: mysqlEnum("cardStyle", ["flat", "three_d"]).default("flat").notNull(),
   enabledLocales: varchar("enabledLocales", { length: 1000 }).default("es,en,nl,de,sv,no,fr,ro,ru,zh-CN,de-CH,fr-CH,it-CH").notNull(),
+  /** Lista JSON de vídeos breves y optimizados para el bloque editorial de la portada. */
+  heroVideos: text("heroVideos"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });

@@ -73,6 +73,16 @@ button:not(:disabled), a[href], select { cursor: pointer; }
 h1, h2, h3, p { margin-top: 0; }
 h1, h2, h3 { font-family: "DM Serif Display", Georgia, serif; font-weight: 400; letter-spacing: -.04em; }
 .hero-copy h1 { color: #112f3f; font-size: clamp(54px, 6vw, 92px); line-height: .98; margin: 0; max-width: 610px; }
+.hero-video-frame { aspect-ratio: 16 / 6; background: #d8d2c7 url("/manus-storage/vivienda-nova-card-loft_e25a829a.jpg") center / cover no-repeat; margin: 25px 0 0; overflow: hidden; position: relative; width: 100%; }
+.hero-video-frame::after { background: linear-gradient(90deg, rgba(17,47,63,.34), transparent 56%); content: ""; inset: 0; pointer-events: none; position: absolute; }
+.hero-video-frame video { height: 100%; inset: 0; object-fit: cover; position: absolute; width: 100%; }
+.hero-video-frame__placeholder { align-items: flex-start; background: linear-gradient(120deg, #204757, #91a8ab 48%, #e5ddd0); color: #fffdf8; display: flex; flex-direction: column; height: 100%; justify-content: center; padding: 20px; position: relative; }
+.hero-video-frame__placeholder::before { border: 1px solid rgba(255,255,255,.6); content: ""; height: 24px; margin-bottom: 10px; width: 24px; }
+.hero-video-frame__placeholder span, .hero-video-frame__caption { font-size: 8px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+.hero-video-frame__placeholder strong { font-family: "DM Serif Display", Georgia, serif; font-size: clamp(17px, 2vw, 25px); font-weight: 400; line-height: 1; max-width: 280px; }
+.hero-video-frame__placeholder p { font-size: 10px; margin: 8px 0 0; opacity: .78; }
+.hero-video-frame__caption { align-items: center; bottom: 10px; color: #fffdf8; display: flex; justify-content: space-between; left: 13px; position: absolute; right: 13px; z-index: 2; }
+.hero-video-frame__caption i { font-style: normal; opacity: .75; }
 .hero-description { color: #53616a; font-size: 15px; line-height: 1.75; margin: 29px 0 35px; max-width: 385px; }
 .hero-ctas { align-items: center; display: flex; flex-wrap: wrap; gap: 25px; }
 .button { align-items: center; display: inline-flex; font-size: 11px; font-weight: 800; gap: 11px; justify-content: center; letter-spacing: .09em; min-height: 51px; padding: 12px 20px; text-transform: uppercase; transition: background .2s, transform .16s cubic-bezier(.23,1,.32,1), color .2s; }
@@ -108,6 +118,8 @@ h1, h2, h3 { font-family: "DM Serif Display", Georgia, serif; font-weight: 400; 
 .outline-number { color: #d95f42; font-family: "DM Serif Display", serif; font-size: 27px; line-height: 1; }
 .search-label h2 { font-size: clamp(35px, 3.5vw, 53px); line-height: 1; margin: 0; }
 .search-panel { align-self: center; display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 0; }
+.search-panel--expanded { grid-template-columns: repeat(3, minmax(145px, 1fr)); gap: 0; max-width: 840px; }
+.search-panel--expanded .search-button { grid-column: 3; }
 .search-field { border-bottom: 1px solid rgba(255,255,255,.28); border-top: 1px solid rgba(255,255,255,.28); min-width: 0; padding: 12px 16px 14px; }
 .search-field + .search-field { border-left: 1px solid rgba(255,255,255,.28); }
 .search-field > span { color: rgba(255,255,255,.55); display: block; font-size: 9px; font-weight: 800; letter-spacing: .12em; margin-bottom: 5px; text-transform: uppercase; }
@@ -133,7 +145,8 @@ h2 em { color: #d95f42; font-style: italic; }
 .property-card:nth-child(1) { grid-column: span 4; margin-top: 48px; }
 .property-card:nth-child(2) { grid-column: span 5; }
 .property-card:nth-child(3) { grid-column: span 3; margin-top: 88px; }
-.property-card { background: #fffdf8; box-shadow: 0 8px 22px rgba(17,47,63,.055); min-width: 0; transition: box-shadow .25s, transform .25s cubic-bezier(.23,1,.32,1); }
+.property-card { background: #fffdf8; box-shadow: 0 8px 22px rgba(17,47,63,.055); min-width: 0; position: relative; transition: box-shadow .25s, transform .25s cubic-bezier(.23,1,.32,1); }
+.property-card::after { background: #eef0ed; color: #304c58; content: attr(data-property-type); font-size: 8px; font-weight: 800; letter-spacing: .11em; padding: 5px 7px; position: absolute; right: 15px; text-transform: uppercase; top: 15px; z-index: 3; }
 .property-card:hover { box-shadow: 0 20px 38px rgba(17,47,63,.13); transform: translateY(-5px); }
 .property-photo-wrap { aspect-ratio: 1.22; background: #d8d1c6; overflow: hidden; position: relative; }
 .property-photo { height: 100%; object-fit: cover; transition: transform .5s cubic-bezier(.23,1,.32,1); width: 100%; }
@@ -225,6 +238,7 @@ h2 em { color: #d95f42; font-style: italic; }
 .dialog-copy > p:not(.eyebrow):not(.dialog-price) { color: #617077; font-size: 13px; line-height: 1.65; }
 .dialog-specs { border-bottom: 1px solid #d5d0c7; border-top: 1px solid #d5d0c7; display: flex; flex-wrap: wrap; gap: 10px 16px; margin: 26px 0; padding: 13px 0; }
 .dialog-specs span { align-items: center; color: #4f5f66; display: flex; font-size: 10px; font-weight: 700; gap: 5px; }
+.dialog-specs .dialog-property-type { color: #c6563d; letter-spacing: .06em; text-transform: uppercase; }
 .dialog-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 .dialog-close { align-items: center; background: #fffdf8; color: #112f3f; display: flex; height: 36px; justify-content: center; position: absolute; right: 12px; top: 12px; transition: background .2s, color .2s; width: 36px; z-index: 1; }
 .dialog-close:hover { background: #d95f42; color: #fffdf8; }
@@ -234,6 +248,8 @@ h2 em { color: #d95f42; font-style: italic; }
   .hero-art { min-height: 570px; }
   .search-section { grid-template-columns: 1fr; gap: 35px; }
   .search-panel { max-width: 700px; }
+  .search-panel--expanded { grid-template-columns: 1fr 1fr; max-width: 700px; }
+  .search-panel--expanded .search-button { grid-column: auto; }
   .properties-section { padding-top: 85px; }
   .method-copy { padding: 80px 45px; }
   .contact-section { padding: 90px 8vw; }
@@ -248,6 +264,7 @@ h2 em { color: #d95f42; font-style: italic; }
   .hero-section { display: flex; flex-direction: column; min-height: 0; }
   .hero-copy { order: 1; padding: 64px 22px 44px; }
   .hero-copy h1 { font-size: clamp(52px, 15vw, 70px); }
+  .hero-video-frame { aspect-ratio: 16 / 8; margin-top: 20px; }
   .hero-art { min-height: 410px; order: 2; }
   .hero-plan-mark { height: 82px; left: 22px; top: 22px; transform: scale(.78); transform-origin: top left; width: 82px; }
   .hero-coordinate { bottom: auto; left: auto; right: 21px; top: 83px; }

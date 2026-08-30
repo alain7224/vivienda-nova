@@ -1,0 +1,23 @@
+/* Casa & Plano: consola privada de clips aéreos para la ventana editorial de la portada. */
+.hero-video-manager { background: #fffdf8; margin: 0 0 70px; padding: clamp(24px, 3vw, 43px); }
+.hero-video-manager__heading { align-items: flex-start; display: flex; gap: 25px; justify-content: space-between; }
+.hero-video-manager h2 { font-family: "DM Serif Display", Georgia, serif; font-size: clamp(36px, 4vw, 54px); font-weight: 400; letter-spacing: -.045em; line-height: .9; margin: 0; }
+.hero-video-manager h2 em { color: #d95f42; font-style: italic; }
+.hero-video-manager__heading p:last-child { color: #627075; font-size: 12px; line-height: 1.6; margin: 14px 0 0; max-width: 410px; }
+.hero-video-manager__upload { align-items: end; display: flex; gap: 10px; }
+.hero-video-manager__upload > label:first-child { color: #677075; display: flex; flex-direction: column; font-size: 9px; font-weight: 800; gap: 7px; letter-spacing: .1em; text-transform: uppercase; }
+.hero-video-manager select { background: #fbfaf6; border: 1px solid #d9d3c9; color: #112f3f; font-size: 12px; min-height: 40px; padding: 8px; }
+.hero-video-manager__file { align-items: center; background: #112f3f; color: #fffdf8; cursor: pointer; display: inline-flex; font-size: 10px; font-weight: 800; gap: 8px; letter-spacing: .08em; min-height: 40px; padding: 0 13px; text-transform: uppercase; }
+.hero-video-manager__file input { display: none; }
+.hero-video-manager__note { align-items: center; border-bottom: 1px solid #ded8cf; border-top: 1px solid #ded8cf; color: #657276; display: flex; font-size: 10px; gap: 7px; margin: 23px 0 0; padding: 11px 0; }
+.hero-video-manager__empty { align-items: center; background: #f5f2eb; color: #617075; display: flex; font-size: 12px; gap: 8px; justify-content: center; margin: 0; min-height: 82px; padding: 18px; }
+.hero-video-manager__list { display: grid; gap: 1px; list-style: none; margin: 15px 0 0; padding: 0; }
+.hero-video-manager__list li { align-items: center; background: #f5f2eb; display: grid; gap: 12px; grid-template-columns: 115px 1fr auto; padding: 10px; }
+.hero-video-manager__list video { background: #112f3f; height: 62px; object-fit: cover; width: 115px; }
+.hero-video-manager__list strong { color: #112f3f; display: block; font-size: 12px; }
+.hero-video-manager__list span { color: #778286; display: block; font-size: 10px; margin-top: 3px; }
+.hero-video-manager__actions { display: flex; gap: 5px; }
+.hero-video-manager__actions button { align-items: center; background: #e4e1da; color: #112f3f; display: flex; height: 32px; justify-content: center; width: 32px; }
+.hero-video-manager__actions button:disabled { cursor: not-allowed; opacity: .35; }
+.hero-video-manager__actions .is-delete { color: #a64035; }
+@media (max-width: 680px) { .hero-video-manager__heading { flex-direction: column; } .hero-video-manager__upload { align-items: stretch; flex-direction: column; width: 100%; } .hero-video-manager select, .hero-video-manager__file { width: 100%; } .hero-video-manager__list li { grid-template-columns: 75px 1fr auto; } .hero-video-manager__list video { height: 55px; width: 75px; } }

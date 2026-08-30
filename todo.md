@@ -60,3 +60,19 @@
 - [x] Añadir al panel una importación privada de fichas de vivienda mediante archivo CSV.
 - [x] Validar el archivo antes de guardar viviendas o enlaces externos.
 - [x] Documentar cómo actualizar, crear una copia del proyecto y publicar cambios.
+- [x] Corregir la imagen rota en la sección de construcción a medida.
+- [x] Mostrar en cada ficha habitaciones, baños, metros cuadrados y tipo de inmueble.
+- [x] Añadir búsqueda y ordenación por precio, superficie y categorías inmobiliarias.
+- [x] Revisar LRCostaHomes para localizar una fuente de catálogo o feed de importación autorizado.
+- [ ] Preparar la importación de propiedades externas solo si el proveedor autoriza el acceso y la reutilización de sus datos.
+- [x] Verificar la imagen, el catálogo y los filtros en escritorio y móvil.
+- [x] Mostrar explícitamente el tipo de inmueble en cada tarjeta y detalle público.
+- [x] Mostrar explícitamente el tipo de inmueble dentro del detalle público de cada vivienda.
+- [ ] Verificar en escritorio y móvil la etiqueta de tipo tanto en tarjeta como en detalle.
+- [ ] Ampliar el selector manual de tipo de inmueble en la administración.
+- [x] Añadir un vídeo de portada cargable desde Administración dentro del bloque izquierdo de la introducción.
+- [x] Permitir elegir y ordenar vídeos aéreos por zona en la configuración de portada.
+- [x] Aplicar reproducción silenciosa, en bucle y con imagen de respaldo en ordenador y móvil.
+- [x] Validar que el vídeo no modifica las demás secciones de la portada.
+- [x] Añadir una imagen de respaldo real visible mientras carga el vídeo o si falla su reproducción.
+- [x] Verificar explícitamente en ordenador y móvil que el vídeo solo ocupa el bloque marcado de la portada.
