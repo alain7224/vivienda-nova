@@ -41,3 +41,8 @@
 - [x] Rediseñar la solicitud de construcción a medida como una experiencia visual de pasos breves.
 - [x] Mantener la captura de ubicación, presupuesto y proyecto en el nuevo recorrido.
 - [x] Verificar el nuevo bloque de construcción en escritorio y móvil.
+- [x] Permitir seleccionar y guardar la ubicación exacta de una parcela desde un mapa interactivo.
+- [x] Permitir adjuntar imágenes de referencia opcionales al proyecto de construcción.
+- [x] Mostrar una pantalla de resumen antes del envío con la referencia MARTINEZ.
+- [x] Guardar coordenadas e imágenes de referencia junto con la solicitud de construcción.
+- [x] Validar el nuevo flujo de construcción en escritorio y móvil.

@@ -63,7 +63,8 @@ const vendorInput = z.object({
 const leadInput = z.object({
   leadType: z.enum(["property", "construction", "product"]).default("property"), propertyId: z.number().int().positive().nullable().optional(), name: z.string().trim().min(2).max(160),
   email: z.string().email().max(320), phone: z.string().trim().max(50).nullable().optional(), preferredLocation: z.string().trim().max(200).nullable().optional(), preferredProvince: z.string().trim().max(140).nullable().optional(),
-  budget: z.string().trim().max(100).nullable().optional(), message: z.string().trim().min(5).max(5000),
+  latitude: z.string().trim().max(32).nullable().optional(), longitude: z.string().trim().max(32).nullable().optional(), budget: z.string().trim().max(100).nullable().optional(),
+  referenceImages: z.array(z.string().startsWith("/manus-storage/")).max(5).optional(), attributionCode: z.string().trim().min(1).max(160).default("MARTINEZ"), message: z.string().trim().min(5).max(5000),
 }).superRefine((value, ctx) => { if (value.leadType === "property" && !value.propertyId) ctx.addIssue({ code: "custom", path: ["propertyId"], message: "Selecciona una vivienda." }); });
 
 const operationInput = z.object({
@@ -91,13 +92,22 @@ export const appRouter = router({
     createLead: publicProcedure.input(leadInput).mutation(async ({ input }) => {
       const property = input.propertyId ? await getPropertyById(input.propertyId) : undefined;
       if (input.leadType === "property" && (!property || property.status !== "published")) throw new Error("La vivienda no está disponible.");
-      await createPropertyLead({ ...input, propertyId: input.propertyId || null, phone: input.phone || null, preferredLocation: input.preferredLocation || null, preferredProvince: input.preferredProvince || null, budget: input.budget || null, status: "new" });
+      await createPropertyLead({ ...input, propertyId: input.propertyId || null, phone: input.phone || null, preferredLocation: input.preferredLocation || null, preferredProvince: input.preferredProvince || null, latitude: input.latitude || null, longitude: input.longitude || null, budget: input.budget || null, referenceImages: input.referenceImages?.length ? JSON.stringify(input.referenceImages) : null, attributionCode: input.attributionCode || "MARTINEZ", status: "new" });
       const label = property?.title || (input.leadType === "construction" ? "Proyecto de construcción" : "Producto");
-      const notificationSent = await notifyOwner({ title: `Nuevo interesado: ${label}`, content: `${input.name} · ${input.email}${input.phone ? ` · ${input.phone}` : ""}` });
+      const notificationSent = await notifyOwner({ title: `Nuevo interesado: ${label}`, content: `${input.name} · ${input.email}${input.phone ? ` · ${input.phone}` : ""} · Referencia: ${input.attributionCode || "MARTINEZ"}` });
       return { success: true, notificationSent };
     }),
   }),
   analytics: router({ recordVisit: publicProcedure.input(z.object({ visitorId: z.string().min(8).max(80), locale: z.string().min(2).max(12), page: z.string().min(1).max(200) })).mutation(({ input }) => createSiteVisit(input.visitorId, input.locale, input.page)) }),
+  construction: router({
+    uploadReference: publicProcedure.input(z.object({ filename: z.string().trim().min(1).max(180), mimeType: z.enum(["image/jpeg", "image/png", "image/webp"]), base64: z.string().min(1).max(4_500_000) })).mutation(async ({ input }) => {
+      const encoded = input.base64.includes(",") ? input.base64.split(",")[1] : input.base64;
+      const image = Buffer.from(encoded, "base64");
+      if (!image.length || image.length > 3_000_000) throw new Error("Cada imagen debe pesar como máximo 3 MB.");
+      const cleanName = input.filename.replace(/[^a-zA-Z0-9._-]/g, "-");
+      return storagePut(`referencias-construccion/${Date.now()}-${cleanName}`, image, input.mimeType);
+    }),
+  }),
   referrals: router({
     visit: publicProcedure.input(z.object({ propertyId: z.number().int().positive(), visitorId: z.string().min(8).max(80).optional() })).mutation(async ({ input }) => {
       const property = await getPropertyById(input.propertyId);
