@@ -17,6 +17,7 @@ import {
   getAdminOverview,
   getPropertyById,
   getPropertyLeadById,
+  getPublicSiteSettings,
   getSiteSettings,
   getVendorById,
   listAdminProperties,
@@ -86,7 +87,7 @@ export const appRouter = router({
     me: publicProcedure.query((opts) => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => { const cookieOptions = getSessionCookieOptions(ctx.req); ctx.res.clearCookie(COOKIE_NAME, { ...cookieOptions, maxAge: -1 }); return { success: true } as const; }),
   }),
-  settings: router({ public: publicProcedure.query(() => getSiteSettings()) }),
+  settings: router({ public: publicProcedure.query(() => getPublicSiteSettings()) }),
   properties: router({
     list: publicProcedure.input(z.object({ locale: z.string().max(12).optional() }).optional()).query(({ input }) => listPublishedProperties(input?.locale)),
     createLead: publicProcedure.input(leadInput).mutation(async ({ input }) => {

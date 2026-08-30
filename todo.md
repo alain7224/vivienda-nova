@@ -46,3 +46,6 @@
 - [x] Mostrar una pantalla de resumen antes del envío con la referencia MARTINEZ.
 - [x] Guardar coordenadas e imágenes de referencia junto con la solicitud de construcción.
 - [x] Validar el nuevo flujo de construcción en escritorio y móvil.
+- [x] Corregir la consulta pública de ajustes para devolver valores iniciales cuando no existan filas guardadas.
+- [x] Añadir una prueba que cubra la configuración pública inicial.
+- [x] Validar que la portada no registra errores de datos indefinidos.

@@ -21,6 +21,19 @@ import { ENV } from "./_core/env";
 
 let _db: ReturnType<typeof drizzle> | null = null;
 
+/** Valores seguros para que el escaparate funcione antes de que el administrador guarde ajustes. */
+export function getDefaultPublicSiteSettings() {
+  return {
+    bannerText: "Vivienda Nova · Selección internacional",
+    bannerBackground: "#d95f42",
+    bannerColor: "#fffdf8",
+    bannerHeight: 36,
+    bannerRotationSeconds: 5,
+    cardStyle: "flat" as const,
+    enabledLocales: "es,en,nl,de,sv,no,fr,ro,ru,zh-CN,de-CH,fr-CH,it-CH",
+  };
+}
+
 export async function getDb() {
   if (!_db && process.env.DATABASE_URL) {
     try { _db = drizzle(process.env.DATABASE_URL); }
@@ -213,6 +226,11 @@ export async function getSiteSettings() {
   if (!db) return undefined;
   const rows = await db.select().from(siteSettings).limit(1);
   return rows[0];
+}
+
+/** Nunca devuelve undefined: se utiliza en la ruta pública para evitar errores de caché del cliente. */
+export async function getPublicSiteSettings() {
+  return (await getSiteSettings()) ?? getDefaultPublicSiteSettings();
 }
 
 export async function updateSiteSettings(values: Partial<typeof siteSettings.$inferInsert>) {
