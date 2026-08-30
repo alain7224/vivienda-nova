@@ -64,12 +64,14 @@
 - [x] Mostrar en cada ficha habitaciones, baños, metros cuadrados y tipo de inmueble.
 - [x] Añadir búsqueda y ordenación por precio, superficie y categorías inmobiliarias.
 - [x] Revisar LRCostaHomes para localizar una fuente de catálogo o feed de importación autorizado.
-- [ ] Preparar la importación de propiedades externas solo si el proveedor autoriza el acceso y la reutilización de sus datos.
+- [x] Preparar la importación segura mediante CSV validado para usar un catálogo externo cuando el proveedor entregue un feed autorizado.
 - [x] Verificar la imagen, el catálogo y los filtros en escritorio y móvil.
 - [x] Mostrar explícitamente el tipo de inmueble en cada tarjeta y detalle público.
 - [x] Mostrar explícitamente el tipo de inmueble dentro del detalle público de cada vivienda.
-- [ ] Verificar en escritorio y móvil la etiqueta de tipo tanto en tarjeta como en detalle.
-- [ ] Ampliar el selector manual de tipo de inmueble en la administración.
+- [x] Verificar en escritorio y móvil la etiqueta de tipo tanto en tarjeta como en detalle.
+- [x] Ampliar la entrada manual de tipos de inmueble mediante la importación privada y las categorías ampliadas del catálogo.
+- [x] Ampliar el selector manual del panel con todas las categorías de inmueble admitidas.
+- [x] Verificar en escritorio y móvil la etiqueta de tipo de tarjeta y detalle con evidencia posterior al último cambio.
 - [x] Añadir un vídeo de portada cargable desde Administración dentro del bloque izquierdo de la introducción.
 - [x] Permitir elegir y ordenar vídeos aéreos por zona en la configuración de portada.
 - [x] Aplicar reproducción silenciosa, en bucle y con imagen de respaldo en ordenador y móvil.

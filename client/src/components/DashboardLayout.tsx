@@ -28,6 +28,7 @@ import { useLocation } from "wouter";
 import { DashboardLayoutSkeleton } from './DashboardLayoutSkeleton';
 import { Button } from "./ui/button";
 import HeroVideoManager from "./HeroVideoManager";
+import PropertyTypeEnhancer from "./PropertyTypeEnhancer";
 
 const menuItems = [
   { icon: LayoutDashboard, label: "Gestión inmobiliaria", path: "/admin" },
@@ -257,7 +258,7 @@ function DashboardLayoutContent({
             </div>
           </div>
         )}
-        <main className="flex-1 p-4">{children}{location === "/admin" && <HeroVideoManager />}</main>
+        <main className="flex-1 p-4">{children}{location === "/admin" && <><HeroVideoManager /><PropertyTypeEnhancer /></>}</main>
       </SidebarInset>
     </>
   );
