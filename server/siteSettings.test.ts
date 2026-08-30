@@ -16,6 +16,7 @@ describe("getDefaultPublicSiteSettings", () => {
         url: "/manus-storage/chalet-piscina-recorrido_14603e97.mp4",
       }]),
       heroImageUrl: "/manus-storage/chalet-minimalista-piscina_3bd4eca8.jpg",
+      contactPhone: "",
       midPageCta: "Compra con claridad · Información directa del vendedor",
     });
   });

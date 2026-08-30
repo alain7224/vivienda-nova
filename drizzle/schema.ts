@@ -169,6 +169,8 @@ export const siteSettings = mysqlTable("siteSettings", {
   /** Lista JSON de vídeos breves y optimizados para el bloque editorial de la portada. */
   heroVideos: text("heroVideos"),
   heroImageUrl: text("heroImageUrl"),
+  /** Teléfono público opcional, gestionado desde el área privada. */
+  contactPhone: varchar("contactPhone", { length: 32 }).default("").notNull(),
   midPageCta: varchar("midPageCta", { length: 220 }).default("Compra con claridad · Información directa del vendedor").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),

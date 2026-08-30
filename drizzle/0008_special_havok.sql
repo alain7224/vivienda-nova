@@ -1,0 +1,1 @@
+ALTER TABLE `siteSettings` ADD `contactPhone` varchar(32) DEFAULT '' NOT NULL;

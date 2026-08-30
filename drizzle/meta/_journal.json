@@ -57,6 +57,13 @@
       "when": 1788084014912,
       "tag": "0007_faithful_reavers",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "5",
+      "when": 1788084972849,
+      "tag": "0008_special_havok",
+      "breakpoints": true
     }
   ]
 }

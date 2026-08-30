@@ -38,3 +38,6 @@
 - [x] Validar el resultado audiovisual en ordenador y móvil.
 - [x] Probar en navegador la subida, previsualización y eliminación de un JPG y un PDF en el brief de construcción.
 - [x] Añadir un control privado para sustituir la imagen residencial de portada y conectar la misma imagen al respaldo del vídeo.
+- [x] Añadir un teléfono de contacto editable en la parte superior de la web con acceso directo a llamada.
+- [x] Validar la visibilidad y el comportamiento del teléfono en ordenador y móvil.
+- [x] Publicar temporalmente +34 611 248 122 como contacto superior editable.

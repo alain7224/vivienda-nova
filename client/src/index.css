@@ -55,12 +55,14 @@ button:not(:disabled), a[href], select { cursor: pointer; }
 .brand-name { color: #112f3f; font-size: 10px; font-weight: 800; letter-spacing: .13em; }
 .brand--light .brand-name { color: #f4f1ea; }
 .desktop-nav { display: flex; gap: clamp(22px, 3vw, 50px); margin-left: auto; margin-right: clamp(24px, 4vw, 62px); }
-.desktop-nav a, .header-contact, .site-footer a { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.desktop-nav a, .header-contact, .header-phone, .site-footer a { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .desktop-nav a { position: relative; }
 .desktop-nav a::after { background: #d95f42; bottom: -6px; content: ""; height: 1px; left: 0; position: absolute; transform: scaleX(0); transform-origin: left; transition: transform .22s cubic-bezier(.23,1,.32,1); width: 100%; }
 .desktop-nav a:hover::after { transform: scaleX(1); }
 .header-actions { align-items: center; display: flex; gap: 22px; }
 .header-contact { align-items: center; color: #112f3f; display: flex; gap: 6px; }
+.header-phone { align-items: center; border-right: 1px solid rgba(17,47,63,.18); color: #112f3f; display: flex; gap: 6px; padding-right: 20px; white-space: nowrap; }
+.header-phone svg { color: #d95f42; }
 .menu-toggle { background: transparent; color: #112f3f; display: none; padding: 4px; }
 .mobile-nav { background: #112f3f; display: flex; flex-direction: column; gap: 2px; left: 0; padding: 16px 22px 20px; position: absolute; right: 0; top: 88px; }
 .mobile-nav a { color: #fffdf8; font-size: 13px; font-weight: 700; letter-spacing: .08em; padding: 12px 0; text-transform: uppercase; }
@@ -264,6 +266,10 @@ h2 em { color: #d95f42; font-style: italic; }
   .site-header { height: 72px; padding: 0 20px; }
   .brand-mark { height: 34px; width: 34px; }
   .desktop-nav, .header-contact { display: none; }
+  .header-actions { gap: 13px; }
+  .header-phone { border-right: 0; padding-right: 0; }
+  .header-phone span { display: none; }
+  .header-phone svg { height: 18px; width: 18px; }
   .menu-toggle { display: flex; }
   .mobile-nav { top: 72px; }
   .hero-section { display: flex; flex-direction: column; min-height: 0; }
