@@ -61,3 +61,5 @@
 - [x] Comprobar el cuadro de ayuda de instalación en pie de página móvil y escritorio.
 - [x] Revisar visualmente el control y la guía de instalación dentro del pie de página en escritorio y móvil.
 - [x] Verificar visualmente en móvil la guía de instalación abierta sin desbordar el pie de página.
+- [x] Alinear «Gestionar cookies» con «Aviso legal» y los demás enlaces legales del pie.
+- [x] Validar la alineación de los enlaces legales en escritorio y móvil.
