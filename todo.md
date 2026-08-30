@@ -38,3 +38,6 @@
 - [x] Separar en el resumen las comisiones previstas, pendientes y cobradas.
 - [x] Convertir la acción principal de cada tarjeta pública en la derivación directa al vendedor.
 - [x] Exigir enlace externo y flujo de derivación para toda vivienda publicada en el escaparate público.
+- [x] Rediseñar la solicitud de construcción a medida como una experiencia visual de pasos breves.
+- [x] Mantener la captura de ubicación, presupuesto y proyecto en el nuevo recorrido.
+- [x] Verificar el nuevo bloque de construcción en escritorio y móvil.

@@ -327,3 +327,53 @@ h2 em { color: #d95f42; font-style: italic; }
   .property-contact-dock form { grid-template-columns: 1fr; }
   .property-contact-dock textarea { grid-column: span 1; }
 }
+
+/* Brief de construcción: recorrido conversacional presentado como una carpeta de proyecto. */
+.build-brief-section { background: #fffdf8; display: grid; gap: clamp(35px, 7vw, 110px); grid-template-columns: minmax(270px, .78fr) minmax(440px, 1.22fr); overflow: hidden; padding: clamp(70px, 9vw, 142px) clamp(22px, 9vw, 154px); position: relative; }
+.build-brief-section::before { border-left: 1px solid #d95f42; content: ""; height: 87px; left: 36px; position: absolute; top: 0; }
+.build-brief-section::after { background-image: linear-gradient(rgba(17,47,63,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(17,47,63,.05) 1px, transparent 1px); background-size: 27px 27px; content: ""; height: 55%; pointer-events: none; position: absolute; right: -2%; top: 0; width: 31%; }
+.build-brief-intro { align-self: center; position: relative; z-index: 1; }
+.build-brief-intro h2 { font-size: clamp(52px, 6vw, 84px); line-height: .88; margin: 0 0 25px; }
+.build-brief-intro > p:not(.eyebrow) { color: #5c6b72; font-size: 14px; line-height: 1.8; margin: 0 0 30px; max-width: 360px; }
+.build-brief-promise { border-top: 1px solid #d8d3ca; display: grid; gap: 12px; grid-template-columns: 26px 1fr; max-width: 365px; padding: 14px 0; }
+.build-brief-promise:last-child { border-bottom: 1px solid #d8d3ca; }
+.build-brief-promise > span { color: #d95f42; font-family: "DM Serif Display", Georgia, serif; font-size: 18px; }
+.build-brief-promise p { color: #68747a; font-size: 11px; line-height: 1.55; margin: 0; }
+.build-brief-promise strong { color: #112f3f; }
+.build-brief-card { background: #f1eee7; box-shadow: 0 18px 38px rgba(17,47,63,.09); min-height: 470px; padding: clamp(22px, 3.3vw, 44px); position: relative; z-index: 1; }
+.build-brief-card::before, .build-brief-card::after { border-color: #d95f42; border-style: solid; content: ""; height: 31px; pointer-events: none; position: absolute; width: 31px; }
+.build-brief-card::before { border-width: 1px 0 0 1px; left: 12px; top: 12px; }
+.build-brief-card::after { border-width: 0 1px 1px 0; bottom: 12px; right: 12px; }
+.build-brief-card-head { align-items: flex-start; border-bottom: 1px solid #c7c3bb; display: flex; justify-content: space-between; padding: 0 0 19px; }
+.build-brief-card-head p { color: #6b7375; font-size: 9px; font-weight: 800; letter-spacing: .14em; margin: 0 0 6px; text-transform: uppercase; }
+.build-brief-card-head > div > span { color: #112f3f; font-family: "DM Serif Display", Georgia, serif; font-size: 23px; }
+.build-steps { align-items: center; display: flex; gap: 6px; padding-top: 3px; }
+.build-steps span { align-items: center; border: 1px solid #98a0a0; border-radius: 50%; color: #7b8587; display: flex; font-size: 8px; font-weight: 800; height: 24px; justify-content: center; width: 24px; }
+.build-steps span.is-active { background: #112f3f; border-color: #112f3f; color: #fffdf8; }
+.build-steps i { background: #bfc1bc; height: 1px; width: 18px; }
+.build-brief-form { min-height: 350px; padding-top: clamp(26px, 4vw, 50px); }
+.build-step { animation: build-step-in .25s cubic-bezier(.23,1,.32,1) both; }
+.build-step-title { align-items: flex-start; display: flex; gap: 12px; margin-bottom: 27px; }
+.build-step-title svg { color: #d95f42; margin-top: 3px; }
+.build-step-title p { color: #d95f42; font-size: 9px; font-weight: 800; letter-spacing: .12em; margin: 0 0 4px; text-transform: uppercase; }
+.build-step-title h3 { font-size: clamp(29px, 3vw, 41px); line-height: .96; margin: 0; }
+.build-input-grid { display: grid; gap: 13px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.build-input-grid label, .build-textarea { color: #6a7375; display: flex; flex-direction: column; font-size: 9px; font-weight: 800; gap: 7px; letter-spacing: .1em; text-transform: uppercase; }
+.build-input-grid .build-full { grid-column: span 2; }
+.build-input-grid input, .build-input-grid select, .build-textarea textarea { background: #fffdf8; border: 1px solid #d5d0c7; border-radius: 0; color: #112f3f; font-size: 13px; font-weight: 500; letter-spacing: 0; outline: none; padding: 12px; text-transform: none; width: 100%; }
+.build-input-grid input:focus, .build-input-grid select:focus, .build-textarea textarea:focus { border-color: #d95f42; box-shadow: 0 0 0 2px rgba(217,95,66,.12); }
+.build-choice-grid { display: grid; gap: 9px; grid-template-columns: 1fr 1fr; margin-bottom: 20px; }
+.build-choice-grid button { align-items: center; background: #fffdf8; border: 1px solid #d5d0c7; color: #112f3f; display: flex; font-size: 11px; font-weight: 700; gap: 9px; padding: 13px; text-align: left; transition: background .2s, color .2s, transform .16s cubic-bezier(.23,1,.32,1); }
+.build-choice-grid button:hover { border-color: #112f3f; }
+.build-choice-grid button.is-selected { background: #112f3f; border-color: #112f3f; color: #fffdf8; }
+.build-choice-grid button:active { transform: scale(.98); }
+.build-choice-grid span { color: #d95f42; font-family: "DM Serif Display", Georgia, serif; font-size: 17px; }
+.build-choice-grid button.is-selected span { color: #fffdf8; }
+.build-textarea textarea { resize: vertical; }
+.build-privacy { color: #758082; font-size: 10px; line-height: 1.55; margin: 19px 0 0; max-width: 490px; }
+.build-navigation { align-items: center; display: flex; justify-content: space-between; margin-top: 28px; }
+.build-back { align-items: center; background: transparent; border-bottom: 1px solid #112f3f; color: #112f3f; display: inline-flex; font-size: 10px; font-weight: 800; gap: 4px; letter-spacing: .07em; padding: 0 0 3px; text-transform: uppercase; }
+@keyframes build-step-in { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
+
+@media (max-width: 780px) { .build-brief-section { grid-template-columns: 1fr; padding: 76px 22px; } .build-brief-section::before { left: 22px; } .build-brief-intro h2 { font-size: 58px; } .build-brief-card { min-height: 475px; padding: 25px 20px; } }
+@media (max-width: 470px) { .build-brief-card-head { gap: 10px; } .build-brief-card-head > div > span { font-size: 18px; } .build-steps i { width: 9px; } .build-input-grid, .build-choice-grid { grid-template-columns: 1fr; } .build-input-grid .build-full { grid-column: span 1; } }
