@@ -168,6 +168,8 @@ export const siteSettings = mysqlTable("siteSettings", {
   enabledLocales: varchar("enabledLocales", { length: 1000 }).default("es,en,nl,de,sv,no,fr,ro,ru,zh-CN,de-CH,fr-CH,it-CH").notNull(),
   /** Lista JSON de vídeos breves y optimizados para el bloque editorial de la portada. */
   heroVideos: text("heroVideos"),
+  heroImageUrl: text("heroImageUrl"),
+  midPageCta: varchar("midPageCta", { length: 220 }).default("Compra con claridad · Información directa del vendedor").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });

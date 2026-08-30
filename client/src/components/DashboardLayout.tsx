@@ -28,6 +28,8 @@ import { useLocation } from "wouter";
 import { DashboardLayoutSkeleton } from './DashboardLayoutSkeleton';
 import { Button } from "./ui/button";
 import HeroVideoManager from "./HeroVideoManager";
+import HeroImageManager from "./HeroImageManager";
+import MidPageCtaControl from "./MidPageCtaControl";
 import PropertyTypeEnhancer from "./PropertyTypeEnhancer";
 
 const menuItems = [
@@ -258,7 +260,7 @@ function DashboardLayoutContent({
             </div>
           </div>
         )}
-        <main className="flex-1 p-4">{children}{location === "/admin" && <><HeroVideoManager /><PropertyTypeEnhancer /></>}</main>
+        <main className="flex-1 p-4">{children}{location === "/admin" && <><HeroVideoManager /><HeroImageManager /><MidPageCtaControl /><PropertyTypeEnhancer /></>}</main>
       </SidebarInset>
     </>
   );

@@ -6,6 +6,8 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Admin from "./pages/Admin";
+import MidPageCtaBridge from "./components/MidPageCtaBridge";
+import HeroImageBridge from "./components/HeroImageBridge";
 import Home from "./pages/Home";
 import Legal from "./pages/Legal";
 
@@ -40,6 +42,8 @@ function App() {
       >
         <TooltipProvider>
           <Toaster />
+          <MidPageCtaBridge />
+          <HeroImageBridge />
           <Router />
         </TooltipProvider>
       </ThemeProvider>

@@ -1,5 +1,6 @@
 import { COOKIE_NAME } from "@shared/const";
 import { z } from "zod";
+import { referenceMimeTypes } from "../shared/referenceFiles";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { notifyOwner } from "./_core/notification";
 import { systemRouter } from "./_core/systemRouter";
@@ -75,7 +76,7 @@ const operationInput = z.object({
   salePrice: z.number().int().nonnegative(), commissionPercent: z.number().int().min(0).max(100), commissionStatus: z.enum(["expected", "pending", "paid", "cancelled"]), closedAt: z.date().nullable().optional(), paidAt: z.date().nullable().optional(), notes: z.string().trim().max(5000).nullable().optional(),
 });
 
-const settingsInput = z.object({ bannerText: z.string().trim().min(1).max(220), bannerBackground: z.string().regex(/^#[0-9a-fA-F]{6}$/), bannerColor: z.string().regex(/^#[0-9a-fA-F]{6}$/), bannerHeight: z.number().int().min(26).max(72), bannerRotationSeconds: z.number().int().min(2).max(20), cardStyle: z.enum(["flat", "three_d"]), enabledLocales: z.string().trim().min(2).max(1000), heroVideos: z.string().max(5000).optional().refine((value) => { if (value === undefined) return true; try { const parsed = JSON.parse(value); return Array.isArray(parsed) && parsed.length <= 6 && parsed.every((item) => typeof item?.label === "string" && typeof item?.url === "string" && item.url.startsWith("/manus-storage/")); } catch { return false; } }, "La lista de vídeos no es válida.") });
+const settingsInput = z.object({ bannerText: z.string().trim().min(1).max(220), bannerBackground: z.string().regex(/^#[0-9a-fA-F]{6}$/), bannerColor: z.string().regex(/^#[0-9a-fA-F]{6}$/), bannerHeight: z.number().int().min(26).max(72), bannerRotationSeconds: z.number().int().min(2).max(20), cardStyle: z.enum(["flat", "three_d"]), enabledLocales: z.string().trim().min(2).max(1000), midPageCta: z.string().trim().min(1).max(220).optional(), heroImageUrl: z.string().startsWith("/manus-storage/").max(3000).optional(), heroVideos: z.string().max(5000).optional().refine((value) => { if (value === undefined) return true; try { const parsed = JSON.parse(value); return Array.isArray(parsed) && parsed.length <= 6 && parsed.every((item) => typeof item?.label === "string" && typeof item?.url === "string" && item.url.startsWith("/manus-storage/")); } catch { return false; } }, "La lista de vídeos no es válida.") });
 
 async function syncTranslations(propertyId: number, input: z.infer<typeof propertyInput>) {
   const translations = await translatePropertyCopy({ title: input.title, city: input.city, zone: input.zone, type: input.type, tag: input.tag, description: input.description });
@@ -104,10 +105,10 @@ export const appRouter = router({
   }),
   analytics: router({ recordVisit: publicProcedure.input(z.object({ visitorId: z.string().min(8).max(80), locale: z.string().min(2).max(12), page: z.string().min(1).max(200) })).mutation(({ input }) => createSiteVisit(input.visitorId, input.locale, input.page)) }),
   construction: router({
-    uploadReference: publicProcedure.input(z.object({ filename: z.string().trim().min(1).max(180), mimeType: z.enum(["image/jpeg", "image/png", "image/webp"]), base64: z.string().min(1).max(4_500_000) })).mutation(async ({ input }) => {
+    uploadReference: publicProcedure.input(z.object({ filename: z.string().trim().min(1).max(180), mimeType: z.enum(referenceMimeTypes), base64: z.string().min(1).max(12_000_000) })).mutation(async ({ input }) => {
       const encoded = input.base64.includes(",") ? input.base64.split(",")[1] : input.base64;
       const image = Buffer.from(encoded, "base64");
-      if (!image.length || image.length > 3_000_000) throw new Error("Cada imagen debe pesar como máximo 3 MB.");
+      if (!image.length || image.length > 8_000_000) throw new Error("Cada archivo debe pesar como máximo 8 MB.");
       const cleanName = input.filename.replace(/[^a-zA-Z0-9._-]/g, "-");
       return storagePut(`referencias-construccion/${Date.now()}-${cleanName}`, image, input.mimeType);
     }),

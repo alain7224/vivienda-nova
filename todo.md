@@ -20,4 +20,21 @@
 - [x] Mejorar el vídeo aéreo aportado para una presentación de fondo profesional y de alta calidad.
 - [x] Validar la portada y el mapa corregidos en ordenador y móvil.
 - [x] Documentar la resolución real del vídeo de fondo y evitar una ampliación artificial a 8K.
-- [ ] Verificar explícitamente en móvil el mapa de parcela tras autorizar contenido externo.
+- [x] Verificar en móvil el mapa de parcela tras autorizar contenido externo.
+- [x] Aceptar imágenes comunes de móvil, JPG, PNG, WebP y PDF como referencias de vivienda a medida.
+- [x] Mostrar claramente en el formulario los adjuntos de idea, casa o parcela y permitir retirarlos.
+- [x] Mantener todos los vídeos de portada sin audio y con una imagen cálida de respaldo.
+- [x] Reducir aproximadamente un 30 % la altura y el espaciado vertical de la portada.
+- [x] Hacer visible desde la portada una pista clara del catálogo de viviendas que continúa debajo.
+- [x] Validar la carga de formatos, la jerarquía de portada y la experiencia móvil.
+- [x] Reducir de forma medible la altura de la portada aproximadamente un 30 % respecto a su tamaño anterior.
+- [x] Mostrar una señal visible del buscador o catálogo en el primer viewport de la portada.
+- [x] Probar de forma explícita la selección, previsualización y retirada de imagen y PDF en el formulario.
+- [x] Eliminar los controles de reproducción e indicadores no esenciales; conservar solo el selector transparente de costa solicitado.
+- [x] Crear una variación de vídeo clara y dinámica con varios encuadres de vivienda y piscina.
+- [x] Crear una imagen de chalet minimalista de dos plantas con piscina para sustituir la imagen actual.
+- [x] Añadir una llamada a la acción clara a mitad de página y hacer su contenido editable desde Administración.
+- [x] Confirmar que vídeo, imagen y llamada a la acción pueden actualizarse desde el panel privado.
+- [x] Validar el resultado audiovisual en ordenador y móvil.
+- [x] Probar en navegador la subida, previsualización y eliminación de un JPG y un PDF en el brief de construcción.
+- [x] Añadir un control privado para sustituir la imagen residencial de portada y conectar la misma imagen al respaldo del vídeo.

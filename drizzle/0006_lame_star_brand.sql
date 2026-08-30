@@ -1,0 +1,1 @@
+ALTER TABLE `siteSettings` ADD `midPageCta` varchar(220) DEFAULT 'Compra con claridad · Información directa del vendedor' NOT NULL;

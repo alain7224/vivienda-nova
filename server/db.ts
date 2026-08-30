@@ -33,8 +33,10 @@ export function getDefaultPublicSiteSettings() {
     enabledLocales: "es,en,nl,de,sv,no,fr,ro,ru,zh-CN,de-CH,fr-CH,it-CH",
     heroVideos: JSON.stringify([{
       label: "Costa Blanca Norte",
-      url: "/manus-storage/costa-blanca-profesional_6d70f226.mp4",
+      url: "/manus-storage/chalet-piscina-recorrido_14603e97.mp4",
     }]),
+    heroImageUrl: "/manus-storage/chalet-minimalista-piscina_3bd4eca8.jpg",
+    midPageCta: "Compra con claridad · Información directa del vendedor",
   };
 }
 
