@@ -93,6 +93,8 @@ export const propertyLeads = mysqlTable("propertyLeads", {
   budget: varchar("budget", { length: 100 }),
   referenceImages: text("referenceImages"),
   attributionCode: varchar("attributionCode", { length: 160 }).default("MARTINEZ").notNull(),
+  privacyAcceptedAt: timestamp("privacyAcceptedAt"),
+  referralConsentAt: timestamp("referralConsentAt"),
   message: text("message").notNull(),
   status: mysqlEnum("status", ["new", "contacted", "sent_to_seller", "in_follow_up", "won", "lost"]).default("new").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),

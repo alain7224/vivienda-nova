@@ -29,6 +29,13 @@
       "when": 1788061094287,
       "tag": "0003_funny_mariko_yashida",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1788068426040,
+      "tag": "0004_magenta_yellow_claw",
+      "breakpoints": true
     }
   ]
 }

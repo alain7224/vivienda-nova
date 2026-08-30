@@ -49,3 +49,10 @@
 - [x] Corregir la consulta pública de ajustes para devolver valores iniciales cuando no existan filas guardadas.
 - [x] Añadir una prueba que cubra la configuración pública inicial.
 - [x] Validar que la portada no registra errores de datos indefinidos.
+- [x] Auditar formularios, analítica, redirecciones y páginas legales del sitio.
+- [x] Crear política de privacidad, aviso legal, política de cookies y transparencia comercial de referidos como borradores operativos.
+- [x] Añadir consentimiento informado y enlaces legales en los formularios públicos.
+- [x] Añadir gestión de consentimiento de cookies antes de activar analítica no esencial.
+- [x] Identificar los datos empresariales que el propietario debe completar antes de publicar.
+- [x] Verificar enlaces, avisos y experiencia legal en escritorio y móvil.
+- [x] Revisar en móvil las páginas legales, el banner de cookies y los consentimientos de formularios.

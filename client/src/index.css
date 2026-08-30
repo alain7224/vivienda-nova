@@ -315,6 +315,10 @@ h2 em { color: #d95f42; font-style: italic; }
 .property-contact-dock select, .property-contact-dock input, .property-contact-dock textarea { background: rgba(255,255,255,.96); border: 0; border-radius: 0; color: #102f40; font-size: 12px; padding: 11px; width: 100%; }
 .property-contact-dock textarea { grid-column: span 2; resize: vertical; }
 .property-contact-dock .button { justify-self: start; }
+.property-contact-consent { display: grid; gap: 7px; grid-column: 1 / -1; padding: 5px 0 3px; }.property-contact-consent label { align-items: flex-start; color: rgba(255,255,255,.78); display: flex; font-size: 10px; gap: 7px; line-height: 1.4; }.property-contact-consent input { accent-color: #d95f42; margin-top: 2px; width: auto; }.property-contact-consent a { color: #fffdf8; font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
+
+/* Privacidad explícita: el panel aparece hasta que la persona haya elegido sus preferencias. */
+.cookie-consent { align-items: center; background: #112f3f; bottom: 18px; box-shadow: 0 16px 42px rgba(17,47,63,.3); color: #fffdf8; display: grid; gap: 16px; grid-template-columns: minmax(240px, 1fr) auto; left: 18px; max-width: 710px; padding: 17px 48px 17px 18px; position: fixed; z-index: 60; }.cookie-consent__intro { align-items: flex-start; display: flex; gap: 10px; }.cookie-consent__intro > svg { color: #d95f42; flex: 0 0 auto; margin-top: 2px; }.cookie-consent__intro p { font-size: 12px; font-weight: 800; margin: 0 0 2px; }.cookie-consent__intro span { color: rgba(255,255,255,.72); display: block; font-size: 10px; line-height: 1.5; }.cookie-consent__settings { border-top: 1px solid rgba(255,255,255,.2); display: grid; gap: 8px; grid-column: 1 / -1; padding-top: 12px; }.cookie-consent__settings label { align-items: flex-start; color: rgba(255,255,255,.85); display: flex; font-size: 10px; gap: 8px; line-height: 1.45; }.cookie-consent__settings input { accent-color: #d95f42; margin-top: 2px; }.cookie-consent__actions { align-items: center; display: flex; flex-wrap: wrap; gap: 9px; grid-column: 1 / -1; }.cookie-consent__actions button, .cookie-consent__actions a { font-size: 9px; font-weight: 800; letter-spacing: .05em; padding: 8px 9px; text-transform: uppercase; }.cookie-link { align-items: center; background: transparent; color: #fffdf8; display: inline-flex; gap: 5px; padding-left: 0!important; }.cookie-consent__actions a { color: rgba(255,255,255,.82); text-decoration: underline; text-underline-offset: 3px; }.cookie-reject { background: rgba(255,255,255,.12); color: #fffdf8; }.cookie-accept { align-items: center; background: #d95f42; color: #fffdf8; display: inline-flex; gap: 4px; }.cookie-close { background: transparent; color: #fffdf8; padding: 5px; position: absolute; right: 12px; top: 12px; }
 
 @media (max-width: 740px) {
   .locale-banner { font-size: 8px; justify-content: flex-start; padding: 5px 12px; }
@@ -326,6 +330,8 @@ h2 em { color: #d95f42; font-style: italic; }
   .property-contact-dock { grid-template-columns: 1fr; padding: 47px 25px; }
   .property-contact-dock form { grid-template-columns: 1fr; }
   .property-contact-dock textarea { grid-column: span 1; }
+  .property-contact-consent { grid-column: span 1; }
+  .cookie-consent { bottom: 0; grid-template-columns: 1fr; left: 0; max-width: none; padding: 16px 42px 16px 16px; right: 0; }
 }
 
 /* Brief de construcción: recorrido conversacional presentado como una carpeta de proyecto. */

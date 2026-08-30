@@ -35,6 +35,7 @@ import {
   updateVendor,
 } from "./db";
 import { buildReferralChannelUrl } from "./referral";
+import { createLeadConsentTimestamps } from "./consent";
 import { storagePut } from "./storage";
 import { translatePropertyCopy } from "./translation";
 
@@ -65,7 +66,7 @@ const leadInput = z.object({
   leadType: z.enum(["property", "construction", "product"]).default("property"), propertyId: z.number().int().positive().nullable().optional(), name: z.string().trim().min(2).max(160),
   email: z.string().email().max(320), phone: z.string().trim().max(50).nullable().optional(), preferredLocation: z.string().trim().max(200).nullable().optional(), preferredProvince: z.string().trim().max(140).nullable().optional(),
   latitude: z.string().trim().max(32).nullable().optional(), longitude: z.string().trim().max(32).nullable().optional(), budget: z.string().trim().max(100).nullable().optional(),
-  referenceImages: z.array(z.string().startsWith("/manus-storage/")).max(5).optional(), attributionCode: z.string().trim().min(1).max(160).default("MARTINEZ"), message: z.string().trim().min(5).max(5000),
+  referenceImages: z.array(z.string().startsWith("/manus-storage/")).max(5).optional(), attributionCode: z.string().trim().min(1).max(160).default("MARTINEZ"), privacyAccepted: z.boolean(), referralConsent: z.boolean(), message: z.string().trim().min(5).max(5000),
 }).superRefine((value, ctx) => { if (value.leadType === "property" && !value.propertyId) ctx.addIssue({ code: "custom", path: ["propertyId"], message: "Selecciona una vivienda." }); });
 
 const operationInput = z.object({
@@ -93,7 +94,9 @@ export const appRouter = router({
     createLead: publicProcedure.input(leadInput).mutation(async ({ input }) => {
       const property = input.propertyId ? await getPropertyById(input.propertyId) : undefined;
       if (input.leadType === "property" && (!property || property.status !== "published")) throw new Error("La vivienda no está disponible.");
-      await createPropertyLead({ ...input, propertyId: input.propertyId || null, phone: input.phone || null, preferredLocation: input.preferredLocation || null, preferredProvince: input.preferredProvince || null, latitude: input.latitude || null, longitude: input.longitude || null, budget: input.budget || null, referenceImages: input.referenceImages?.length ? JSON.stringify(input.referenceImages) : null, attributionCode: input.attributionCode || "MARTINEZ", status: "new" });
+      const { privacyAccepted, referralConsent, ...lead } = input;
+      const consent = createLeadConsentTimestamps({ privacyAccepted, referralConsent });
+      await createPropertyLead({ ...lead, propertyId: lead.propertyId || null, phone: lead.phone || null, preferredLocation: lead.preferredLocation || null, preferredProvince: lead.preferredProvince || null, latitude: lead.latitude || null, longitude: lead.longitude || null, budget: lead.budget || null, referenceImages: lead.referenceImages?.length ? JSON.stringify(lead.referenceImages) : null, attributionCode: lead.attributionCode || "MARTINEZ", status: "new", ...consent });
       const label = property?.title || (input.leadType === "construction" ? "Proyecto de construcción" : "Producto");
       const notificationSent = await notifyOwner({ title: `Nuevo interesado: ${label}`, content: `${input.name} · ${input.email}${input.phone ? ` · ${input.phone}` : ""} · Referencia: ${input.attributionCode || "MARTINEZ"}` });
       return { success: true, notificationSent };
@@ -144,6 +147,7 @@ export const appRouter = router({
     prepareLeadReferral: adminProcedure.input(z.object({ leadId: z.number().int().positive(), vendorId: z.number().int().positive() })).mutation(async ({ input }) => {
       const [lead, vendor] = await Promise.all([getPropertyLeadById(input.leadId), getVendorById(input.vendorId)]);
       if (!lead || !vendor) throw new Error("No se encontró el cliente o el vendedor.");
+      if (!lead.referralConsentAt) throw new Error("Este cliente no autorizó el envío de sus datos al vendedor.");
       const property = lead.propertyId ? await getPropertyById(lead.propertyId) : undefined;
       const title = property?.title || (lead.leadType === "construction" ? "Proyecto de construcción a medida" : "Consulta de producto");
       const message = `Cliente referido por MARTINEZ\nNombre: ${lead.name}\nCorreo: ${lead.email}\nTeléfono: ${lead.phone || "No indicado"}\nInterés: ${title}\nMensaje: ${lead.message}\nReferencia: ${vendor.referralCode}`;
