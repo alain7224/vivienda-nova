@@ -13,3 +13,13 @@ export function buildReferralUrl(destination: string, parameter?: string | null,
   }
   return url.toString();
 }
+
+/** Construye el canal elegido sin enviar mensajes ni iniciar llamadas de forma automática. */
+export function buildReferralChannelUrl(method: "direct" | "email" | "whatsapp" | "sms" | "phone", value: string, message: string, parameter?: string | null, code?: string | null) {
+  if (method === "direct") return buildReferralUrl(value, parameter, code);
+  if (method === "email") return `mailto:${encodeURIComponent(value)}?subject=${encodeURIComponent("Nuevo interesado referido por MARTINEZ")}&body=${encodeURIComponent(message)}`;
+  if (method === "phone") return `tel:${value.replace(/[^+0-9]/g, "")}`;
+  if (method === "sms") return `sms:${value.replace(/[^+0-9]/g, "")}?body=${encodeURIComponent(message)}`;
+  const number = value.replace(/[^0-9]/g, "");
+  return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+}

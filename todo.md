@@ -1,8 +1,8 @@
 # Plan de ejecución · Administración y referidos
 
 - [x] Implementar el flujo combinado: capturar contactos y ofrecer redirección directa rastreable al vendedor.
-- [ ] Activar avisos privados al propietario y preparar el canal adicional de correo.
-- [ ] Configurar, por cada vendedor, el enlace de afiliado o el código de referencia que acepte.
+- [x] Activar avisos privados al propietario; el panel conserva los datos de contacto para responder por correo o teléfono.
+- [x] Habilitar, por cada vivienda, la configuración del enlace de afiliado o el código de referencia que facilite el vendedor.
 - [x] Convertir el proyecto para disponer de acceso privado y una base de datos persistente.
 - [x] Crear el panel de administración, visible solo para el propietario del proyecto.
 - [x] Añadir alta y edición manual de propiedades, con subida de imágenes y campos comerciales.
@@ -12,3 +12,29 @@
 - [x] Enviar un aviso privado al propietario por cada solicitud de información.
 - [x] Validar permisos, redirecciones, trazabilidad y experiencia móvil.
 - [x] Preparar una guía breve para administrar inmuebles y comprobar referidos.
+- [x] Crear la ficha de vendedor con sus reglas de atribución y vincularla a cada vivienda.
+- [x] Añadir a la administración una gestión de vendedores y sus códigos de referido.
+- [ ] Definir el proveedor de correo para el canal adicional de aviso automático.
+- [x] Investigar y documentar el modelo recomendado de redirección y atribución de referidos.
+- [x] Añadir una modalidad de derivación directa al vendedor desde cada vivienda pública.
+- [x] Registrar y administrar todos los clientes e interacciones recibidas desde la web.
+- [x] Añadir operaciones cerradas con precio de venta, comisión, dirección y provincia.
+- [x] Mostrar un resumen privado de comisiones previstas, cobradas y pendientes.
+- [x] Recomendar y fijar el modelo de derivación directa que no requiere gestionar la venta.
+- [x] Añadir selector y barra multilingüe editable con detección de idioma del navegador.
+- [x] Traducir automáticamente las nuevas fichas de vivienda a los idiomas habilitados.
+- [x] Añadir métricas privadas de visitantes, clics y contactos.
+- [x] Permitir alternar entre tarjetas de vivienda con estilo plano y efecto tridimensional.
+- [x] Añadir una acción privada para derivar un interesado y su vivienda al vendedor seleccionado con el código MARTINEZ.
+- [x] Añadir ficha de operación con precio de cierre, comisión, dirección, provincia y estado de cobro.
+- [x] Incluir rumano y las variantes de alemán, francés e italiano de Suiza en la configuración de idiomas.
+- [x] Aclarar que VENDEDORPAULA es un código propuesto y sustituirlo por MARTINEZ como referencia comercial.
+- [x] Configurar el botón principal de cada vivienda para la derivación directa al vendedor externo.
+- [x] Permitir configurar derivación por enlace directo, correo, WhatsApp, SMS o llamada en cada vendedor.
+- [x] Usar MARTINEZ como código de referencia configurable por defecto.
+- [x] Crear un formulario de construcción a medida para captar ubicación, necesidades y presupuesto.
+- [x] Clasificar en el CRM los contactos de viviendas y los proyectos de construcción desde cero.
+- [x] Añadir un historial privado de visitas y clics de referido por vivienda, fecha y canal.
+- [x] Separar en el resumen las comisiones previstas, pendientes y cobradas.
+- [x] Convertir la acción principal de cada tarjeta pública en la derivación directa al vendedor.
+- [x] Exigir enlace externo y flujo de derivación para toda vivienda publicada en el escaparate público.

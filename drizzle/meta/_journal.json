@@ -8,6 +8,20 @@
       "when": 1788043898382,
       "tag": "0000_damp_serpent_society",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1788044579461,
+      "tag": "0001_spotty_mimic",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1788059037846,
+      "tag": "0002_unknown_sabra",
+      "breakpoints": true
     }
   ]
 }

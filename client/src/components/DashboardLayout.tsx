@@ -159,7 +159,7 @@ function DashboardLayoutContent({
         >
           <SidebarHeader className="h-16 justify-center">
             <div className="flex items-center gap-2 px-2 transition-all w-full">
-              {!isCollapsed ? <img src="/manus-storage/vivienda-nova-logo_364aff20.png" alt="" className="h-7 w-7 shrink-0 object-contain" /> : null}
+              {!isCollapsed ? <span aria-hidden="true" className="flex h-7 w-7 shrink-0 items-center justify-center bg-[#112f3f] text-[11px] font-serif tracking-[-0.15em] text-[#fffdf8]">NV</span> : null}
               <button
                 onClick={toggleSidebar}
                 className="h-8 w-8 flex items-center justify-center hover:bg-accent rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ring shrink-0"
