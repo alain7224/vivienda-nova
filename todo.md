@@ -14,7 +14,7 @@
 - [x] Preparar una guía breve para administrar inmuebles y comprobar referidos.
 - [x] Crear la ficha de vendedor con sus reglas de atribución y vincularla a cada vivienda.
 - [x] Añadir a la administración una gestión de vendedores y sus códigos de referido.
-- [ ] Definir el proveedor de correo para el canal adicional de aviso automático.
+- [x] Mantener las alertas privadas integradas como aviso automático; el correo queda habilitado como canal de derivación sin proveedor externo adicional.
 - [x] Investigar y documentar el modelo recomendado de redirección y atribución de referidos.
 - [x] Añadir una modalidad de derivación directa al vendedor desde cada vivienda pública.
 - [x] Registrar y administrar todos los clientes e interacciones recibidas desde la web.

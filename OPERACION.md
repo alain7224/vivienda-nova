@@ -24,6 +24,8 @@ La acción principal de la tarjeta pública es **«Ver oferta del vendedor»**. 
 
 Cuando un visitante envía el formulario vinculado a una vivienda, la consulta se conserva en **«Clientes y proyectos»** con la fecha, los datos de contacto, el inmueble y su estado. Además, se envía un aviso privado a la cuenta propietaria del proyecto. Desde la tabla puedes abrir el correo o llamar al teléfono que haya dejado el interesado, elegir el vendedor y pulsar **«Enviar»** para preparar una derivación por el canal configurado.
 
+Los avisos internos no dependen de un servicio de correo externo. El canal «Correo» se usa para derivar un referido directamente a la dirección que configures para cada vendedor; abre un mensaje preparado en el equipo de quien realice la derivación.
+
 La misma área registra las visitas y clics en **«Visitas y referidos»**. Se muestran los últimos 100 eventos con vivienda, idioma o canal y fecha. No se guarda la dirección IP del visitante.
 
 ## Construcción a medida
