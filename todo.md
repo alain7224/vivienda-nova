@@ -63,3 +63,7 @@
 - [x] Verificar visualmente en móvil la guía de instalación abierta sin desbordar el pie de página.
 - [x] Alinear «Gestionar cookies» con «Aviso legal» y los demás enlaces legales del pie.
 - [x] Validar la alineación de los enlaces legales en escritorio y móvil.
+- [x] Verificar que visitantes anónimos solo acceden a contenido público y no a métricas, CRM ni comisiones.
+- [x] Confirmar que el propietario mantiene acceso exclusivo a Administración mediante inicio de sesión seguro.
+- [x] Preparar una lista clara de pasos antes de pulsar Publicar.
+- [x] Documentar en la guía operativa la lista de comprobación previa a la publicación pública.

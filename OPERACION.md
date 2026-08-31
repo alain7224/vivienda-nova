@@ -55,6 +55,17 @@ Cuando el vendedor confirme que una venta se ha cerrado, abre **«Añadir operac
 
 Cuando quieras hacerla visible en internet, abre el panel del proyecto, guarda una versión y utiliza el botón **Publish**. La plataforma incluye alojamiento y una dirección pública; puedes comenzar con esa dirección sin contratar un proveedor externo. Después podrás conectar un dominio propio desde **Settings → Domains** si lo deseas. Antes de publicar, crea al menos un vendedor y una vivienda publicada para que el escaparate no aparezca vacío.
 
+### Lista de comprobación antes de publicar
+
+1. Entra en **`/admin`** con la misma cuenta con la que eres propietario del proyecto y confirma que ves el panel privado. No necesitas crear una segunda contraseña dentro de la web: el acceso usa el inicio de sesión seguro de tu cuenta propietaria.
+2. Crea cada **vendedor** y confirma por escrito su enlace, código de referido, canal de contacto y condiciones de comisión. Usa `MARTINEZ` solo si el vendedor confirma que reconoce ese código.
+3. Publica al menos una **vivienda real** con precio, superficie, dormitorios, baños, fotografía autorizada y enlace de derivación correcto. Mantén en borrador todo lo que no deba aparecer aún.
+4. Prueba desde la ficha pública el enlace al vendedor, el teléfono, WhatsApp y los botones de compartir. Revisa especialmente que cada enlace abre el destino esperado.
+5. Sustituye los datos pendientes de los textos de privacidad, cookies y aviso legal: razón social o nombre, NIF/CIF, domicilio, correo de derechos, conservación y destinatarios. Estos borradores requieren revisión jurídica antes de una actividad comercial.
+6. Comprueba la portada y el formulario en móvil y ordenador. El formulario solo debe pedir datos que vayas a gestionar y los consentimientos de privacidad y derivación deben seguir visibles.
+7. Guarda una **versión de respaldo** del proyecto antes de publicar. La administración, métricas, interesados, vendedores y comisiones permanecen tras inicio de sesión; una visita pública no puede consultar esos datos.
+8. Cuando los puntos anteriores estén listos, pulsa **Publish** desde el panel. La publicación no cambia quién puede entrar al área privada: solo hace accesible la web pública.
+
 Las actualizaciones de contenido que hagas desde **`/admin`** —viviendas, vendedores, imágenes, operaciones o ajustes visuales— se guardan en la base de datos y no requieren editar el código. Si cambias el diseño, las funciones o los textos estructurales, guarda una nueva versión del proyecto y vuelve a utilizar **Publish** para actualizar la versión pública.
 
 ## Copia y control del proyecto
