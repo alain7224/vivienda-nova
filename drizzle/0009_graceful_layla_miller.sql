@@ -1,0 +1,2 @@
+ALTER TABLE `siteSettings` ADD `ownerName` varchar(160) DEFAULT 'Vivienda Nova' NOT NULL;--> statement-breakpoint
+ALTER TABLE `siteSettings` ADD `businessMode` enum('real_estate','catalog') DEFAULT 'real_estate' NOT NULL;

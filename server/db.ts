@@ -37,8 +37,15 @@ export function getDefaultPublicSiteSettings() {
     }]),
     heroImageUrl: "/manus-storage/chalet-minimalista-piscina_3bd4eca8.jpg",
     contactPhone: "",
+    ownerName: "Vivienda Nova",
+    businessMode: "real_estate" as const,
     midPageCta: "Compra con claridad · Información directa del vendedor",
   };
+}
+
+/** En modo catálogo, una ficha puede publicarse para consulta directa sin vendedor externo. */
+export function requiresExternalSellerForPublishedEntry(mode?: "real_estate" | "catalog" | null) {
+  return mode !== "catalog";
 }
 
 export async function getDb() {
@@ -73,8 +80,10 @@ export async function getUserByOpenId(openId: string) {
 export async function listPublishedProperties(locale?: string) {
   const db = await getDb();
   if (!db) return [];
+  const settings = await getSiteSettings();
+  const requiresExternalSeller = requiresExternalSellerForPublishedEntry(settings?.businessMode);
   const rows = (await db.select().from(properties).where(eq(properties.status, "published")).orderBy(desc(properties.createdAt)))
-    .filter((property) => property.linkMode !== "capture" && Boolean(property.externalUrl));
+    .filter((property) => !requiresExternalSeller || (property.linkMode !== "capture" && Boolean(property.externalUrl)));
   if (!locale || locale === "es" || rows.length === 0) return rows;
   const translations = await db.select().from(propertyTranslations).where(eq(propertyTranslations.locale, locale));
   const translationByProperty = new Map(translations.map((translation) => [translation.propertyId, translation]));

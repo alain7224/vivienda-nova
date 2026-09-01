@@ -171,6 +171,10 @@ export const siteSettings = mysqlTable("siteSettings", {
   heroImageUrl: text("heroImageUrl"),
   /** Teléfono público opcional, gestionado desde el área privada. */
   contactPhone: varchar("contactPhone", { length: 32 }).default("").notNull(),
+  /** Nombre del titular comercial que puede cambiarse si el proyecto se cede. */
+  ownerName: varchar("ownerName", { length: 160 }).default("Vivienda Nova").notNull(),
+  /** Determina si el escaparate opera como promoción inmobiliaria o catálogo comercial. */
+  businessMode: mysqlEnum("businessMode", ["real_estate", "catalog"]).default("real_estate").notNull(),
   midPageCta: varchar("midPageCta", { length: 220 }).default("Compra con claridad · Información directa del vendedor").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),

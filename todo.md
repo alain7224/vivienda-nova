@@ -67,3 +67,13 @@
 - [x] Confirmar que el propietario mantiene acceso exclusivo a Administración mediante inicio de sesión seguro.
 - [x] Preparar una lista clara de pasos antes de pulsar Publicar.
 - [x] Documentar en la guía operativa la lista de comprobación previa a la publicación pública.
+- [ ] Añadir un titular comercial editable para la web y los textos legales operativos.
+- [ ] Mostrar el titular comercial editable en las páginas legales públicas.
+- [ ] Añadir un selector de modelo entre promoción inmobiliaria y catálogo comercial adaptable.
+- [ ] Mantener el modo inmobiliario actual intacto al alternar el modo de presentación.
+- [ ] Permitir en modo catálogo publicar productos de consulta directa sin enlace de vendedor, manteniendo la obligación de derivación en modo inmobiliario.
+- [ ] Verificar la conexión y sincronizar el respaldo actual del proyecto en GitHub.
+- [ ] Documentar cómo ceder la gestión y alojar la web tras una posible venta del proyecto.
+- [x] Añadir entre 3 y 8 palabras clave SEO relevantes a la página principal.
+- [x] Establecer document.title entre 30 y 60 caracteres y validar el conteo exacto.
+- [x] Comprobar la compilación y la presencia de los metadatos SEO en la portada.

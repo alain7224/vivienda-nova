@@ -17,6 +17,8 @@ describe("getDefaultPublicSiteSettings", () => {
       }]),
       heroImageUrl: "/manus-storage/chalet-minimalista-piscina_3bd4eca8.jpg",
       contactPhone: "",
+      ownerName: "Vivienda Nova",
+      businessMode: "real_estate",
       midPageCta: "Compra con claridad · Información directa del vendedor",
     });
   });

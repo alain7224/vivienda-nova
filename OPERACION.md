@@ -72,6 +72,21 @@ Las actualizaciones de contenido que hagas desde **`/admin`** —viviendas, vend
 
 Conserva una copia de la web desde el área de **Code** o conecta el proyecto a un repositorio de GitHub desde **Settings → GitHub**. Si la web utiliza el alojamiento incluido, su funcionamiento depende de ese servicio de alojamiento; el dominio que compres en un registrador externo sigue bajo tu control. Para trasladar la aplicación a otro proveedor se requiere exportar el código, configurar las variables de entorno y adaptar el despliegue al nuevo proveedor.
 
+## Titular comercial, modelo y futura cesión
+
+Desde **Administración → Idiomas y diseño** puedes cambiar el campo **«Titular comercial»** y seleccionar el **modelo de la web**:
+
+| Modelo | Qué cambia con el selector | Qué no incorpora todavía |
+|---|---|---|
+| Promoción inmobiliaria | Conserva viviendas, vendedor externo, código de referido y registro privado de clics o comisiones. | No gestiona contratos, visitas ni pagos de la compraventa. |
+| Catálogo comercial | Cambia las etiquetas públicas a productos, catálogo y consulta de producto. Permite publicar una ficha para consulta directa sin un enlace de vendedor. | No añade carrito, stock, cobro, pedido ni envío. Para una tienda con pagos habrá que conectar una plataforma de comercio. |
+
+El **titular comercial** es el nombre mostrado en el pie y en los textos legales; puedes sustituirlo cuando cambie la empresa, marca o persona responsable. No modifica la cuenta técnica de administrador. Esta separación es importante: el acceso a **`/admin`**, la base de datos y las métricas continúan protegidos por la cuenta propietaria del proyecto, no por el texto que aparece en la web.
+
+Si un día vendes el proyecto, conserva primero una versión de respaldo y sigue este orden: transfiere el repositorio de GitHub al comprador, entrégale o transfiera el dominio en el registrador correspondiente, y solicita el cambio de propiedad del proyecto y de sus servicios de alojamiento o crea una copia nueva bajo la cuenta del comprador. Antes de entregar datos reales, acuerda por escrito qué ocurre con los contactos, métricas, vendedores y archivos existentes; no deben transferirse sin una base legal y la información necesaria para los interesados.
+
+GitHub guarda el **código y el historial de cambios**, pero no sustituye por sí solo al alojamiento, la base de datos, el inicio de sesión ni el almacenamiento de archivos. Puedes alojar la aplicación aquí y usar GitHub como respaldo y control de versiones, o exportar el proyecto y configurarlo en otro proveedor cuando sea necesario.
+
 ## Información que debes pedir a cada vendedor
 
 | Dato | Por qué es necesario |
