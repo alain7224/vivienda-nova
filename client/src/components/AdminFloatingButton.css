@@ -1,0 +1,47 @@
+.admin-floating-container {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 70;
+  pointer-events: auto;
+}
+
+.admin-floating-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 44px;
+  height: 44px;
+  padding: 0 12px;
+  background: linear-gradient(180deg, #13323b 0%, #0f2a33 100%);
+  color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(17, 47, 63, 0.22), 0 2px 6px rgba(0,0,0,0.08);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: -0.01em;
+  transform: translateZ(0);
+  transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
+}
+
+.admin-floating-button:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 14px 30px rgba(17, 47, 63, 0.26), 0 4px 10px rgba(0,0,0,0.12);
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .admin-floating-button,
+  .admin-floating-button:hover {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* On very small screens, make it slightly smaller and move inward */
+@media (max-width: 420px) {
+  .admin-floating-container { right: 12px; bottom: 12px; }
+  .admin-floating-button { height: 40px; min-width: 40px; padding: 0 10px; border-radius: 10px; font-size: 12px; }
+}
