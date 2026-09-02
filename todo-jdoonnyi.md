@@ -68,3 +68,16 @@
 - [x] Añadir el idioma de las visitas al resumen geográfico del panel admin.
 - [x] Reescribir las referencias documentales que usan «por IP» para que hablen de ubicación aproximada agregada.
 - [x] Entregar explícitamente la captura real del mapa junto con la nueva versión publicada.
+
+## Incidencia de acceso admin en producción
+
+- [x] Comprobar por qué `ADMIN_KEY` funciona en el entorno de Manus pero aparece sin configurar en viviendanova.casa.
+- [x] Verificar que `ADMIN_KEY` esté disponible en producción sin leerla ni mostrarla en logs, código o respuestas.
+- [ ] Probar el endpoint de login admin desde el dominio público y confirmar la sesión resultante.
+- [ ] Guardar y publicar un checkpoint con la corrección, si se requiere un cambio de código o configuración.
+
+## Corrección de identidad admin en producción
+
+- [x] Evitar que el login por clave dependa de `OWNER_OPEN_ID` cuando esa variable integrada no está disponible en el despliegue público.
+- [x] Crear una identidad técnica estable y separada para la sesión por `ADMIN_KEY`, manteniendo rol admin y sin exponer credenciales.
+- [ ] Volver a probar el login contra https://viviendanova.casa y publicar el checkpoint corregido.

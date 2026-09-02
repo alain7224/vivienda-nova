@@ -48,10 +48,7 @@ export function registerKeyLogin(app: Express) {
       console.error("[KeyLogin] ADMIN_KEY is not configured");
       return res.status(503).json({ error: "admin_not_configured" });
     }
-    if (!ENV.ownerOpenId) {
-      console.error("[KeyLogin] OWNER_OPEN_ID is not configured");
-      return res.status(503).json({ error: "owner_not_configured" });
-    }
+    const ownerOpenId = ENV.ownerOpenId || "vivienda-nova-admin-key-owner";
     if (!ENV.cookieSecret || !ENV.appId) {
       console.error("[KeyLogin] Session configuration is incomplete");
       return res.status(503).json({ error: "session_not_configured" });
@@ -60,13 +57,13 @@ export function registerKeyLogin(app: Express) {
 
     try {
       await upsertUser({
-        openId: ENV.ownerOpenId,
+        openId: ownerOpenId,
         name: ENV.ownerName,
         loginMethod: "admin-key",
         role: "admin",
         lastSignedIn: new Date(),
       });
-      const sessionToken = await sdk.createSessionToken(ENV.ownerOpenId, {
+      const sessionToken = await sdk.createSessionToken(ownerOpenId, {
         expiresInMs: ONE_YEAR_MS,
         name: ENV.ownerName,
       });
