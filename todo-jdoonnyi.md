@@ -81,3 +81,15 @@
 - [x] Evitar que el login por clave dependa de `OWNER_OPEN_ID` cuando esa variable integrada no está disponible en el despliegue público.
 - [x] Crear una identidad técnica estable y separada para la sesión por `ADMIN_KEY`, manteniendo rol admin y sin exponer credenciales.
 - [x] Volver a probar el login contra https://viviendanova.casa y publicar el checkpoint corregido.
+
+## Incidencia: sesión admin bloqueada tras login público
+
+- [x] Localizar la comprobación que exige OWNER_OPEN_ID y provoca «Acceso restringido» después del login por clave.
+- [x] Hacer que la sesión creada por ADMIN_KEY sea reconocida como admin autorizado sin ampliar permisos a otros usuarios.
+- [x] Probar el flujo público completo: login, cookie, identidad admin y carga de /admin.
+- [x] Guardar y publicar un checkpoint con la corrección final.
+
+## Verificación final de acceso admin
+
+- [x] Verificar el flujo público de /admin tras iniciar sesión con ADMIN_KEY: el dominio devolvió sesión admin y admin.overview; la captura visual del mismo código en desarrollo muestra el panel completo. El intento de navegador remoto en el dominio devolvió 504 y no se considera evidencia visual adicional.
+- [x] Ajustar la documentación de causa raíz para indicar que el bloqueo era la configuración de identidad del login y la comprobación efectiva del rol admin.

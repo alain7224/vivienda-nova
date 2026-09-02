@@ -125,3 +125,8 @@ En **«Visitas y referidos»**, pulsa la tarjeta **«visitantes»** para abrir e
 La analítica solo se registra después de aceptar la categoría correspondiente en el aviso de cookies. La aplicación no muestra ni conserva el identificador de red original; guarda únicamente la ubicación aproximada agregada, el idioma, la página y el dominio de entrada. Esa ubicación no equivale a una dirección exacta y puede fallar o situar al visitante en otra localidad cuando utiliza VPN, red móvil, proxy o una red corporativa. Los datos históricos anteriores a esta mejora no tienen ubicación retroactiva; las nuevas visitas consentidas irán rellenando el mapa.
 
 Antes de usar estos datos para campañas, revisa que la política de cookies y privacidad de la web describa esta medición y el proveedor técnico utilizado. El mapa está pensado para orientar la inversión publicitaria por mercados, no para identificar personas.
+
+
+### Nota sobre el acceso admin por clave
+
+Si el login con `ADMIN_KEY` responde correctamente pero `/admin` muestra «Acceso restringido», revisa la identidad de sesión y el rol `admin`. El acceso por clave utiliza una identidad técnica estable de respaldo cuando la identidad propietaria integrada no está disponible en producción; no basta con que la clave sea aceptada, porque el panel autoriza sus operaciones mediante el rol persistido del usuario. Nunca incluyas la clave en GitHub, capturas o mensajes.
