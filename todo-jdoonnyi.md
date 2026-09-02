@@ -30,4 +30,4 @@
 - [x] Probar manualmente el flujo completo de botón admin, login por clave y entrada a /admin con sesión.
 - [x] Verificar autenticadamente la apertura de los editores de vivienda, vendedor, ajustes de colores/contenido, importador y enlace de oficina.
 - [x] Documentar en OPERACION.md las variables seguras, su configuración y el procedimiento de actualización/publicación.
-- [ ] Verificar el flujo de colaborador desde un enlace válido y confirmar que las nuevas fichas quedan como borradores sin crear datos ficticios en la base de datos; la validación de enlace válido y el rechazo de tokens inválidos ya están comprobados.
+- [x] Verificar el flujo de colaborador desde un enlace válido y confirmar que las nuevas fichas quedan como borradores sin crear datos ficticios en la base de datos; la validación de enlace válido, el rechazo de tokens inválidos y la regla de estado borrador están comprobados.

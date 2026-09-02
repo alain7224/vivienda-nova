@@ -16,3 +16,7 @@ export function buildCollaboratorUrl(origin: string, token: string) {
   }
   return `${parsed.origin}/oficina/${encodeURIComponent(token)}`;
 }
+
+export function forceCollaboratorDraft<T extends object>(values: T) {
+  return { ...values, status: "draft" as const, linkMode: "capture" as const, vendorId: null, externalUrl: null };
+}

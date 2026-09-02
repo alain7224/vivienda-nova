@@ -45,7 +45,7 @@ import { buildReferralChannelUrl } from "./referral";
 import { createLeadConsentTimestamps } from "./consent";
 import { storagePut } from "./storage";
 import { translatePropertyCopy } from "./translation";
-import { buildCollaboratorUrl, createCollaboratorToken, hashCollaboratorToken } from "./collaborator";
+import { buildCollaboratorUrl, createCollaboratorToken, forceCollaboratorDraft, hashCollaboratorToken } from "./collaborator";
 
 const directChannels = ["direct", "email", "whatsapp", "sms", "phone"] as const;
 const propertyInput = z.object({
@@ -126,9 +126,10 @@ export const appRouter = router({
       const { token, ...values } = input;
       const link = await getActivePropertyInviteLink(hashCollaboratorToken(token));
       if (!link) throw new Error("Este enlace de oficina ha caducado o ha sido revocado.");
-      const id = await createProperty({ ...values, status: "draft", linkMode: "capture", vendorId: null, externalUrl: null, referralCode: values.referralCode || "MARTINEZ" });
+      const draft = forceCollaboratorDraft(values);
+      const id = await createProperty({ ...draft, referralCode: values.referralCode || "MARTINEZ" });
       let translationsReady = true;
-      try { await syncTranslations(id, { ...values, status: "draft", linkMode: "capture", vendorId: null, externalUrl: null }); } catch { translationsReady = false; }
+      try { await syncTranslations(id, draft); } catch { translationsReady = false; }
       await touchPropertyInviteLink(link.id);
       return { success: true, id, translationsReady };
     }),
