@@ -17,6 +17,9 @@ const redirectToLoginIfUnauthorized = (error: unknown) => {
   const isUnauthorized = error.message === UNAUTHED_ERR_MSG;
 
   if (!isUnauthorized) return;
+  // AdminPanel owns the private-route transition and logout flow. Avoid
+  // restarting OAuth while its protected queries are being torn down.
+  if (window.location.pathname.startsWith("/admin")) return;
 
   startLogin();
 };

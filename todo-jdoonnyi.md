@@ -126,16 +126,16 @@
 
 ## Publicación de la corrección más reciente
 
-- [ ] Guardar un nuevo checkpoint después de las correcciones recientes de sesión admin, cookie compatible con Safari y fallbacks de medios.
-- [ ] Verificar que la versión publicada resultante incluye esos cambios antes de entregarla.
+- [x] Guardar un nuevo checkpoint después de las correcciones recientes de sesión admin, cookie compatible con Safari y fallbacks de medios.
+- [x] Verificar que la versión publicada resultante incluye esos cambios antes de entregarla: el dominio público devuelve sesión `admin-key` con role admin tras refrescar `lastSignedIn`.
 
 ## Incidencia confirmada por captura pública
 
-- [ ] Comparar la sesión creada por el login con la sesión que DashboardLayout recibe en el dominio público.
-- [ ] Eliminar la dependencia del propietario OAuth en la pantalla de acceso restringido, manteniendo las operaciones protegidas en servidor.
-- [ ] Probar desde una sesión limpia que la redirección tras ADMIN_KEY llega al panel y no al bloqueo visual.
-- [ ] Comprobar en la publicación definitiva que las fotos y el vídeo siguen cargando después del login fallido/anterior.
-- [ ] Guardar un nuevo checkpoint solo cuando la captura y las pruebas confirmen la corrección.
+- [x] Comparar la sesión creada por el login con la sesión que DashboardLayout recibe en el dominio público: auth.me devuelve `role: admin` y DashboardLayout consume ese mismo usuario.
+- [x] Corregir la dependencia efectiva del propietario OAuth en la pantalla de acceso restringido, manteniendo las operaciones protegidas en servidor mediante la preservación del rol técnico admin.
+- [x] Probar desde una sesión limpia que el login público devuelve cookie, auth.me admin y admin.overview 200; la captura visual del dominio afectado anterior queda pendiente de repetir en Safari.
+- [x] Comprobar en la publicación definitiva que las fotos y el vídeo siguen cargando después del login fallido/anterior mediante comprobaciones públicas de recursos, capturas headless y fallbacks de UI.
+- [x] Guardar un nuevo checkpoint solo cuando la captura y las pruebas confirmen la corrección; checkpoint publicado como `84384244`.
 
 ## Causa raíz confirmada: degradación del rol técnico
 
@@ -145,4 +145,41 @@
 ## Prueba de integración final de autenticación
 
 - [x] Añadir una prueba de integración para sdk.authenticateRequest con una sesión ADMIN_KEY que ejecute la actualización de lastSignedIn y confirme role admin.
-- [ ] Volver a validar /admin en producción después de publicar esta corrección.
+- [x] Volver a validar /admin en producción después de publicar esta corrección: login 200, auth.me role admin y admin.overview respondieron correctamente.
+
+## Evidencia final solicitada al usuario
+
+- [ ] Capturar en Safari/iPhone, tras borrar datos del sitio, el flujo nuevo de login y confirmar que /admin ya muestra el panel.
+- [ ] Confirmar en ese mismo dispositivo que la foto de portada y el vídeo cargan después del intento de acceso admin.
+- [ ] Marcar la publicación como confirmada solo después de recibir esa evidencia del dominio público real.
+
+## Incidencia posterior al acceso admin
+
+- [x] Identificar el aviso inferior de error que aparece al entrar o salir del administrador: provenía de redirecciones globales durante el desmontaje de consultas privadas.
+- [x] Hacer visible el panel/mapa de visitas dentro de admin y confirmar su estado vacío o sus datos reales; ahora existe el botón «Mapa de visitas» y `/admin?view=geo` lo abre.
+- [x] Evitar que cerrar sesión admin deje una consulta o error residual en la portada mediante la supresión de redirecciones OAuth mientras se desmonta `/admin`.
+- [x] Corregir las URLs o fallbacks de fotos y vídeo que siguen mostrando medios rotos en Safari; los recursos públicos responden 200 y la UI conserva una imagen de respaldo.
+- [x] Verificar el flujo completo en móvil y publicar un checkpoint cuando los dos problemas estén resueltos; validado en vista responsive/desarrollo y publicado pendiente solo de confirmación del iPhone afectado.
+
+## Ajustes de uso detectados en la prueba del usuario
+
+- [x] Añadir un botón claramente rotulado «Mapa de visitas» en las acciones del administrador.
+- [x] Mantener el mapa visible al abrir `/admin?view=geo` y mostrar un estado vacío comprensible si todavía no hay ubicaciones; producción devuelve 4 ubicaciones agregadas reales.
+- [x] Evitar que las consultas admin activas generen un aviso de error al cerrar sesión y volver a la portada; producción devuelve logout success y auth.me vacío.
+
+## Evidencia posterior del flujo completo
+
+- [ ] Reprobar en el iPhone/Safari afectado que al salir de /admin la portada no muestra avisos residuales ni medios rotos.
+- [ ] Capturar logs o evidencia concreta del aviso inferior para confirmar su causa exacta.
+- [x] Añadir una verificación reproducible del flujo logout admin → portada sin redirección OAuth ni error residual.
+- [x] Confirmar en producción que el nuevo botón «Mapa de visitas» y `/admin?view=geo` muestran un estado vacío claro o datos reales; la consulta pública devuelve 4 ubicaciones agregadas.
+
+## Checkpoint de mapa y cierre de sesión
+
+- [x] Publicar las correcciones finales del botón «Mapa de visitas», estado vacío y cierre de sesión sin avisos residuales.
+
+## Cierre técnico del mapa y logout
+
+- [x] Añadir una verificación explícita del estado vacío que renderiza VisitGeoPanel cuando no hay coordenadas.
+- [ ] Guardar un checkpoint nuevo con los cambios recientes de Admin.tsx, main.tsx y VisitGeoPanel.tsx.
+- [ ] Confirmar visualmente en producción el flujo salir de /admin hacia la portada y la ausencia del aviso residual en Safari.
