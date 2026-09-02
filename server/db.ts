@@ -59,6 +59,12 @@ export async function getDb() {
   return _db;
 }
 
+export function roleUpdateForUpsert(openId: string, requestedRole: InsertUser["role"], ownerOpenId: string) {
+  if (requestedRole !== undefined) return { role: requestedRole };
+  if (openId === ownerOpenId) return { role: "admin" as const };
+  return {} as const;
+}
+
 export async function upsertUser(user: InsertUser): Promise<void> {
   if (!user.openId) throw new Error("User openId is required for upsert");
   const db = await getDb();
@@ -68,8 +74,11 @@ export async function upsertUser(user: InsertUser): Promise<void> {
   (["name", "email", "loginMethod"] as const).forEach((field) => {
     if (user[field] !== undefined) { values[field] = user[field] ?? null; updateSet[field] = user[field] ?? null; }
   });
-  values.role = user.role ?? (user.openId === ENV.ownerOpenId ? "admin" : "user");
-  updateSet.role = values.role;
+  const roleUpdate = roleUpdateForUpsert(user.openId, user.role, ENV.ownerOpenId);
+  if ("role" in roleUpdate) {
+    values.role = roleUpdate.role;
+    updateSet.role = roleUpdate.role;
+  }
   await db.insert(users).values(values).onDuplicateKeyUpdate({ set: updateSet });
 }
 

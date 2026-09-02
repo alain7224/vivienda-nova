@@ -128,3 +128,21 @@
 
 - [ ] Guardar un nuevo checkpoint después de las correcciones recientes de sesión admin, cookie compatible con Safari y fallbacks de medios.
 - [ ] Verificar que la versión publicada resultante incluye esos cambios antes de entregarla.
+
+## Incidencia confirmada por captura pública
+
+- [ ] Comparar la sesión creada por el login con la sesión que DashboardLayout recibe en el dominio público.
+- [ ] Eliminar la dependencia del propietario OAuth en la pantalla de acceso restringido, manteniendo las operaciones protegidas en servidor.
+- [ ] Probar desde una sesión limpia que la redirección tras ADMIN_KEY llega al panel y no al bloqueo visual.
+- [ ] Comprobar en la publicación definitiva que las fotos y el vídeo siguen cargando después del login fallido/anterior.
+- [ ] Guardar un nuevo checkpoint solo cuando la captura y las pruebas confirmen la corrección.
+
+## Causa raíz confirmada: degradación del rol técnico
+
+- [x] Evitar que upsertUser convierta la identidad técnica de ADMIN_KEY de admin a user cuando se actualiza lastSignedIn.
+- [x] Añadir una prueba de regresión que confirme que la identidad técnica conserva role admin después de authenticateRequest, mediante prueba de integración con mocks de persistencia.
+
+## Prueba de integración final de autenticación
+
+- [x] Añadir una prueba de integración para sdk.authenticateRequest con una sesión ADMIN_KEY que ejecute la actualización de lastSignedIn y confirme role admin.
+- [ ] Volver a validar /admin en producción después de publicar esta corrección.
