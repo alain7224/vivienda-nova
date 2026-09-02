@@ -1,5 +1,6 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { LockKeyhole, X } from "lucide-react";
+import { completeAdminKeyLogin } from "@/lib/adminSession";
 import { toast } from "sonner";
 import { useLocation } from "wouter";
 import { useAuth } from "@/_core/hooks/useAuth";
@@ -42,8 +43,16 @@ export default function AdminFloatingButton() {
       });
 
       if (response.ok) {
+        // Do not let a stale Preview bearer token override the new admin cookie
+        // in Safari, private browsing, or WebViews where cookies may be delayed.
         toast.success("Acceso concedido. Abriendo administración…");
-        window.setTimeout(() => { window.location.assign("/admin"); }, 180);
+        window.setTimeout(() => {
+          try {
+            completeAdminKeyLogin(sessionStorage, (path) => window.location.assign(path));
+          } catch {
+            window.location.assign("/admin");
+          }
+        }, 180);
         return;
       }
 

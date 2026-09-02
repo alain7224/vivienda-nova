@@ -93,3 +93,38 @@
 
 - [x] Verificar el flujo público de /admin tras iniciar sesión con ADMIN_KEY: el dominio devolvió sesión admin y admin.overview; la captura visual del mismo código en desarrollo muestra el panel completo. El intento de navegador remoto en el dominio devolvió 504 y no se considera evidencia visual adicional.
 - [x] Ajustar la documentación de causa raíz para indicar que el bloqueo era la configuración de identidad del login y la comprobación efectiva del rol admin.
+
+## Incidencia producción: admin y medios no cargan
+
+- [x] Reproducir el flujo público de ADMIN_KEY y `/admin` desde una sesión limpia, sin depender de la sesión de Manus.
+- [x] Localizar por qué el panel redirige a «Acceso restringido» después de mostrar «Acceso concedido».
+- [x] Auditar todas las URLs de imágenes, vídeo y miniaturas usadas por la portada y fichas.
+- [x] Corregir medios rotos para que usen almacenamiento publicado estable, sin rutas locales ni archivos inaccesibles.
+- [x] Confirmar si el modo de alojamiento en reposo afecta a la carga de medios o si el fallo está en las URLs/configuración.
+- [x] Verificar en móvil y escritorio que cargan las fotos y el vídeo de presentación.
+- [x] Guardar un checkpoint publicado y documentar la causa y la solución.
+
+## Causa real adicional: token de vista previa persistido
+
+- [x] Limpiar el token `manus-cookie` de sessionStorage inmediatamente después del login por ADMIN_KEY.
+- [x] Evitar que una sesión antigua del navegador de Manus sustituya la cookie admin pública en Safari o navegación privada.
+- [x] Añadir una prueba que confirme que el flujo admin no conserva el token de vista previa tras el acceso por clave.
+
+## Verificación honesta pendiente de producción
+
+- [ ] Confirmar /admin autenticado en el dominio público con una sesión limpia; el navegador remoto anterior agotó el tiempo.
+- [x] Auditar y normalizar las URLs de medios persistidas en viviendas y configuración para que solo usen recursos publicados válidos; la configuración real usa `/manus-storage/` y no hay viviendas publicadas con URLs antiguas que normalizar.
+- [ ] Reprobar en Safari/iPhone del usuario la carga de fotos y reproducción del vídeo tras limpiar caché y cookies.
+
+- [x] Configurar la cookie creada por ADMIN_KEY como sesión de primer nivel compatible con Safari, manteniendo `secure` y `httpOnly`.
+
+## Cierre de evidencia antes de publicar
+
+- [x] Sustituir la prueba estática del botón admin por una prueba de comportamiento que compruebe sessionStorage y navegación tras login por clave.
+- [x] Auditar explícitamente todas las URLs persistidas de propiedades y configuración y documentar el resultado completo sin crear datos ficticios.
+- [x] Guardar un checkpoint posterior a las correcciones de sesión, cookie y fallback de medios.
+
+## Publicación de la corrección más reciente
+
+- [ ] Guardar un nuevo checkpoint después de las correcciones recientes de sesión admin, cookie compatible con Safari y fallbacks de medios.
+- [ ] Verificar que la versión publicada resultante incluye esos cambios antes de entregarla.

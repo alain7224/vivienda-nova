@@ -130,3 +130,8 @@ Antes de usar estos datos para campañas, revisa que la política de cookies y p
 ### Nota sobre el acceso admin por clave
 
 Si el login con `ADMIN_KEY` responde correctamente pero `/admin` muestra «Acceso restringido», revisa la identidad de sesión y el rol `admin`. El acceso por clave utiliza una identidad técnica estable de respaldo cuando la identidad propietaria integrada no está disponible en producción; no basta con que la clave sea aceptada, porque el panel autoriza sus operaciones mediante el rol persistido del usuario. Nunca incluyas la clave en GitHub, capturas o mensajes.
+
+
+### Medios públicos y alojamiento
+
+Las imágenes y el vídeo de portada se sirven desde `/manus-storage/`, no desde carpetas locales del proyecto. La comprobación pública confirmó que los recursos principales responden correctamente y que el modo Autoscale/reposo no impide su entrega; puede producir un primer arranque más lento, pero no un icono de imagen rota. La portada incluye ahora un respaldo visual para fotos o vídeos que fallen temporalmente. Antes de publicar una vivienda, comprueba que su `imageUrl` sea una URL de almacenamiento publicada y accesible.

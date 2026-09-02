@@ -67,7 +67,7 @@ export function registerKeyLogin(app: Express) {
         expiresInMs: ONE_YEAR_MS,
         name: ENV.ownerName,
       });
-      res.cookie(COOKIE_NAME, sessionToken, { ...getSessionCookieOptions(req), maxAge: ONE_YEAR_MS });
+      res.cookie(COOKIE_NAME, sessionToken, { ...getSessionCookieOptions(req), sameSite: "lax", maxAge: ONE_YEAR_MS });
       attempts.delete(clientKey);
       return res.json({ success: true });
     } catch (error) {

@@ -16,7 +16,12 @@ export default function HeroCoastVideo({ videos, selectedIndex, onSelect, onFilt
   const frameRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [open, setOpen] = useState(false);
+  const [videoError, setVideoError] = useState(false);
   const activeVideo = videos[selectedIndex];
+
+  useEffect(() => {
+    setVideoError(false);
+  }, [activeVideo?.url]);
 
   useEffect(() => {
     const frame = frameRef.current;
@@ -38,7 +43,7 @@ export default function HeroCoastVideo({ videos, selectedIndex, onSelect, onFilt
   };
 
   return <div className="hero-coast-video" ref={frameRef} style={{ "--hero-video-fallback": `url(\"${fallbackImageUrl}\")` } as CSSProperties}>
-    {activeVideo ? <video ref={videoRef} src={activeVideo.url} autoPlay muted loop playsInline preload="metadata" poster={fallbackImageUrl} /> : <div className="hero-coast-video__fallback"><span>VÍDEO AÉREO / PORTADA</span><strong>Costa Blanca · Costa Cálida · Costa del Sol</strong><p>Carga un clip desde Administración</p></div>}
+    {activeVideo && !videoError ? <video ref={videoRef} src={activeVideo.url} autoPlay muted loop playsInline preload="metadata" poster={fallbackImageUrl} onError={() => setVideoError(true)} /> : <div className="hero-coast-video__fallback" style={{ backgroundImage: `url("${fallbackImageUrl}")` }}><span>VÍDEO AÉREO / PORTADA</span><strong>Costa Blanca · Costa Cálida · Costa del Sol</strong><p>{videoError ? "El vídeo no está disponible ahora; mostramos la imagen de portada." : "Carga un clip desde Administración"}</p></div>}
     <div className="hero-coast-video__shade" />
     <div className="hero-coast-video__controls">
       <div className="coast-picker"><button type="button" onClick={() => setOpen((value) => !value)} aria-expanded={open}><span>Ver costa</span><strong>{activeVideo?.label ?? "Seleccionar"}</strong></button>{open && <div className="coast-picker__menu">{videos.length ? videos.map((video, index) => <button type="button" key={`${video.label}-${index}`} className={index === selectedIndex ? "is-active" : ""} onClick={() => chooseCoast(index)}>{video.label}</button>) : <span>Configura los clips en Administración</span>}</div>}</div>
