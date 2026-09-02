@@ -49,3 +49,22 @@
 - [x] Añadir una prueba automatizada del selector de idioma: apertura, cierre al pulsar fuera y cierre al seleccionar idioma.
 - [x] Añadir una prueba de integración de fuente que confirme que el acceso admin está dentro del pie y no montado globalmente como flotante.
 - [x] Guardar un checkpoint nuevo después de estas mejoras de pie, idioma y analítica geográfica.
+
+## Ajuste de analítica estilo Shopify
+
+- [x] Confirmar que la analítica nunca muestra ni conserva IP, nombre de calle, número de vivienda ni identidad del visitante.
+- [x] Mostrar solo país y ubicación general aproximada, fecha, idioma y página o vivienda consultada.
+- [x] Revisar el mapa para que los marcadores sean agregados y no permitan deducir una dirección concreta.
+- [x] Capturar y entregar una vista real del mapa desde el panel admin, sin datos ficticios.
+
+## Refinamiento solicitado por el propietario
+
+- [x] Sustituir cualquier texto que diga «por IP» por ubicación aproximada agregada y aclarar que la IP no se muestra ni se conserva.
+- [x] Mostrar en el mapa y el resumen la última fecha de visita por ubicación y las páginas o viviendas consultadas.
+- [x] Añadir una forma directa de abrir el mapa de visitas para poder revisarlo visualmente.
+
+## Cierre de privacidad y presentación
+
+- [x] Añadir el idioma de las visitas al resumen geográfico del panel admin.
+- [x] Reescribir las referencias documentales que usan «por IP» para que hablen de ubicación aproximada agregada.
+- [x] Entregar explícitamente la captura real del mapa junto con la nueva versión publicada.

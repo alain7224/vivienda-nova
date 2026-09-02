@@ -258,23 +258,24 @@ export async function listSiteVisits() {
 
 export async function getVisitGeoSummary() {
   const rows = await listSiteVisits();
-  type Bucket = { country: string | null; region: string | null; city: string | null; latitude: number | null; longitude: number | null; visits: number; visitorIds: Set<string>; pages: Set<string>; lastVisited: Date };
+  type Bucket = { country: string | null; region: string | null; city: string | null; latitude: number | null; longitude: number | null; visits: number; visitorIds: Set<string>; pages: Set<string>; locales: Set<string>; lastVisited: Date };
   const buckets = new Map<string, Bucket>();
   for (const row of rows) {
     const country = row.country || "Desconocido";
     const region = row.region || "Sin región";
     const city = row.city || "Sin municipio";
     const key = `${country}|${region}|${city}`;
-    const bucket = buckets.get(key) ?? { country: row.country, region: row.region, city: row.city, latitude: row.latitude, longitude: row.longitude, visits: 0, visitorIds: new Set<string>(), pages: new Set<string>(), lastVisited: row.createdAt };
+    const bucket = buckets.get(key) ?? { country: row.country, region: row.region, city: row.city, latitude: row.latitude, longitude: row.longitude, visits: 0, visitorIds: new Set<string>(), pages: new Set<string>(), locales: new Set<string>(), lastVisited: row.createdAt };
     bucket.visits += 1;
     bucket.visitorIds.add(row.visitorId);
     bucket.pages.add(row.page);
+    bucket.locales.add(row.locale);
     if (row.createdAt > bucket.lastVisited) bucket.lastVisited = row.createdAt;
     if (bucket.latitude === null && row.latitude !== null) bucket.latitude = row.latitude;
     if (bucket.longitude === null && row.longitude !== null) bucket.longitude = row.longitude;
     buckets.set(key, bucket);
   }
-  const locations = Array.from(buckets.values()).map((bucket) => ({ country: bucket.country, region: bucket.region, city: bucket.city, latitude: bucket.latitude, longitude: bucket.longitude, visits: bucket.visits, uniqueVisitors: bucket.visitorIds.size, pages: Array.from(bucket.pages), lastVisited: bucket.lastVisited })).sort((first, second) => second.visits - first.visits);
+  const locations = Array.from(buckets.values()).map((bucket) => ({ country: bucket.country, region: bucket.region, city: bucket.city, latitude: bucket.latitude, longitude: bucket.longitude, visits: bucket.visits, uniqueVisitors: bucket.visitorIds.size, pages: Array.from(bucket.pages), locales: Array.from(bucket.locales), lastVisited: bucket.lastVisited })).sort((first, second) => second.visits - first.visits);
   const aggregate = (field: "country" | "region" | "city") => {
     const result = new Map<string, { name: string; visits: number; uniqueVisitors: Set<string> }>();
     for (const row of rows) {
