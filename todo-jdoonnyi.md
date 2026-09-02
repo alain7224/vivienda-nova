@@ -181,5 +181,18 @@
 ## Cierre técnico del mapa y logout
 
 - [x] Añadir una verificación explícita del estado vacío que renderiza VisitGeoPanel cuando no hay coordenadas.
-- [ ] Guardar un checkpoint nuevo con los cambios recientes de Admin.tsx, main.tsx y VisitGeoPanel.tsx.
+- [x] Guardar un checkpoint nuevo con los cambios recientes de Admin.tsx, main.tsx y VisitGeoPanel.tsx.
 - [ ] Confirmar visualmente en producción el flujo salir de /admin hacia la portada y la ausencia del aviso residual en Safari.
+
+## Importación autorizada y hero de producción
+
+- [x] Auditar la configuración real de hero (imagen y vídeos) que recibe viviendanova.casa y localizar por qué Safari muestra un fondo vacío.
+- [x] Corregir el renderizado de la imagen y el vídeo de portada para que la foto de respaldo se muestre incluso si el vídeo falla.
+- [x] Analizar la estructura pública de lrcostahomes.com y definir una importación autorizada que cree únicamente borradores revisables.
+- [ ] Comparar una importación manual puntual con una sincronización programada antes de conectar la web de origen.
+
+## Diseño de importación L & R Costa Homes
+
+- [x] Documentar el mapeo de campos, el permiso necesario, los límites y la garantía de crear solo borradores.
+- [ ] Elegir con el propietario entre importar una ficha por URL o sincronizar cambios periódicos antes de conectar el origen.
+- [ ] Publicar la corrección de hero y la documentación de importación antes de implementar la modalidad elegida.

@@ -106,7 +106,7 @@ h1, h2, h3 { font-family: "DM Serif Display", Georgia, serif; font-weight: 400; 
 .text-cta:hover svg, .inline-link:hover svg { transform: translate(3px, -3px); }
 .hero-art { background: #d6d5cc var(--hero-art-image, url("/manus-storage/chalet-minimalista-piscina_3bd4eca8.jpg")) center / cover no-repeat; min-height: 430px; overflow: hidden; position: relative; }
 .hero-art::after { background: linear-gradient(90deg, rgba(17,47,63,.22), transparent 35%); content: ""; inset: 0; pointer-events: none; position: absolute; }
-.hero-art > img { height: 100%; object-fit: cover; object-position: center; opacity: 0; position: absolute; width: 100%; }
+.hero-art > img { height: 100%; object-fit: cover; object-position: center; opacity: 1; position: absolute; width: 100%; }
 .hero-plan-mark { border: 1px solid rgba(255,253,248,.8); color: #fffdf8; height: 112px; left: 8%; position: absolute; top: 8%; width: 112px; z-index: 1; }
 .hero-plan-mark i { border: 1px solid rgba(255,253,248,.9); display: block; height: 42px; position: absolute; width: 33px; }
 .hero-plan-mark i:first-child { border-right: 0; border-bottom: 0; left: -1px; top: -1px; }
