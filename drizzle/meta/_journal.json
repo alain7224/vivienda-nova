@@ -71,6 +71,13 @@
       "when": 1788215899333,
       "tag": "0009_graceful_layla_miller",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "5",
+      "when": 1788325667262,
+      "tag": "0010_dry_guardian",
+      "breakpoints": true
     }
   ]
 }

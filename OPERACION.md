@@ -2,7 +2,23 @@
 
 ## Acceso privado
 
-La administración se abre en **`/admin`**. Entra con la misma cuenta del propietario del proyecto. El sistema valida esa identidad en el servidor: cualquier otra persona que acceda a esta ruta verá un mensaje de acceso restringido y no podrá consultar ni modificar la cartera, los interesados ni los enlaces.
+La administración se abre en **`/admin`**. También existe el botón visible **«Acceso administrador»** en la web pública y en la propia ruta `/admin`. Ese botón permite entrar con una clave privada propia, sin depender de la contraseña de Manus. La clave se valida en el servidor y crea una sesión segura; no se guarda en el navegador ni en GitHub.
+
+La cuenta de la sesión por clave es la identidad indicada por `OWNER_OPEN_ID` y debe conservar el rol `admin`. La aplicación la sincroniza automáticamente al utilizar la clave. Si se entra con otra cuenta de Manus, se verá acceso restringido y no se podrán consultar ni modificar los datos privados.
+
+### Variables seguras del entorno
+
+`ADMIN_KEY` es obligatoria para activar el botón de acceso por clave. Debe ser larga, aleatoria y privada; configúrala desde el gestor de **Settings → Secrets** del proyecto y nunca la escribas en un commit, issue, captura o archivo `.env` del repositorio. `OWNER_OPEN_ID` identifica la cuenta propietaria que recibirá la sesión admin; `OWNER_NAME` es el nombre mostrado en esa sesión. `JWT_SECRET` firma las cookies de sesión y debe mantenerse configurada y fuerte. Estas variables se gestionan como secretos del entorno, no como contenido de la aplicación.
+
+Si sospechas que la clave se ha compartido, sustitúyela desde **Settings → Secrets** y reinicia/reconstruye el proyecto. La sesión anterior podrá mantenerse hasta su caducidad, por lo que, ante una exposición real, conviene cerrar sesiones y solicitar la rotación del secreto de sesión según el panel de gestión.
+
+## Enlaces de oficina para colaboradores
+
+Desde el panel admin utiliza **«Enlace de oficina»**. Escribe el nombre de la oficina y elige una caducidad de 7, 30, 60 o 90 días. La aplicación genera un enlace aleatorio de un solo propósito; en la base de datos solo se conserva su huella, no el token en claro. Copia el enlace y entrégalo únicamente a la persona autorizada.
+
+El colaborador abre `/oficina/<token>` y completa una ficha. El enlace solo permite crear viviendas en estado **borrador**; no permite ver clientes, vendedores, métricas, ajustes, imágenes privadas ni el panel admin. Antes de publicarla, revisa la vivienda en **«Cartera»**, corrige los datos si es necesario y añade el enlace y el flujo del vendedor. Puedes revocar un enlace desde el mismo gestor; al revocarlo deja de funcionar inmediatamente.
+
+El enlace funciona como una llave privada: no debe publicarse en un anuncio ni compartirse en grupos abiertos. Si necesitas varias oficinas, crea un enlace distinto para cada una para poder revocarlos por separado.
 
 ## Publicar una vivienda
 
@@ -51,20 +67,24 @@ En **«Idiomas y diseño»** puedes cambiar el texto, el color, el alto y el rit
 
 Cuando el vendedor confirme que una venta se ha cerrado, abre **«Añadir operación»**. Indica el cliente, la vivienda o proyecto, dirección, ciudad, provincia, país, precio de cierre y porcentaje de comisión. El panel calcula el importe y permite clasificarlo como **previsto**, **pendiente**, **cobrado** o **cancelado**. El resumen superior y la sección de operaciones muestran estas categorías por separado.
 
-## Publicar la web
+## Publicar y actualizar la web
 
-Cuando quieras hacerla visible en internet, abre el panel del proyecto, guarda una versión y utiliza el botón **Publish**. La plataforma incluye alojamiento y una dirección pública; puedes comenzar con esa dirección sin contratar un proveedor externo. Después podrás conectar un dominio propio desde **Settings → Domains** si lo deseas. Antes de publicar, crea al menos un vendedor y una vivienda publicada para que el escaparate no aparezca vacío.
+La web publicada no necesita despublicarse para aplicar una corrección de código. Se trabaja sobre la versión de desarrollo, se comprueban tipos, pruebas, compilación y pantallas, y después se guarda un **checkpoint**. En este proyecto el guardado del checkpoint publica automáticamente la nueva versión; la página permanece accesible durante el proceso y la base de datos conserva viviendas, vendedores, contactos, métricas, ajustes y enlaces de oficina.
+
+Los cambios de contenido que hagas desde **`/admin`** se guardan directamente en la base de datos y no requieren publicar una nueva versión de código. Las actualizaciones de código o de estructura sí requieren guardar el checkpoint. Si una versión necesitara retirarse, utiliza el historial del proyecto para volver a una versión estable, sin ejecutar borrados manuales sobre la base de datos.
+
+La plataforma incluye alojamiento y una dirección pública; puedes utilizarla sin contratar un proveedor externo. Después podrás conectar un dominio propio desde **Settings → Domains** si lo deseas. Antes de dar por terminada una publicación, crea al menos un vendedor y una vivienda publicada real para que el escaparate no aparezca vacío.
 
 ### Lista de comprobación antes de publicar
 
-1. Entra en **`/admin`** con la misma cuenta con la que eres propietario del proyecto y confirma que ves el panel privado. No necesitas crear una segunda contraseña dentro de la web: el acceso usa el inicio de sesión seguro de tu cuenta propietaria.
+1. Entra en **`/admin`** con el botón **«Acceso administrador»** y prueba la `ADMIN_KEY` propia. Confirma que ves el panel privado y que aparecen **«Añadir vivienda»**, **«Importar CSV»**, **«Vendedores»**, **«Añadir operación»**, **«Idiomas y diseño»** y **«Enlace de oficina»**. Como alternativa, el login OAuth de la cuenta propietaria sigue disponible.
 2. Crea cada **vendedor** y confirma por escrito su enlace, código de referido, canal de contacto y condiciones de comisión. Usa `MARTINEZ` solo si el vendedor confirma que reconoce ese código.
 3. Publica al menos una **vivienda real** con precio, superficie, dormitorios, baños, fotografía autorizada y enlace de derivación correcto. Mantén en borrador todo lo que no deba aparecer aún.
 4. Prueba desde la ficha pública el enlace al vendedor, el teléfono, WhatsApp y los botones de compartir. Revisa especialmente que cada enlace abre el destino esperado.
 5. Sustituye los datos pendientes de los textos de privacidad, cookies y aviso legal: razón social o nombre, NIF/CIF, domicilio, correo de derechos, conservación y destinatarios. Estos borradores requieren revisión jurídica antes de una actividad comercial.
 6. Comprueba la portada y el formulario en móvil y ordenador. El formulario solo debe pedir datos que vayas a gestionar y los consentimientos de privacidad y derivación deben seguir visibles.
 7. Guarda una **versión de respaldo** del proyecto antes de publicar. La administración, métricas, interesados, vendedores y comisiones permanecen tras inicio de sesión; una visita pública no puede consultar esos datos.
-8. Cuando los puntos anteriores estén listos, pulsa **Publish** desde el panel. La publicación no cambia quién puede entrar al área privada: solo hace accesible la web pública.
+8. Cuando los puntos anteriores estén listos, guarda un checkpoint. En este proyecto ese checkpoint se publica automáticamente; no hay que despublicar primero. La publicación no cambia quién puede entrar al área privada: solo actualiza el código público y conserva los datos de la base de datos.
 
 Las actualizaciones de contenido que hagas desde **`/admin`** —viviendas, vendedores, imágenes, operaciones o ajustes visuales— se guardan en la base de datos y no requieren editar el código. Si cambias el diseño, las funciones o los textos estructurales, guarda una nueva versión del proyecto y vuelve a utilizar **Publish** para actualizar la versión pública.
 

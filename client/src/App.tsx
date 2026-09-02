@@ -6,10 +6,12 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Admin from "./pages/Admin";
+import AdminFloatingButton from "./components/AdminFloatingButton";
 import MidPageCtaBridge from "./components/MidPageCtaBridge";
 import HeroImageBridge from "./components/HeroImageBridge";
 import Home from "./pages/Home";
 import Legal from "./pages/Legal";
+import Collaborator from "./pages/Collaborator";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -17,6 +19,7 @@ function Router() {
     <Switch>
       <Route path={"/"} component={Home} />
       <Route path={"/admin"} component={Admin} />
+      <Route path={"/oficina/:token"} component={Collaborator} />
       <Route path={"/privacidad"} component={Legal} />
       <Route path={"/cookies"} component={Legal} />
       <Route path={"/referidos"} component={Legal} />
@@ -42,6 +45,7 @@ function App() {
       >
         <TooltipProvider>
           <Toaster />
+          <AdminFloatingButton />
           <MidPageCtaBridge />
           <HeroImageBridge />
           <Router />

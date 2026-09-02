@@ -1,4 +1,4 @@
-import { desc, eq } from "drizzle-orm";
+import { and, desc, eq, gt, isNull } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import {
   commissionOperations,
@@ -8,6 +8,8 @@ import {
   InsertPropertyTranslation,
   InsertUser,
   InsertVendor,
+  InsertPropertyInviteLink,
+  propertyInviteLinks,
   properties,
   propertyLeads,
   propertyTranslations,
@@ -75,6 +77,40 @@ export async function getUserByOpenId(openId: string) {
   if (!db) return undefined;
   const result = await db.select().from(users).where(eq(users.openId, openId)).limit(1);
   return result[0];
+}
+
+export async function createPropertyInviteLink(values: InsertPropertyInviteLink) {
+  const db = await getDb();
+  if (!db) throw new Error("La base de datos no está disponible.");
+  await db.insert(propertyInviteLinks).values(values);
+  const rows = await db.select({ id: propertyInviteLinks.id }).from(propertyInviteLinks).where(eq(propertyInviteLinks.tokenHash, values.tokenHash)).limit(1);
+  if (!rows[0]) throw new Error("No se pudo recuperar el enlace creado.");
+  return rows[0].id;
+}
+
+export async function listPropertyInviteLinks() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(propertyInviteLinks).orderBy(desc(propertyInviteLinks.createdAt));
+}
+
+export async function getActivePropertyInviteLink(tokenHash: string) {
+  const db = await getDb();
+  if (!db) return undefined;
+  const rows = await db.select().from(propertyInviteLinks).where(and(eq(propertyInviteLinks.tokenHash, tokenHash), isNull(propertyInviteLinks.revokedAt), gt(propertyInviteLinks.expiresAt, new Date()))).limit(1);
+  return rows[0];
+}
+
+export async function touchPropertyInviteLink(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("La base de datos no está disponible.");
+  return db.update(propertyInviteLinks).set({ lastUsedAt: new Date(), updatedAt: new Date() }).where(eq(propertyInviteLinks.id, id));
+}
+
+export async function revokePropertyInviteLink(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("La base de datos no está disponible.");
+  return db.update(propertyInviteLinks).set({ revokedAt: new Date(), updatedAt: new Date() }).where(eq(propertyInviteLinks.id, id));
 }
 
 export async function listPublishedProperties(locale?: string) {

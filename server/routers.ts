@@ -7,6 +7,7 @@ import { systemRouter } from "./_core/systemRouter";
 import { adminProcedure, publicProcedure, router } from "./_core/trpc";
 import {
   createCommissionOperation,
+  createPropertyInviteLink,
   createProperty,
   createPropertyLead,
   createReferralClick,
@@ -15,6 +16,7 @@ import {
   countPropertiesForVendor,
   deleteProperty,
   deleteVendor,
+  getActivePropertyInviteLink,
   getAdminOverview,
   getPropertyById,
   getPropertyLeadById,
@@ -23,6 +25,7 @@ import {
   getVendorById,
   listAdminProperties,
   listCommissionOperations,
+  listPropertyInviteLinks,
   listPropertyLeads,
   listPublishedProperties,
   listReferralClicks,
@@ -30,6 +33,8 @@ import {
   listVendors,
   replacePropertyTranslations,
   requiresExternalSellerForPublishedEntry,
+  revokePropertyInviteLink,
+  touchPropertyInviteLink,
   updateCommissionOperation,
   updateProperty,
   updatePropertyLeadStatus,
@@ -40,6 +45,7 @@ import { buildReferralChannelUrl } from "./referral";
 import { createLeadConsentTimestamps } from "./consent";
 import { storagePut } from "./storage";
 import { translatePropertyCopy } from "./translation";
+import { buildCollaboratorUrl, createCollaboratorToken, hashCollaboratorToken } from "./collaborator";
 
 const directChannels = ["direct", "email", "whatsapp", "sms", "phone"] as const;
 const propertyInput = z.object({
@@ -111,6 +117,22 @@ export const appRouter = router({
       return storagePut(`referencias-construccion/${Date.now()}-${cleanName}`, image, input.mimeType);
     }),
   }),
+  collaborator: router({
+    info: publicProcedure.input(z.object({ token: z.string().trim().min(32).max(200) })).query(async ({ input }) => {
+      const link = await getActivePropertyInviteLink(hashCollaboratorToken(input.token));
+      return link ? { active: true, label: link.label, expiresAt: link.expiresAt } : { active: false };
+    }),
+    createProperty: publicProcedure.input(propertyInput.safeExtend({ token: z.string().trim().min(32).max(200) })).mutation(async ({ input }) => {
+      const { token, ...values } = input;
+      const link = await getActivePropertyInviteLink(hashCollaboratorToken(token));
+      if (!link) throw new Error("Este enlace de oficina ha caducado o ha sido revocado.");
+      const id = await createProperty({ ...values, status: "draft", linkMode: "capture", vendorId: null, externalUrl: null, referralCode: values.referralCode || "MARTINEZ" });
+      let translationsReady = true;
+      try { await syncTranslations(id, { ...values, status: "draft", linkMode: "capture", vendorId: null, externalUrl: null }); } catch { translationsReady = false; }
+      await touchPropertyInviteLink(link.id);
+      return { success: true, id, translationsReady };
+    }),
+  }),
   referrals: router({
     visit: publicProcedure.input(z.object({ propertyId: z.number().int().positive(), visitorId: z.string().min(8).max(80).optional() })).mutation(async ({ input }) => {
       const property = await getPropertyById(input.propertyId);
@@ -161,6 +183,9 @@ export const appRouter = router({
     updateSettings: adminProcedure.input(settingsInput).mutation(async ({ input }) => { await updateSiteSettings(input); return { success: true }; }),
     uploadImage: adminProcedure.input(z.object({ filename: z.string().trim().min(1).max(180), mimeType: z.enum(["image/jpeg", "image/png", "image/webp"]), base64: z.string().min(1).max(7_000_000) })).mutation(async ({ input, ctx }) => { const encoded = input.base64.includes(",") ? input.base64.split(",")[1] : input.base64; const image = Buffer.from(encoded, "base64"); if (!image.length || image.length > 5_000_000) throw new Error("La imagen debe pesar como máximo 5 MB."); const cleanName = input.filename.replace(/[^a-zA-Z0-9._-]/g, "-"); return storagePut(`viviendas/${ctx.user.id}/${cleanName}`, image, input.mimeType); }),
     uploadHeroVideo: adminProcedure.input(z.object({ filename: z.string().trim().min(1).max(180), mimeType: z.enum(["video/mp4", "video/webm"]), base64: z.string().min(1).max(65_000_000) })).mutation(async ({ input, ctx }) => { const encoded = input.base64.includes(",") ? input.base64.split(",")[1] : input.base64; const video = Buffer.from(encoded, "base64"); if (!video.length || video.length > 45_000_000) throw new Error("El vídeo debe pesar como máximo 45 MB."); const cleanName = input.filename.replace(/[^a-zA-Z0-9._-]/g, "-"); return storagePut(`videos-portada/${ctx.user.id}/${Date.now()}-${cleanName}`, video, input.mimeType); }),
+    inviteLinks: adminProcedure.query(async () => (await listPropertyInviteLinks()).map(({ tokenHash: _tokenHash, ...link }) => link)),
+    createInviteLink: adminProcedure.input(z.object({ label: z.string().trim().min(2).max(160), origin: z.string().url(), expiresInDays: z.number().int().min(1).max(90).default(30) })).mutation(async ({ input, ctx }) => { const { token, tokenHash } = createCollaboratorToken(); const expiresAt = new Date(Date.now() + input.expiresInDays * 24 * 60 * 60 * 1000); const id = await createPropertyInviteLink({ tokenHash, label: input.label, createdByUserId: ctx.user.id, expiresAt }); return { id, label: input.label, expiresAt, url: buildCollaboratorUrl(input.origin, token) }; }),
+    revokeInviteLink: adminProcedure.input(z.object({ id: z.number().int().positive() })).mutation(async ({ input }) => { await revokePropertyInviteLink(input.id); return { success: true }; }),
   }),
 });
 

@@ -180,6 +180,22 @@ export const siteSettings = mysqlTable("siteSettings", {
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
 
+/** Enlaces privados para que una oficina colaboradora envíe viviendas como borradores. */
+export const propertyInviteLinks = mysqlTable("propertyInviteLinks", {
+  id: int("id").autoincrement().primaryKey(),
+  tokenHash: varchar("tokenHash", { length: 64 }).notNull().unique(),
+  label: varchar("label", { length: 160 }).notNull(),
+  createdByUserId: int("createdByUserId").notNull(),
+  expiresAt: timestamp("expiresAt").notNull(),
+  revokedAt: timestamp("revokedAt"),
+  lastUsedAt: timestamp("lastUsedAt"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+}, (table) => [
+  index("property_invite_links_active_idx").on(table.revokedAt, table.expiresAt),
+  index("property_invite_links_creator_idx").on(table.createdByUserId),
+]);
+
 export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 export type Property = typeof properties.$inferSelect;
@@ -192,3 +208,5 @@ export type PropertyTranslation = typeof propertyTranslations.$inferSelect;
 export type InsertPropertyTranslation = typeof propertyTranslations.$inferInsert;
 export type CommissionOperation = typeof commissionOperations.$inferSelect;
 export type InsertCommissionOperation = typeof commissionOperations.$inferInsert;
+export type PropertyInviteLink = typeof propertyInviteLinks.$inferSelect;
+export type InsertPropertyInviteLink = typeof propertyInviteLinks.$inferInsert;
