@@ -189,13 +189,13 @@
 - [x] Auditar la configuración real de hero (imagen y vídeos) que recibe viviendanova.casa y localizar por qué Safari muestra un fondo vacío.
 - [x] Corregir el renderizado de la imagen y el vídeo de portada para que la foto de respaldo se muestre incluso si el vídeo falla.
 - [x] Analizar la estructura pública de lrcostahomes.com y definir una importación autorizada que cree únicamente borradores revisables.
-- [ ] Comparar una importación manual puntual con una sincronización programada antes de conectar la web de origen.
+- [x] Comparar una importación manual puntual con una sincronización programada antes de conectar la web de origen; el propietario ha elegido la carga manual por CSV para comenzar.
 
 ## Diseño de importación L & R Costa Homes
 
 - [x] Documentar el mapeo de campos, el permiso necesario, los límites y la garantía de crear solo borradores.
-- [ ] Elegir con el propietario entre importar una ficha por URL o sincronizar cambios periódicos antes de conectar el origen.
-- [ ] Publicar la corrección de hero y la documentación de importación antes de implementar la modalidad elegida.
+- [x] Elegir con el propietario entre importar una ficha por URL o sincronizar cambios periódicos antes de conectar el origen; se usará inicialmente CSV manual.
+- [x] Publicar la corrección de hero y la documentación de importación antes de implementar la modalidad elegida.
 
 ## Importación de prueba de L & R Costa Homes
 
@@ -207,3 +207,13 @@
 ## Entrega de importación inicial
 
 - [x] Guardar un checkpoint que incluya el CSV de cinco borradores y comunicar el procedimiento de carga manual.
+
+## Medios de las fichas importadas
+
+- [x] Descargar las cinco imágenes de las fichas autorizadas y subirlas al almacenamiento estable de Vivienda Nova.
+- [x] Sustituir en los cinco borradores las URLs externas por sus copias publicadas estables.
+- [x] Verificar que las miniaturas de los cinco borradores cargan desde el almacenamiento propio antes de publicar cualquier ficha.
+
+## Consolidación de importación inicial
+
+- [x] Guardar un checkpoint posterior a la importación de los cinco borradores y al traslado de sus imágenes al almacenamiento propio.

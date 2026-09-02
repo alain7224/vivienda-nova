@@ -33,6 +33,12 @@ Cada URL se valida contra el dominio autorizado y se limita a una sola ficha por
 
 Para comenzar se recomienda la **importación de una ficha por URL**. Solo se considerará una sincronización periódica tras validar varios imports y confirmar con L & R Costa Homes el alcance, las fotos y las fichas que desean compartir.
 
+## Carga inicial realizada
+
+El 3 de septiembre de 2026 se transformaron e importaron cinco fichas autorizadas como **borradores**: Apartamentos, bungalows y villas en Vera Playa (LRN-042), Apartamentos en Calpe (LRN-040), Villa en San Miguel de Salinas (LRN-022), Chalet en Finestrat (LRN-004) y Adosados en Rafal (LRN-031). Todas conservan su URL origen en el campo de enlace externo y ninguna está publicada.
+
+Las imágenes principales se descargaron desde las fichas autorizadas y se volvieron a servir desde el almacenamiento propio de Vivienda Nova. Con ello, las miniaturas de los borradores no dependen de enlaces externos ni de la disponibilidad de la web de origen.
+
 ## Referencias
 
 [1]: https://lrcostahomes.com/robots.txt "Reglas públicas de rastreo de L & R Costa Homes"
