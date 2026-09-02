@@ -196,3 +196,14 @@
 - [x] Documentar el mapeo de campos, el permiso necesario, los límites y la garantía de crear solo borradores.
 - [ ] Elegir con el propietario entre importar una ficha por URL o sincronizar cambios periódicos antes de conectar el origen.
 - [ ] Publicar la corrección de hero y la documentación de importación antes de implementar la modalidad elegida.
+
+## Importación de prueba de L & R Costa Homes
+
+- [x] Seleccionar y comprobar cinco fichas públicas autorizadas de L & R Costa Homes.
+- [x] Crear un CSV compatible, con URL de origen y datos trazables para las cinco fichas.
+- [x] Importar el CSV como cinco borradores, sin publicar ninguna vivienda.
+- [x] Verificar los cinco borradores en el panel admin mediante consulta autenticada y entregar el CSV para cargas manuales posteriores.
+
+## Entrega de importación inicial
+
+- [x] Guardar un checkpoint que incluya el CSV de cinco borradores y comunicar el procedimiento de carga manual.
