@@ -20,6 +20,7 @@ import {
   getAdminOverview,
   getPropertyById,
   getPropertyLeadById,
+  getVisitGeoSummary,
   getPublicSiteSettings,
   getSiteSettings,
   getVendorById,
@@ -46,6 +47,7 @@ import { createLeadConsentTimestamps } from "./consent";
 import { storagePut } from "./storage";
 import { translatePropertyCopy } from "./translation";
 import { buildCollaboratorUrl, createCollaboratorToken, forceCollaboratorDraft, hashCollaboratorToken } from "./collaborator";
+import { resolveVisitGeo } from "./geo";
 
 const directChannels = ["direct", "email", "whatsapp", "sms", "phone"] as const;
 const propertyInput = z.object({
@@ -107,7 +109,7 @@ export const appRouter = router({
       return { success: true, notificationSent };
     }),
   }),
-  analytics: router({ recordVisit: publicProcedure.input(z.object({ visitorId: z.string().min(8).max(80), locale: z.string().min(2).max(12), page: z.string().min(1).max(200) })).mutation(({ input }) => createSiteVisit(input.visitorId, input.locale, input.page)) }),
+  analytics: router({ recordVisit: publicProcedure.input(z.object({ visitorId: z.string().min(8).max(80), locale: z.string().min(2).max(12), page: z.string().min(1).max(200) })).mutation(async ({ input, ctx }) => createSiteVisit(input.visitorId, input.locale, input.page, await resolveVisitGeo(ctx.req))) }),
   construction: router({
     uploadReference: publicProcedure.input(z.object({ filename: z.string().trim().min(1).max(180), mimeType: z.enum(referenceMimeTypes), base64: z.string().min(1).max(12_000_000) })).mutation(async ({ input }) => {
       const encoded = input.base64.includes(",") ? input.base64.split(",")[1] : input.base64;
@@ -151,7 +153,7 @@ export const appRouter = router({
     }),
   }),
   admin: router({
-    overview: adminProcedure.query(() => getAdminOverview()), properties: adminProcedure.query(() => listAdminProperties()), leads: adminProcedure.query(() => listPropertyLeads()), vendors: adminProcedure.query(() => listVendors()),
+    overview: adminProcedure.query(() => getAdminOverview()), visitGeo: adminProcedure.query(() => getVisitGeoSummary()), properties: adminProcedure.query(() => listAdminProperties()), leads: adminProcedure.query(() => listPropertyLeads()), vendors: adminProcedure.query(() => listVendors()),
     operations: adminProcedure.query(() => listCommissionOperations()), interactions: adminProcedure.query(async () => {
       const [visits, clicks] = await Promise.all([listSiteVisits(), listReferralClicks()]);
       return [

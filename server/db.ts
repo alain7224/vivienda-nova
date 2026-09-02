@@ -20,6 +20,7 @@ import {
   vendors,
 } from "../drizzle/schema";
 import { ENV } from "./_core/env";
+import type { VisitGeo } from "./geo";
 
 let _db: ReturnType<typeof drizzle> | null = null;
 
@@ -243,16 +244,49 @@ export async function listReferralClicks() {
   return db.select().from(referralClicks).orderBy(desc(referralClicks.createdAt));
 }
 
-export async function createSiteVisit(visitorId: string, locale: string, page: string) {
+export async function createSiteVisit(visitorId: string, locale: string, page: string, geo?: VisitGeo) {
   const db = await getDb();
   if (!db) return;
-  return db.insert(siteVisits).values({ visitorId, locale, page });
+  return db.insert(siteVisits).values({ visitorId, locale, page, country: geo?.country ?? null, region: geo?.region ?? null, city: geo?.city ?? null, latitude: geo?.latitude ?? null, longitude: geo?.longitude ?? null, entrySource: geo?.entrySource ?? null });
 }
 
 export async function listSiteVisits() {
   const db = await getDb();
   if (!db) return [];
   return db.select().from(siteVisits).orderBy(desc(siteVisits.createdAt));
+}
+
+export async function getVisitGeoSummary() {
+  const rows = await listSiteVisits();
+  type Bucket = { country: string | null; region: string | null; city: string | null; latitude: number | null; longitude: number | null; visits: number; visitorIds: Set<string>; pages: Set<string>; lastVisited: Date };
+  const buckets = new Map<string, Bucket>();
+  for (const row of rows) {
+    const country = row.country || "Desconocido";
+    const region = row.region || "Sin región";
+    const city = row.city || "Sin municipio";
+    const key = `${country}|${region}|${city}`;
+    const bucket = buckets.get(key) ?? { country: row.country, region: row.region, city: row.city, latitude: row.latitude, longitude: row.longitude, visits: 0, visitorIds: new Set<string>(), pages: new Set<string>(), lastVisited: row.createdAt };
+    bucket.visits += 1;
+    bucket.visitorIds.add(row.visitorId);
+    bucket.pages.add(row.page);
+    if (row.createdAt > bucket.lastVisited) bucket.lastVisited = row.createdAt;
+    if (bucket.latitude === null && row.latitude !== null) bucket.latitude = row.latitude;
+    if (bucket.longitude === null && row.longitude !== null) bucket.longitude = row.longitude;
+    buckets.set(key, bucket);
+  }
+  const locations = Array.from(buckets.values()).map((bucket) => ({ country: bucket.country, region: bucket.region, city: bucket.city, latitude: bucket.latitude, longitude: bucket.longitude, visits: bucket.visits, uniqueVisitors: bucket.visitorIds.size, pages: Array.from(bucket.pages), lastVisited: bucket.lastVisited })).sort((first, second) => second.visits - first.visits);
+  const aggregate = (field: "country" | "region" | "city") => {
+    const result = new Map<string, { name: string; visits: number; uniqueVisitors: Set<string> }>();
+    for (const row of rows) {
+      const name = row[field] || "Desconocido";
+      const current = result.get(name) ?? { name, visits: 0, uniqueVisitors: new Set<string>() };
+      current.visits += 1;
+      current.uniqueVisitors.add(row.visitorId);
+      result.set(name, current);
+    }
+    return Array.from(result.values()).map((item) => ({ name: item.name, visits: item.visits, uniqueVisitors: item.uniqueVisitors.size })).sort((first, second) => second.visits - first.visits);
+  };
+  return { locations, countries: aggregate("country"), regions: aggregate("region"), cities: aggregate("city") };
 }
 
 export async function listCommissionOperations() {

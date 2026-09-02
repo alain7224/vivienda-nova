@@ -31,3 +31,21 @@
 - [x] Verificar autenticadamente la apertura de los editores de vivienda, vendedor, ajustes de colores/contenido, importador y enlace de oficina.
 - [x] Documentar en OPERACION.md las variables seguras, su configuración y el procedimiento de actualización/publicación.
 - [x] Verificar el flujo de colaborador desde un enlace válido y confirmar que las nuevas fichas quedan como borradores sin crear datos ficticios en la base de datos; la validación de enlace válido, el rechazo de tokens inválidos y la regla de estado borrador están comprobados.
+
+## Nueva solicitud: pie, idioma y procedencia de visitas
+
+- [x] Reubicar el acceso admin desde el botón flotante al pie, junto a avisos legales y gestión de cookies.
+- [x] Retirar el comportamiento flotante del acceso admin y conservar un enlace claro, accesible y responsive en el pie.
+- [x] Hacer que el selector de idioma se cierre al hacer clic o tocar fuera y al cambiar de idioma.
+- [x] Revisar consentimiento y privacidad antes de registrar procedencia geográfica de visitas.
+- [x] Registrar procedencia agregada por país, región/provincia y municipio cuando sea técnicamente posible, sin guardar IP cruda.
+- [x] Añadir al panel admin un mapa horizontal y resumen de visitas por ubicación, conectado a datos reales.
+- [x] Permitir abrir el mapa desde la métrica de visitas y mostrar el lugar visitado sin exponer datos personales.
+- [x] Añadir pruebas para cierre del idioma, pie admin y agregación geográfica.
+- [x] Verificar escritorio y móvil, ejecutar tipos, pruebas y build, y publicar un checkpoint.
+
+## Correcciones de verificación detectadas
+
+- [x] Añadir una prueba automatizada del selector de idioma: apertura, cierre al pulsar fuera y cierre al seleccionar idioma.
+- [x] Añadir una prueba de integración de fuente que confirme que el acceso admin está dentro del pie y no montado globalmente como flotante.
+- [x] Guardar un checkpoint nuevo después de estas mejoras de pie, idioma y analítica geográfica.

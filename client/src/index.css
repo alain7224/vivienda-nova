@@ -239,6 +239,8 @@ h2 em { color: #d95f42; font-style: italic; }
 .site-footer__links { align-items: center; display: flex; gap: 20px; }
 .site-footer__links > a, .site-footer__links > button { align-items: center; color: rgba(255,255,255,.77); display: inline-flex; font-family: "Manrope", sans-serif; font-size: 9px; font-weight: 500; line-height: 1; margin: 0; min-height: 14px; padding: 0; }
 .site-footer__links > button { background: transparent; border: 0; cursor: pointer; }
+.site-footer__links .admin-floating-button { position: static; z-index: auto; min-height: 14px; padding: 0; border: 0; border-radius: 0; color: rgba(255,255,255,.77); background: transparent; box-shadow: none; font: 500 9px/1 "Manrope", sans-serif; letter-spacing: 0; text-transform: none; }
+.site-footer__links .admin-floating-button:hover { color: #fffdf8; background: transparent; box-shadow: none; transform: none; text-decoration: underline; text-underline-offset: 3px; }
 .site-footer__links > a:hover, .site-footer__links > button:hover { color: #fffdf8; text-decoration: underline; text-underline-offset: 3px; }
 .settings-mode-note { background: #f1eee8; border-left: 3px solid #d95f42; color: #41525a; font-size: 12px; line-height: 1.55; margin: 18px 0; max-width: 720px; padding: 11px 13px; }
 .install-app-control { position: relative; }
@@ -352,8 +354,9 @@ h2 em { color: #d95f42; font-style: italic; }
 .locale-banner { align-items: center; display: flex; font-size: 9px; font-weight: 800; justify-content: center; letter-spacing: .1em; min-height: 36px; padding: 5px 24px; position: relative; text-transform: uppercase; z-index: 30; }
 .locale-banner__dot { background: currentColor; border-radius: 50%; height: 5px; margin-right: 8px; width: 5px; }
 .locale-banner p { margin: 0; }
-.locale-banner > button { align-items: center; background: rgba(255,255,255,.14); color: inherit; display: flex; font: inherit; gap: 5px; margin-left: 18px; padding: 5px 7px; }
-.locale-menu { background: #fffdf8; box-shadow: 0 12px 35px rgba(16,47,64,.18); display: grid; grid-template-columns: repeat(2, minmax(105px, 1fr)); padding: 7px; position: absolute; right: 22px; top: calc(100% + 2px); z-index: 50; }
+.locale-switcher { position: relative; }
+.locale-switcher > button { align-items: center; background: rgba(255,255,255,.14); color: inherit; display: flex; font: inherit; gap: 5px; margin-left: 18px; padding: 5px 7px; }
+.locale-menu { background: #fffdf8; box-shadow: 0 12px 35px rgba(16,47,64,.18); display: grid; grid-template-columns: repeat(2, minmax(105px, 1fr)); padding: 7px; position: absolute; right: 0; top: calc(100% + 2px); z-index: 50; }
 .locale-menu button { background: transparent; color: #102f40; font-family: "Manrope", sans-serif; font-size: 10px; padding: 8px 10px; text-align: left; }
 .locale-menu button:hover, .locale-menu button.is-active { background: #d95f42; color: #fffdf8; }
 .property-card--3d { box-shadow: 12px 14px 0 rgba(16,47,64,.14), 25px 27px 0 rgba(217,95,66,.17); transform: perspective(1000px) rotateX(1deg) rotateY(-1deg); }
@@ -379,8 +382,8 @@ h2 em { color: #d95f42; font-style: italic; }
 
 @media (max-width: 740px) {
   .locale-banner { font-size: 8px; justify-content: flex-start; padding: 5px 12px; }
-  .locale-banner > button { margin-left: auto; }
-  .locale-menu { right: 8px; }
+  .locale-switcher > button { margin-left: auto; }
+  .locale-menu { right: 0; }
   .construction-section { grid-template-columns: 1fr; }
   .construction-art { min-height: 265px; }
   .construction-copy { padding: 50px 25px; }

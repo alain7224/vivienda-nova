@@ -117,3 +117,11 @@ GitHub guarda el **código y el historial de cambios**, pero no sustituye por s�
 | Acuerdo de comisión | Define importe, condición de cobro y prueba de atribución. |
 
 La cartera empieza deliberadamente vacía para que solo aparezcan los inmuebles y datos comerciales que tú autorices desde la administración.
+
+## Procedencia geográfica de las visitas
+
+En **«Visitas y referidos»**, pulsa la tarjeta **«visitantes»** para abrir el mapa horizontal. El panel agrupa las visitas consentidas por país, región y municipio, muestra visitantes únicos, páginas visitadas y puntos aproximados cuando el proveedor de geolocalización los devuelve. También conserva el dominio de referencia —por ejemplo, una campaña o buscador— cuando está disponible.
+
+La analítica solo se registra después de aceptar la categoría correspondiente en el aviso de cookies. La aplicación no guarda la dirección IP original; guarda únicamente la ubicación aproximada agregada, el idioma, la página y el dominio de entrada. La geolocalización por IP no equivale a una dirección exacta y puede fallar o situar al visitante en otra localidad cuando utiliza VPN, red móvil, proxy o una red corporativa. Los datos históricos anteriores a esta mejora no tienen ubicación retroactiva; las nuevas visitas consentidas irán rellenando el mapa.
+
+Antes de usar estos datos para campañas, revisa que la política de cookies y privacidad de la web describa esta medición y el proveedor técnico utilizado. El mapa está pensado para orientar la inversión publicitaria por mercados, no para identificar personas.

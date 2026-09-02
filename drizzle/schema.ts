@@ -1,4 +1,4 @@
-import { index, int, mysqlEnum, mysqlTable, text, timestamp, uniqueIndex, varchar } from "drizzle-orm/mysql-core";
+import { double, index, int, mysqlEnum, mysqlTable, text, timestamp, uniqueIndex, varchar } from "drizzle-orm/mysql-core";
 
 /** Usuarios autenticados; la cuenta propietaria conserva el rol admin. */
 export const users = mysqlTable("users", {
@@ -125,8 +125,14 @@ export const siteVisits = mysqlTable("siteVisits", {
   visitorId: varchar("visitorId", { length: 80 }).notNull(),
   locale: varchar("locale", { length: 12 }).notNull(),
   page: varchar("page", { length: 200 }).notNull(),
+  country: varchar("country", { length: 100 }),
+  region: varchar("region", { length: 140 }),
+  city: varchar("city", { length: 140 }),
+  latitude: double("latitude"),
+  longitude: double("longitude"),
+  entrySource: varchar("entrySource", { length: 320 }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-}, (table) => [index("site_visits_visitor_idx").on(table.visitorId), index("site_visits_created_idx").on(table.createdAt)]);
+}, (table) => [index("site_visits_visitor_idx").on(table.visitorId), index("site_visits_created_idx").on(table.createdAt), index("site_visits_geo_idx").on(table.country, table.region, table.city)]);
 
 /** Operaciones que el administrador confirma después de recibir la información del vendedor externo. */
 export const commissionOperations = mysqlTable("commissionOperations", {
