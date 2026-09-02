@@ -63,7 +63,7 @@ export default function AdminFloatingButton() {
 
   return (
     <>
-      <button className="admin-floating-button" type="button" onClick={() => setOpen(true)} aria-haspopup="dialog">
+      <button className="admin-floating-button" type="button" onClick={() => setOpen(true)} aria-haspopup="dialog" aria-label="Abrir panel administrador">
         <LockKeyhole size={16} aria-hidden="true" />
         <span>Acceso administrador</span>
       </button>

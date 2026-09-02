@@ -1,51 +1,9 @@
-.admin-floating-button {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  z-index: 60;
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  min-height: 44px;
-  padding: 0 16px;
-  border: 1px solid rgba(255, 253, 248, 0.25);
-  border-radius: 999px;
-  color: #fffdf8;
-  background: #172522;
-  box-shadow: 0 12px 30px rgba(23, 37, 34, 0.22);
-  font: 700 0.76rem/1 "DM Sans", sans-serif;
-  letter-spacing: 0.03em;
-  cursor: pointer;
-  transition: transform 160ms ease-out, background-color 160ms ease-out, box-shadow 160ms ease-out;
-}
-
+.admin-floating-button { position: fixed; right: 20px; bottom: 20px; z-index: 60; display: inline-flex; align-items: center; gap: 9px; min-height: 44px; padding: 0 16px; border: 1px solid rgba(255, 253, 248, 0.25); border-radius: 999px; color: #fffdf8; background: #172522; box-shadow: 0 12px 30px rgba(23, 37, 34, 0.22); font: 700 0.76rem/1 "DM Sans", sans-serif; letter-spacing: 0.03em; cursor: pointer; transition: transform 160ms ease-out, background-color 160ms ease-out, box-shadow 160ms ease-out; }
 .admin-floating-button:hover { background: #2d5750; box-shadow: 0 15px 34px rgba(23, 37, 34, 0.28); transform: translateY(-2px); }
 .admin-floating-button:active { transform: scale(0.97); }
 .admin-floating-button:focus-visible, .admin-modal button:focus-visible, .admin-modal input:focus-visible { outline: 3px solid rgba(217, 95, 66, 0.45); outline-offset: 3px; }
-
-.admin-modal-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 70;
-  display: grid;
-  place-items: center;
-  padding: 20px;
-  background: rgba(16, 29, 26, 0.58);
-  backdrop-filter: blur(5px);
-}
-
-.admin-modal {
-  position: relative;
-  width: min(100%, 440px);
-  padding: 34px;
-  border: 1px solid rgba(23, 37, 34, 0.12);
-  border-radius: 24px;
-  color: #172522;
-  background: #fffdf8;
-  box-shadow: 0 24px 70px rgba(16, 29, 26, 0.3);
-  animation: admin-modal-in 180ms cubic-bezier(0.23, 1, 0.32, 1);
-}
-
+.admin-modal-overlay { position: fixed; inset: 0; z-index: 70; display: grid; place-items: center; padding: 20px; background: rgba(16, 29, 26, 0.58); backdrop-filter: blur(5px); }
+.admin-modal { position: relative; width: min(100%, 440px); padding: 34px; border: 1px solid rgba(23, 37, 34, 0.12); border-radius: 24px; color: #172522; background: #fffdf8; box-shadow: 0 24px 70px rgba(16, 29, 26, 0.3); animation: admin-modal-in 180ms cubic-bezier(0.23, 1, 0.32, 1); }
 .admin-modal-close { position: absolute; top: 16px; right: 16px; display: grid; place-items: center; width: 36px; height: 36px; border: 0; border-radius: 50%; color: #52605b; background: transparent; cursor: pointer; }
 .admin-modal-close:hover { color: #172522; background: #f1eee7; }
 .admin-modal-icon { display: grid; place-items: center; width: 48px; height: 48px; margin-bottom: 18px; border-radius: 14px; color: #fffdf8; background: #d95f42; }
@@ -63,17 +21,6 @@
 .admin-modal-submit:hover { background: #b94d34; }
 .admin-modal-submit:active, .admin-modal-cancel:active { transform: scale(0.97); }
 .admin-modal-submit:disabled { cursor: wait; opacity: 0.65; }
-
 @keyframes admin-modal-in { from { opacity: 0; transform: translateY(8px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
-
-@media (max-width: 640px) {
-  .admin-floating-button { right: 14px; bottom: 14px; min-height: 42px; padding: 0 13px; font-size: 0.7rem; }
-  .admin-modal { padding: 28px 22px 22px; border-radius: 20px; }
-  .admin-modal-actions { flex-direction: column-reverse; }
-  .admin-modal-cancel, .admin-modal-submit { width: 100%; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .admin-modal { animation: none; }
-  .admin-floating-button, .admin-modal button { transition: none; }
-}
+@media (max-width: 640px) { .admin-floating-button { right: 14px; bottom: 14px; min-height: 42px; padding: 0 13px; font-size: 0.7rem; } .admin-modal { padding: 28px 22px 22px; border-radius: 20px; } .admin-modal-actions { flex-direction: column-reverse; } .admin-modal-cancel, .admin-modal-submit { width: 100%; } }
+@media (prefers-reduced-motion: reduce) { .admin-modal { animation: none; } .admin-floating-button, .admin-modal button { transition: none; } }
