@@ -253,5 +253,5 @@
 - [x] Hacer que salir del administrador redirija siempre a la portada pública, nunca a una pantalla negra de login.
 - [x] Auditar y corregir fallos de carga de fotos y vídeos en producción, especialmente Safari/iPhone.
 - [x] Importar todas las fichas disponibles en https://lrcostahomes.com/es/ con sus fotos y vídeos cuando existan, manteniéndolos en almacenamiento propio. Resultado verificado: 109 fichas, 109 con galería local; el catálogo no expuso vídeos de ficha copiables.
-- [ ] Traducir las tarjetas visibles al idioma seleccionado, incluyendo título, zona, tipo, descripción y etiquetas. Parcial: el servicio agotó su cuota después de sincronizar una parte; no se inventaron traducciones para el resto.
+- [ ] Traducir las tarjetas visibles al idioma seleccionado, incluyendo título, zona, tipo, descripción y etiquetas. Parcial verificado: 70 de 109 fichas tienen traducciones guardadas en los 12 idiomas; 39 conservan español hasta que el servicio vuelva a estar disponible, sin inventar contenido.
 - [x] Diseñar la importación total para no duplicar fichas existentes y para dejar trazabilidad de la fuente original solo en el panel privado.
