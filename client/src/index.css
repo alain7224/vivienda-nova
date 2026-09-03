@@ -149,11 +149,9 @@ h2 em { color: #d95f42; font-style: italic; }
 .collection-meta { align-items: flex-end; display: flex; flex-direction: column; gap: 12px; padding-bottom: 6px; }
 .collection-meta p { color: #657177; font-size: 10px; font-weight: 800; letter-spacing: .12em; margin: 0; text-transform: uppercase; }
 .filter-link { align-items: center; background: transparent; border-bottom: 1px solid #112f3f; color: #112f3f; display: inline-flex; font-size: 10px; font-weight: 800; gap: 7px; letter-spacing: .08em; padding: 0 0 3px; text-transform: uppercase; }
-.property-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: clamp(17px, 2.3vw, 37px); position: relative; }
-.property-card:nth-child(1) { grid-column: span 4; margin-top: 48px; }
-.property-card:nth-child(2) { grid-column: span 5; }
-.property-card:nth-child(3) { grid-column: span 3; margin-top: 88px; }
-.property-card { background: #fffdf8; box-shadow: 0 8px 22px rgba(17,47,63,.055); min-width: 0; position: relative; transition: box-shadow .25s, transform .25s cubic-bezier(.23,1,.32,1); }
+.property-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(22px, 2.4vw, 36px); position: relative; }
+.property-card:nth-child(1), .property-card:nth-child(2), .property-card:nth-child(3) { grid-column: auto; margin-top: 0; }
+.property-card { background: #fffdf8; box-shadow: 0 8px 22px rgba(17,47,63,.055); min-width: 0; overflow: hidden; position: relative; transition: box-shadow .25s, transform .25s cubic-bezier(.23,1,.32,1); }
 .property-card::after { background: #eef0ed; color: #304c58; content: attr(data-property-type); font-size: 8px; font-weight: 800; letter-spacing: .11em; padding: 5px 7px; position: absolute; right: 15px; text-transform: uppercase; top: 15px; z-index: 3; }
 .property-card:hover { box-shadow: 0 20px 38px rgba(17,47,63,.13); transform: translateY(-5px); }
 .property-photo-wrap { aspect-ratio: 1.22; background: #d8d1c6; overflow: hidden; position: relative; }
@@ -166,11 +164,11 @@ h2 em { color: #d95f42; font-style: italic; }
 .save-button:hover, .save-button.is-saved { background: #d95f42; color: #fffdf8; }
 .save-button:active { transform: scale(.92); }
 .property-info { padding: 23px 22px 20px; }
-.property-heading { align-items: flex-start; display: flex; gap: 14px; justify-content: space-between; }
+.property-heading { align-items: flex-start; display: grid; gap: 8px; grid-template-columns: minmax(0, 1fr); }
 .property-place { color: #6a7275; font-size: 9px; font-weight: 800; letter-spacing: .1em; margin: 0 0 6px; text-transform: uppercase; }
 .property-heading h3 { font-size: clamp(25px, 2vw, 31px); line-height: .98; margin: 0; }
-.property-price { color: #d95f42; font-size: 13px; font-weight: 800; margin: 8px 0 0; text-align: right; white-space: nowrap; }
-.property-description { color: #667078; font-size: 12px; line-height: 1.65; margin: 19px 0 21px; min-height: 39px; }
+.property-price { color: #d95f42; font-size: 13px; font-weight: 800; margin: 0; text-align: left; white-space: nowrap; }
+.property-description { color: #667078; display: -webkit-box; font-size: 12px; line-height: 1.65; margin: 19px 0 21px; min-height: 39px; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 5; }
 .property-footer { align-items: flex-end; border-top: 1px solid #e1ddd5; display: flex; gap: 10px; justify-content: space-between; padding-top: 15px; }
 .property-specs { display: flex; gap: 10px; }
 .property-specs span { align-items: center; color: #4b585f; display: flex; font-size: 10px; font-weight: 700; gap: 4px; white-space: nowrap; }
@@ -253,9 +251,13 @@ h2 em { color: #d95f42; font-style: italic; }
 .install-app-guide p { color: #334a55; font-size: 10px; font-weight: 600; letter-spacing: 0; line-height: 1.45; margin: 0; text-transform: none; }
 .install-app-guide > button { color: #112f3f; flex: 0 0 auto; padding: 1px; }
 
-.property-dialog-backdrop { align-items: center; background: rgba(17,47,63,.73); display: flex; inset: 0; justify-content: center; padding: 22px; position: fixed; z-index: 20; }
-.property-dialog { background: #fffdf8; box-shadow: 0 28px 70px rgba(0,0,0,.3); display: grid; grid-template-columns: 1fr 1fr; max-width: 910px; position: relative; width: 100%; }
-.property-dialog > img { height: 100%; max-height: 530px; object-fit: cover; width: 100%; }
+.property-dialog-backdrop { align-items: center; background: rgba(17,47,63,.73); display: flex; inset: 0; justify-content: center; overflow: auto; padding: 22px; position: fixed; z-index: 20; }
+.property-dialog { background: #fffdf8; box-shadow: 0 28px 70px rgba(0,0,0,.3); display: grid; grid-template-columns: 1fr 1fr; max-height: calc(100vh - 44px); max-width: 910px; overflow: auto; position: relative; width: 100%; }
+.property-dialog-media { background: #dce8e5; min-width: 0; overflow: hidden; }
+.property-dialog-media > img { display: block; height: 330px; max-height: 48vh; object-fit: cover; width: 100%; }
+.dialog-gallery { display: flex; gap: 8px; overflow-x: auto; padding: 10px; scrollbar-width: thin; }
+.dialog-gallery img { aspect-ratio: 1.45; border: 2px solid transparent; flex: 0 0 92px; height: 62px; object-fit: cover; width: 92px; }
+.dialog-gallery img:first-child { border-color: #d95f42; }
 .dialog-copy { align-self: center; padding: clamp(35px, 5vw, 66px); }
 .dialog-copy h2 { font-size: clamp(38px, 4vw, 57px); line-height: .92; margin: 0; }
 .dialog-price { color: #d95f42; font-size: 16px; font-weight: 800; margin: 14px 0 20px; }
@@ -279,6 +281,8 @@ h2 em { color: #d95f42; font-style: italic; }
 .dialog-close:hover { background: #d95f42; color: #fffdf8; }
 
 @media (max-width: 960px) {
+  .property-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
   .hero-section { grid-template-columns: 1fr 1fr; min-height: 410px; }
   .hero-art { min-height: 410px; }
   .search-section { grid-template-columns: 1fr; gap: 35px; }
@@ -337,7 +341,7 @@ h2 em { color: #d95f42; font-style: italic; }
   .site-footer__links { flex-wrap: wrap; gap: 12px 16px; }
   .install-app-guide { bottom: calc(100% + 10px); left: 0; right: auto; width: min(310px, calc(100vw - 44px)); }
   .property-dialog { display: block; max-height: calc(100vh - 44px); overflow: auto; }
-  .property-dialog > img { display: block; height: 245px; max-height: none; }
+  .property-dialog-media > img { height: 245px; max-height: none; }
   .dialog-copy { padding: 32px 25px; }
   .dialog-actions .button { width: 100%; }
 }

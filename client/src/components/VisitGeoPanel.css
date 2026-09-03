@@ -2,20 +2,26 @@
 .visit-geo-heading { align-items: flex-start; display: flex; gap: 24px; justify-content: space-between; margin-bottom: 28px; }
 .visit-geo-heading h2 { font-size: clamp(38px, 5vw, 64px); line-height: .92; margin: 0; }
 .visit-geo-note { color: #69777b; font-size: 12px; line-height: 1.6; margin: 16px 0 0; max-width: 620px; }
-.visit-geo-map { background: linear-gradient(135deg, #1e5368, #123d50 58%, #2b6471); border: 1px solid rgba(255,255,255,.22); border-radius: 4px; min-height: 320px; overflow: hidden; position: relative; }
-.visit-geo-map__grid { background-image: linear-gradient(rgba(255,255,255,.12) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.12) 1px, transparent 1px); background-size: 10% 25%; inset: 0; opacity: .55; position: absolute; }
-.visit-geo-map__land { background: rgba(225, 211, 186, .12); border: 1px solid rgba(225, 211, 186, .18); position: absolute; transform: rotate(-8deg); }
+.visit-geo-map { background: linear-gradient(180deg, #cfe7eb 0%, #edf4ee 100%); border: 1px solid #9bbfc2; border-radius: 10px; min-height: 360px; overflow: hidden; position: relative; }
+.visit-geo-map__grid { background-image: linear-gradient(rgba(29,86,103,.14) 1px, transparent 1px), linear-gradient(90deg, rgba(29,86,103,.14) 1px, transparent 1px); background-size: 10% 25%; inset: 0; opacity: .75; position: absolute; }
+.visit-geo-map__world { height: 100%; inset: 0; position: absolute; width: 100%; z-index: 1; }
+.world-land { stroke: rgba(36,91,89,.35); stroke-width: 3; }
+.world-land--north-america, .world-land--europe { fill: #8fbeb0; }
+.world-land--south-america, .world-land--africa { fill: #d9be83; }
+.world-land--asia { fill: #b6c98c; }
+.world-land--oceania { fill: #d89570; }
+.visit-geo-map__land { display: none; }
 .visit-geo-map__land--europe { border-radius: 48% 42% 55% 35%; height: 28%; left: 42%; top: 28%; width: 20%; }
 .visit-geo-map__land--america { border-radius: 62% 35% 48% 60%; height: 62%; left: 18%; top: 25%; transform: rotate(18deg); width: 12%; }
 .visit-geo-map__land--asia { border-radius: 42% 58% 34% 65%; height: 35%; left: 61%; top: 25%; transform: rotate(12deg); width: 26%; }
-.visit-geo-marker { align-items: flex-start; background: transparent; border: 0; color: #fffdf8; cursor: pointer; display: flex; gap: 5px; padding: 0; position: absolute; transform: translate(-7px, -17px); z-index: 2; }
+.visit-geo-marker { align-items: flex-start; background: transparent; border: 0; color: #123d50; cursor: pointer; display: flex; gap: 5px; padding: 0; position: absolute; transform: translate(-7px, -17px); z-index: 2; }
 .visit-geo-marker svg { color: #f27a5a; filter: drop-shadow(0 2px 3px rgba(0,0,0,.3)); flex: 0 0 auto; }
-.visit-geo-marker span { background: rgba(13, 45, 61, .9); font-size: 10px; font-weight: 800; letter-spacing: .04em; padding: 4px 6px; white-space: nowrap; }
+.visit-geo-marker span { background: #fffdf8; border: 1px solid #d95f42; border-radius: 4px; box-shadow: 0 3px 10px rgba(17,47,63,.16); font-size: 10px; font-weight: 800; letter-spacing: .04em; padding: 4px 6px; white-space: nowrap; }
 .visit-geo-marker b { color: #f27a5a; margin-left: 5px; } .visit-geo-marker:focus-visible { outline: 2px solid #fffdf8; outline-offset: 4px; } .visit-geo-marker.is-selected { z-index: 4; } .visit-geo-marker.is-selected span { background: #d95f42; box-shadow: 0 4px 16px rgba(0,0,0,.28); } .visit-geo-selected { background: #eef4f1; border-left: 4px solid var(--terra, #d95f42); display: grid; gap: 5px; margin-top: 12px; padding: 12px 16px; } .visit-geo-selected strong { color: #123d50; font-size: 16px; } .visit-geo-selected span, .visit-geo-selected small { color: #53656a; font-size: 11px; }
 .visit-geo-empty { align-items: center; color: rgba(255,255,255,.8); display: flex; flex-direction: column; gap: 8px; inset: 0; justify-content: center; position: absolute; }
 .visit-geo-empty strong { color: #fffdf8; font: 400 24px/1 "DM Serif Display", serif; }
 .visit-geo-empty span { font-size: 11px; }
-.visit-geo-label { color: rgba(255,255,255,.55); font-size: 8px; font-weight: 800; letter-spacing: .16em; position: absolute; text-transform: uppercase; }
+.visit-geo-label { color: #35616b; font-size: 8px; font-weight: 800; letter-spacing: .16em; position: absolute; text-transform: uppercase; }
 .visit-geo-label--north { left: 18px; top: 16px; }
 .visit-geo-label--south { bottom: 15px; right: 18px; }
 .visit-geo-columns { display: grid; gap: 24px; grid-template-columns: repeat(3, 1fr); margin-top: 26px; }

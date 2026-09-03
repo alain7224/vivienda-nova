@@ -226,8 +226,8 @@
 - [x] Hacer interactivo y visible el mapa al pulsar «Visitantes» o «Mapa de visitas».
 - [x] Añadir un control claro para aprobar un borrador y convertirlo en una vivienda visible públicamente.
 - [x] Implementar un botón para pegar una URL de L & R Costa Homes, copiar sus imágenes y publicarla internamente en modo contacto.
-- [ ] Corregir el fallo de publicación e impedir que se declare publicada una versión si la compilación o despliegue falla.
-- [ ] Verificar en móvil y escritorio la entrada por clave, logout, mapa, aprobación y carga de medios antes del checkpoint.
+- [x] Corregir el fallo de publicación e impedir que se declare publicada una versión si la compilación o despliegue falla.
+- [x] Verificar en móvil y escritorio la entrada por clave, logout, mapa, aprobación y carga de medios antes del checkpoint.
 
 ## Evidencia visual recibida
 
@@ -243,3 +243,15 @@
 - [x] Añadir hasta tres teléfonos y un correo editables para preparar avisos, sin enviar mensajes reales durante las pruebas.
 - [x] Publicar una ficha importada solo cuando sus imágenes estén copiadas y revisadas, manteniendo la opción de borrador.
 - [x] Verificar que las fichas importadas y sus galerías no dependan de URLs externas.
+
+## Incidencias nuevas confirmadas por capturas
+
+- [x] Corregir las tarjetas del catálogo para que mantengan ancho, proporción, texto y botón de detalles sin columnas estrechas ni scroll infinito.
+- [x] Hacer que toda tarjeta o botón de detalles abra la información dentro de Vivienda Nova con desplazamiento interno razonable, sin congelar la página.
+- [x] Sustituir el mapa negro por un mapa mundial coloreado, visible y seleccionable, con alternativa de lista.
+- [x] Hacer que todos los botones de la barra lateral cambien de sección o abran su editor correspondiente.
+- [x] Hacer que salir del administrador redirija siempre a la portada pública, nunca a una pantalla negra de login.
+- [x] Auditar y corregir fallos de carga de fotos y vídeos en producción, especialmente Safari/iPhone.
+- [x] Importar todas las fichas disponibles en https://lrcostahomes.com/es/ con sus fotos y vídeos cuando existan, manteniéndolos en almacenamiento propio. Resultado verificado: 109 fichas, 109 con galería local; el catálogo no expuso vídeos de ficha copiables.
+- [ ] Traducir las tarjetas visibles al idioma seleccionado, incluyendo título, zona, tipo, descripción y etiquetas. Parcial: el servicio agotó su cuota después de sincronizar una parte; no se inventaron traducciones para el resto.
+- [x] Diseñar la importación total para no duplicar fichas existentes y para dejar trazabilidad de la fuente original solo en el panel privado.

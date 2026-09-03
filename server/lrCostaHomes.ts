@@ -90,6 +90,18 @@ async function copyImage(source: string, index: number) {
   }
 }
 
+export async function discoverLrCostaHomesUrls(): Promise<string[]> {
+  const urls = new Set<string>();
+  for (let page = 1; page <= 11; page += 1) {
+    const source = page === 1 ? "https://lrcostahomes.com/es/properties-search/" : `https://lrcostahomes.com/es/properties-search/page/${page}/`;
+    const response = await fetch(source, { headers: { "user-agent": "ViviendaNova importer" }, signal: AbortSignal.timeout(20_000) });
+    if (!response.ok) throw new Error(`No se pudo leer el catálogo (página ${page}, ${response.status}).`);
+    const html = (await readResponse(response)).toString("utf8");
+    for (const match of html.matchAll(/href=["'](https:\/\/lrcostahomes\.com\/es\/property\/[^"'#?]+\/?)["']/gi)) urls.add(match[1]);
+  }
+  return [...urls];
+}
+
 export async function importLrCostaHomesUrl(sourceUrl: string): Promise<LrCostaDraft> {
   const url = validateUrl(sourceUrl);
   const response = await fetch(url, { headers: { "user-agent": "ViviendaNova importer" }, signal: AbortSignal.timeout(20_000) });
