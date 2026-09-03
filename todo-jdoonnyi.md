@@ -217,3 +217,29 @@
 ## Consolidación de importación inicial
 
 - [x] Guardar un checkpoint posterior a la importación de los cinco borradores y al traslado de sus imágenes al almacenamiento propio.
+
+## Corrección crítica de acceso y panel admin
+
+- [x] Eliminar el acceso superior «Administrar» que permite llegar al panel sin abrir el formulario de clave.
+- [x] Exigir ADMIN_KEY desde la única entrada situada en el pie y limitar esa sesión a 30 minutos.
+- [x] Hacer legibles los controles de la barra lateral y reunir allí navegación a viviendas, mapa, diseño, vendedores, importación y enlaces de oficina.
+- [x] Hacer interactivo y visible el mapa al pulsar «Visitantes» o «Mapa de visitas».
+- [x] Añadir un control claro para aprobar un borrador y convertirlo en una vivienda visible públicamente.
+- [x] Implementar un botón para pegar una URL de L & R Costa Homes, copiar sus imágenes y publicarla internamente en modo contacto.
+- [ ] Corregir el fallo de publicación e impedir que se declare publicada una versión si la compilación o despliegue falla.
+- [ ] Verificar en móvil y escritorio la entrada por clave, logout, mapa, aprobación y carga de medios antes del checkpoint.
+
+## Evidencia visual recibida
+
+- [x] Suprimir la etiqueta superior «Administrar» incluso cuando el usuario ya tenga una sesión admin activa.
+- [x] Convertir la barra lateral azul en un menú de texto de alto contraste, con destino visible para cada editor.
+- [x] Separar los marcadores superpuestos del mapa y añadir selección por lista para abrir el detalle de cada ubicación.
+
+## Requisitos nuevos confirmados
+
+- [x] Importar y almacenar todas las imágenes de cada ficha de L & R, no solo la portada, y mostrar una galería interna.
+- [x] Evitar la derivación pública a la web original: el cliente debe seguir en Vivienda Nova y solicitar información desde la ficha.
+- [x] Crear un aviso privado con datos del contacto, vivienda y enlace interno; nunca mostrar esos datos al visitante.
+- [x] Añadir hasta tres teléfonos y un correo editables para preparar avisos, sin enviar mensajes reales durante las pruebas.
+- [x] Publicar una ficha importada solo cuando sus imágenes estén copiadas y revisadas, manteniendo la opción de borrador.
+- [x] Verificar que las fichas importadas y sus galerías no dependan de URLs externas.

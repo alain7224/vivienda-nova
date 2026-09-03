@@ -126,10 +126,10 @@ export async function revokePropertyInviteLink(id: number) {
 export async function listPublishedProperties(locale?: string) {
   const db = await getDb();
   if (!db) return [];
-  const settings = await getSiteSettings();
-  const requiresExternalSeller = requiresExternalSellerForPublishedEntry(settings?.businessMode);
-  const rows = (await db.select().from(properties).where(eq(properties.status, "published")).orderBy(desc(properties.createdAt)))
-    .filter((property) => !requiresExternalSeller || (property.linkMode !== "capture" && Boolean(property.externalUrl)));
+  const rows = (await db.select().from(properties).where(eq(properties.status, "published")).orderBy(desc(properties.createdAt))).map((property) => ({
+    ...property,
+    imageGallery: property.imageGallery ? (() => { try { return JSON.parse(property.imageGallery) as string[]; } catch { return [property.imageUrl]; } })() : [property.imageUrl],
+  }));
   if (!locale || locale === "es" || rows.length === 0) return rows;
   const translations = await db.select().from(propertyTranslations).where(eq(propertyTranslations.locale, locale));
   const translationByProperty = new Map(translations.map((translation) => [translation.propertyId, translation]));

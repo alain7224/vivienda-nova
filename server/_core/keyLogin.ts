@@ -1,6 +1,6 @@
 import crypto from "crypto";
 import type { Express, Request, Response } from "express";
-import { COOKIE_NAME, ONE_YEAR_MS } from "@shared/const";
+import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./cookies";
 import { ENV } from "./env";
 import { upsertUser } from "../db";
@@ -9,6 +9,7 @@ import { sdk } from "./sdk";
 const attempts = new Map<string, { count: number; first: number }>();
 const WINDOW_MS = 60_000;
 const MAX_ATTEMPTS = 6;
+export const ADMIN_SESSION_MS = 30 * 60 * 1000;
 
 function getClientKey(req: Request) {
   const forwarded = req.headers["x-forwarded-for"];
@@ -64,10 +65,10 @@ export function registerKeyLogin(app: Express) {
         lastSignedIn: new Date(),
       });
       const sessionToken = await sdk.createSessionToken(ownerOpenId, {
-        expiresInMs: ONE_YEAR_MS,
+        expiresInMs: ADMIN_SESSION_MS,
         name: ENV.ownerName,
       });
-      res.cookie(COOKIE_NAME, sessionToken, { ...getSessionCookieOptions(req), sameSite: "lax", maxAge: ONE_YEAR_MS });
+      res.cookie(COOKIE_NAME, sessionToken, { ...getSessionCookieOptions(req), sameSite: "lax", maxAge: ADMIN_SESSION_MS });
       attempts.delete(clientKey);
       return res.json({ success: true });
     } catch (error) {

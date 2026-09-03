@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/sidebar";
 import { startLogin } from "@/const";
 import { useIsMobile } from "@/hooks/useMobile";
-import { LayoutDashboard, LogOut, PanelLeft } from "lucide-react";
+import { BarChart3, CircleDollarSign, FileSpreadsheet, LayoutDashboard, Link2, LogOut, PanelLeft, Plus, SlidersHorizontal, Users } from "lucide-react";
 import { CSSProperties, useEffect, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { DashboardLayoutSkeleton } from './DashboardLayoutSkeleton';
@@ -33,7 +33,14 @@ import MidPageCtaControl from "./MidPageCtaControl";
 import PropertyTypeEnhancer from "./PropertyTypeEnhancer";
 
 const menuItems = [
-  { icon: LayoutDashboard, label: "Gestión inmobiliaria", path: "/admin" },
+  { icon: LayoutDashboard, label: "Resumen", path: "/admin" },
+  { icon: Plus, label: "Añadir vivienda", path: "/admin?panel=property" },
+  { icon: FileSpreadsheet, label: "Importar desde L & R / CSV", path: "/admin?panel=importer" },
+  { icon: BarChart3, label: "Mapa de visitas", path: "/admin?view=geo" },
+  { icon: Users, label: "Vendedores", path: "/admin?panel=vendor" },
+  { icon: CircleDollarSign, label: "Operaciones", path: "/admin?panel=operation" },
+  { icon: SlidersHorizontal, label: "Idiomas y diseño", path: "/admin?panel=settings" },
+  { icon: Link2, label: "Enlace de oficina", path: "/admin?panel=links" },
 ];
 
 const SIDEBAR_WIDTH_KEY = "sidebar-width";
@@ -158,7 +165,7 @@ function DashboardLayoutContent({
       <div className="relative" ref={sidebarRef}>
         <Sidebar
           collapsible="icon"
-          className="border-r-0"
+          className="border-r-0 bg-[#102f40] text-[#fffdf8]"
           disableTransition={isResizing}
         >
           <SidebarHeader className="h-16 justify-center">
@@ -169,11 +176,11 @@ function DashboardLayoutContent({
                 className="h-8 w-8 flex items-center justify-center hover:bg-accent rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ring shrink-0"
                 aria-label="Toggle navigation"
               >
-                <PanelLeft className="h-4 w-4 text-muted-foreground" />
+                <PanelLeft className="h-4 w-4 text-[#fffdf8]" />
               </button>
               {!isCollapsed ? (
                 <div className="flex items-center gap-2 min-w-0">
-                  <span className="font-semibold tracking-tight truncate">
+                  <span className="font-semibold tracking-tight truncate text-[#fffdf8]">
                     Vivienda Nova
                   </span>
                 </div>
@@ -191,7 +198,7 @@ function DashboardLayoutContent({
                       isActive={isActive}
                       onClick={() => setLocation(item.path)}
                       tooltip={item.label}
-                      className={`h-10 transition-all font-normal`}
+                      className={`h-11 transition-all font-medium text-[#fffdf8] hover:bg-[#1d4a5d] hover:text-white ${isActive ? "bg-[#d95f42] text-white shadow-sm" : ""}`}
                     >
                       <item.icon
                         className={`h-4 w-4 ${isActive ? "text-primary" : ""}`}
@@ -214,10 +221,10 @@ function DashboardLayoutContent({
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex-1 min-w-0 group-data-[collapsible=icon]:hidden">
-                    <p className="text-sm font-medium truncate leading-none">
+                    <p className="text-sm font-medium truncate leading-none text-[#fffdf8]">
                       {user?.name || "-"}
                     </p>
-                    <p className="text-xs text-muted-foreground truncate mt-1.5">
+                    <p className="text-xs text-[#c6d7dc] truncate mt-1.5">
                       {user?.email || "-"}
                     </p>
                   </div>

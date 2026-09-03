@@ -48,13 +48,14 @@ import { storagePut } from "./storage";
 import { translatePropertyCopy } from "./translation";
 import { buildCollaboratorUrl, createCollaboratorToken, forceCollaboratorDraft, hashCollaboratorToken } from "./collaborator";
 import { resolveVisitGeo } from "./geo";
+import { importLrCostaHomesUrl } from "./lrCostaHomes";
 
 const directChannels = ["direct", "email", "whatsapp", "sms", "phone"] as const;
 const propertyInput = z.object({
   slug: z.string().trim().min(3).max(180), title: z.string().trim().min(3).max(180), city: z.string().trim().min(2).max(100), zone: z.string().trim().min(2).max(140),
   province: z.string().trim().max(140).nullable().optional(), country: z.string().trim().min(2).max(100).default("España"), type: z.string().trim().min(2).max(80),
   price: z.string().trim().min(1).max(80), priceValue: z.number().int().nonnegative(), bedrooms: z.number().int().min(0).max(30), bathrooms: z.number().int().min(0).max(30), surface: z.number().int().positive().max(100000),
-  description: z.string().trim().min(10).max(5000), imageUrl: z.string().trim().min(1).max(3000), tag: z.string().trim().min(2).max(100), status: z.enum(["draft", "published"]),
+  description: z.string().trim().min(10).max(5000), imageUrl: z.string().trim().min(1).max(3000), imageGallery: z.array(z.string().startsWith("/manus-storage/")).max(30).optional(), tag: z.string().trim().min(2).max(100), status: z.enum(["draft", "published"]),
   linkMode: z.enum(["capture", "redirect", "both"]).default("redirect"), vendorId: z.number().int().positive().nullable().optional(), externalUrl: z.string().url().max(3000).nullable().optional(),
   referralParameter: z.string().trim().min(1).max(80).default("ref"), referralCode: z.string().trim().min(1).max(160).nullable().optional(),
 }).superRefine((value, ctx) => {
@@ -82,7 +83,7 @@ const operationInput = z.object({
   salePrice: z.number().int().nonnegative(), commissionPercent: z.number().int().min(0).max(100), commissionStatus: z.enum(["expected", "pending", "paid", "cancelled"]), closedAt: z.date().nullable().optional(), paidAt: z.date().nullable().optional(), notes: z.string().trim().max(5000).nullable().optional(),
 });
 
-const settingsInput = z.object({ bannerText: z.string().trim().min(1).max(220), bannerBackground: z.string().regex(/^#[0-9a-fA-F]{6}$/), bannerColor: z.string().regex(/^#[0-9a-fA-F]{6}$/), bannerHeight: z.number().int().min(26).max(72), bannerRotationSeconds: z.number().int().min(2).max(20), cardStyle: z.enum(["flat", "three_d"]), enabledLocales: z.string().trim().min(2).max(1000), contactPhone: z.string().trim().max(32).optional(), ownerName: z.string().trim().min(2).max(160).optional(), businessMode: z.enum(["real_estate", "catalog"]).optional(), midPageCta: z.string().trim().min(1).max(220).optional(), heroImageUrl: z.string().startsWith("/manus-storage/").max(3000).optional(), heroVideos: z.string().max(5000).optional().refine((value) => { if (value === undefined) return true; try { const parsed = JSON.parse(value); return Array.isArray(parsed) && parsed.length <= 6 && parsed.every((item) => typeof item?.label === "string" && typeof item?.url === "string" && item.url.startsWith("/manus-storage/")); } catch { return false; } }, "La lista de vídeos no es válida.") });
+const settingsInput = z.object({ bannerText: z.string().trim().min(1).max(220), bannerBackground: z.string().regex(/^#[0-9a-fA-F]{6}$/), bannerColor: z.string().regex(/^#[0-9a-fA-F]{6}$/), bannerHeight: z.number().int().min(26).max(72), bannerRotationSeconds: z.number().int().min(2).max(20), cardStyle: z.enum(["flat", "three_d"]), enabledLocales: z.string().trim().min(2).max(1000), contactPhone: z.string().trim().max(32).optional(), notificationPhones: z.string().trim().max(500).optional(), notificationEmail: z.string().email().max(320).nullable().optional(), ownerName: z.string().trim().min(2).max(160).optional(), businessMode: z.enum(["real_estate", "catalog"]).optional(), midPageCta: z.string().trim().min(1).max(220).optional(), heroImageUrl: z.string().startsWith("/manus-storage/").max(3000).optional(), heroVideos: z.string().max(5000).optional().refine((value) => { if (value === undefined) return true; try { const parsed = JSON.parse(value); return Array.isArray(parsed) && parsed.length <= 6 && parsed.every((item) => typeof item?.label === "string" && typeof item?.url === "string" && item.url.startsWith("/manus-storage/")); } catch { return false; } }, "La lista de vídeos no es válida.") });
 
 async function syncTranslations(propertyId: number, input: z.infer<typeof propertyInput>) {
   const translations = await translatePropertyCopy({ title: input.title, city: input.city, zone: input.zone, type: input.type, tag: input.tag, description: input.description });
@@ -105,7 +106,9 @@ export const appRouter = router({
       const consent = createLeadConsentTimestamps({ privacyAccepted, referralConsent });
       await createPropertyLead({ ...lead, propertyId: lead.propertyId || null, phone: lead.phone || null, preferredLocation: lead.preferredLocation || null, preferredProvince: lead.preferredProvince || null, latitude: lead.latitude || null, longitude: lead.longitude || null, budget: lead.budget || null, referenceImages: lead.referenceImages?.length ? JSON.stringify(lead.referenceImages) : null, attributionCode: lead.attributionCode || "MARTINEZ", status: "new", ...consent });
       const label = property?.title || (input.leadType === "construction" ? "Proyecto de construcción" : "Producto");
-      const notificationSent = await notifyOwner({ title: `Nuevo interesado: ${label}`, content: `${input.name} · ${input.email}${input.phone ? ` · ${input.phone}` : ""} · Referencia: ${input.attributionCode || "MARTINEZ"}` });
+      const internalLink = property ? `/?property=${encodeURIComponent(property.slug)}` : "/#contacto";
+      const settings = await getSiteSettings();
+      const notificationSent = await notifyOwner({ title: `Nuevo interesado: ${label}`, content: [`Interés privado recibido en Vivienda Nova`, `Vivienda: ${label}`, `Enlace interno: ${internalLink}`, `Nombre: ${input.name}`, `Correo: ${input.email}`, `Teléfono: ${input.phone || "No indicado"}`, `Mensaje: ${input.message}`, `Destinatarios configurados: ${(settings?.notificationPhones || "ninguno").split(",").slice(0, 3).join(", ")}${settings?.notificationEmail ? ` · ${settings.notificationEmail}` : ""}`, `Referencia: ${input.attributionCode || "MARTINEZ"}`].join("\n") });
       return { success: true, notificationSent };
     }),
   }),
@@ -129,7 +132,7 @@ export const appRouter = router({
       const link = await getActivePropertyInviteLink(hashCollaboratorToken(token));
       if (!link) throw new Error("Este enlace de oficina ha caducado o ha sido revocado.");
       const draft = forceCollaboratorDraft(values);
-      const id = await createProperty({ ...draft, referralCode: values.referralCode || "MARTINEZ" });
+      const id = await createProperty({ ...draft, imageGallery: values.imageGallery?.length ? JSON.stringify(Array.from(new Set([values.imageUrl, ...values.imageGallery]))) : null, referralCode: values.referralCode || "MARTINEZ" });
       let translationsReady = true;
       try { await syncTranslations(id, draft); } catch { translationsReady = false; }
       await touchPropertyInviteLink(link.id);
@@ -137,19 +140,10 @@ export const appRouter = router({
     }),
   }),
   referrals: router({
-    visit: publicProcedure.input(z.object({ propertyId: z.number().int().positive(), visitorId: z.string().min(8).max(80).optional() })).mutation(async ({ input }) => {
+    visit: publicProcedure.input(z.object({ propertyId: z.number().int().positive() })).mutation(async ({ input }) => {
       const property = await getPropertyById(input.propertyId);
-      if (!property || property.status !== "published" || !property.externalUrl) throw new Error("El enlace del vendedor no está disponible.");
-      const vendor = property.vendorId ? await getVendorById(property.vendorId) : undefined;
-      const channel = vendor?.contactMethod ?? "direct";
-      const contactValue = channel === "direct" ? property.externalUrl : vendor?.contactValue;
-      if (!contactValue) throw new Error("El vendedor no tiene un canal de derivación configurado.");
-      const code = vendor?.referralCode ?? property.referralCode;
-      const parameter = vendor?.referralParameter ?? property.referralParameter;
-      const message = `Nuevo interesado referido por MARTINEZ. Vivienda: ${property.title}. Código: ${code}. Enlace: ${property.externalUrl}`;
-      const destinationUrl = buildReferralChannelUrl(channel, contactValue, message, parameter, code);
-      await createReferralClick(property.id, destinationUrl, vendor?.id ?? property.vendorId, channel, input.visitorId);
-      return { destinationUrl, channel };
+      if (!property || property.status !== "published") throw new Error("La vivienda no está disponible.");
+      return { destinationUrl: `/?property=${encodeURIComponent(property.slug)}`, channel: "internal" as const };
     }),
   }),
   admin: router({
@@ -161,8 +155,10 @@ export const appRouter = router({
         ...clicks.map((click) => ({ id: `click-${click.id}`, kind: "click" as const, propertyId: click.propertyId, channel: click.channel, locale: null, createdAt: click.createdAt })),
       ].sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime()).slice(0, 100);
     }), settings: adminProcedure.query(() => getSiteSettings()),
-    createProperty: adminProcedure.input(propertyInput).mutation(async ({ input }) => { if (input.status === "published" && input.linkMode === "capture" && requiresExternalSellerForPublishedEntry((await getSiteSettings())?.businessMode)) throw new Error("Las viviendas públicas deben derivar directamente al vendedor."); const id = await createProperty({ ...input, province: input.province || null, vendorId: input.vendorId || null, externalUrl: input.externalUrl || null, referralCode: input.referralCode || "MARTINEZ" }); let translationsReady = true; try { await syncTranslations(id, input); } catch { translationsReady = false; } return { success: true, translationsReady }; }),
-    updateProperty: adminProcedure.input(propertyInput.safeExtend({ id: z.number().int().positive() })).mutation(async ({ input }) => { const { id, ...values } = input; if (values.status === "published" && values.linkMode === "capture" && requiresExternalSellerForPublishedEntry((await getSiteSettings())?.businessMode)) throw new Error("Las viviendas públicas deben derivar directamente al vendedor."); await updateProperty(id, { ...values, province: values.province || null, vendorId: values.vendorId || null, externalUrl: values.externalUrl || null, referralCode: values.referralCode || "MARTINEZ" }); let translationsReady = true; try { await syncTranslations(id, values); } catch { translationsReady = false; } return { success: true, translationsReady }; }),
+    importLrCostaHomes: adminProcedure.input(z.object({ sourceUrl: z.string().url().max(3000) })).mutation(({ input }) => importLrCostaHomesUrl(input.sourceUrl)),
+    createProperty: adminProcedure.input(propertyInput).mutation(async ({ input }) => { const id = await createProperty({ ...input, imageGallery: input.imageGallery?.length ? JSON.stringify(Array.from(new Set([input.imageUrl, ...input.imageGallery]))) : null, province: input.province || null, vendorId: input.vendorId || null, externalUrl: input.externalUrl || null, referralCode: input.referralCode || "MARTINEZ" }); let translationsReady = true; try { await syncTranslations(id, input); } catch { translationsReady = false; } return { success: true, translationsReady }; }),
+    updateProperty: adminProcedure.input(propertyInput.safeExtend({ id: z.number().int().positive() })).mutation(async ({ input }) => { const { id, ...values } = input; await updateProperty(id, { ...values, imageGallery: values.imageGallery?.length ? JSON.stringify(Array.from(new Set([values.imageUrl, ...values.imageGallery]))) : null, province: values.province || null, vendorId: values.vendorId || null, externalUrl: values.externalUrl || null, referralCode: values.referralCode || "MARTINEZ" }); let translationsReady = true; try { await syncTranslations(id, values); } catch { translationsReady = false; } return { success: true, translationsReady }; }),
+    approveProperty: adminProcedure.input(z.object({ id: z.number().int().positive() })).mutation(async ({ input }) => { await updateProperty(input.id, { status: "published", linkMode: "capture" }); return { success: true }; }),
     deleteProperty: adminProcedure.input(z.object({ id: z.number().int().positive() })).mutation(async ({ input }) => { await deleteProperty(input.id); return { success: true }; }),
     createVendor: adminProcedure.input(vendorInput).mutation(async ({ input }) => { await createVendor({ ...input, email: input.email || null, phone: input.phone || null, contactValue: input.contactValue || null, referralCode: input.referralCode || "MARTINEZ", attributionNote: input.attributionNote || null }); return { success: true }; }),
     updateVendor: adminProcedure.input(vendorInput.safeExtend({ id: z.number().int().positive() })).mutation(async ({ input }) => { const { id, ...values } = input; await updateVendor(id, { ...values, email: values.email || null, phone: values.phone || null, contactValue: values.contactValue || null, referralCode: values.referralCode || "MARTINEZ", attributionNote: values.attributionNote || null }); return { success: true }; }),

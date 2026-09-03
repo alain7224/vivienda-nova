@@ -46,6 +46,8 @@ export const properties = mysqlTable("properties", {
   surface: int("surface").notNull(),
   description: text("description").notNull(),
   imageUrl: text("imageUrl").notNull(),
+  /** JSON de URLs internas en almacenamiento; imageUrl conserva la portada. */
+  imageGallery: text("imageGallery"),
   tag: varchar("tag", { length: 100 }).default("Nueva oportunidad").notNull(),
   status: mysqlEnum("status", ["draft", "published"]).default("draft").notNull(),
   linkMode: mysqlEnum("linkMode", ["capture", "redirect", "both"]).default("redirect").notNull(),
@@ -181,6 +183,9 @@ export const siteSettings = mysqlTable("siteSettings", {
   ownerName: varchar("ownerName", { length: 160 }).default("Vivienda Nova").notNull(),
   /** Determina si el escaparate opera como promoción inmobiliaria o catálogo comercial. */
   businessMode: mysqlEnum("businessMode", ["real_estate", "catalog"]).default("real_estate").notNull(),
+  /** Destinatarios privados separados por comas; nunca se exponen en la portada. */
+  notificationPhones: text("notificationPhones"),
+  notificationEmail: varchar("notificationEmail", { length: 320 }),
   midPageCta: varchar("midPageCta", { length: 220 }).default("Compra con claridad · Información directa del vendedor").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
