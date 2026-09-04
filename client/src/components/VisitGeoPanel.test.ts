@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getGeoMapState, getGeoPoints, type GeoLocation } from "./VisitGeoPanel";
+import { clusterLocations, getGeoMapState, getGeoPoints, type GeoLocation } from "./VisitGeoPanel";
 
 const location = (latitude: number | null, longitude: number | null): GeoLocation => ({
   country: "España",
@@ -23,5 +23,14 @@ describe("VisitGeoPanel", () => {
 
   it("keeps only complete approximate locations as map points", () => {
     expect(getGeoPoints([location(38.0, -0.7), location(null, -0.7)])).toHaveLength(1);
+  });
+
+  it("groups nearby locations to prevent overlapping labels", () => {
+    const nearby = { ...location(40.4168, -3.7038), city: "Madrid" };
+    const nearbyTwo = { ...location(40.4172, -3.7041), city: "Madrid centro" };
+    const distant = { ...location(41.3874, 2.1686), city: "Barcelona" };
+    const clusters = clusterLocations([nearby, nearbyTwo, distant]);
+    expect(clusters.some((cluster) => cluster.length === 2)).toBe(true);
+    expect(clusters.some((cluster) => cluster.length === 1 && cluster[0].city === "Barcelona")).toBe(true);
   });
 });

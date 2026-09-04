@@ -254,10 +254,21 @@ h2 em { color: #d95f42; font-style: italic; }
 .property-dialog-backdrop { align-items: center; background: rgba(17,47,63,.73); display: flex; inset: 0; justify-content: center; overflow: auto; padding: 22px; position: fixed; z-index: 20; }
 .property-dialog { background: #fffdf8; box-shadow: 0 28px 70px rgba(0,0,0,.3); display: grid; grid-template-columns: 1fr 1fr; max-height: calc(100vh - 44px); max-width: 910px; overflow: auto; position: relative; width: 100%; }
 .property-dialog-media { background: #dce8e5; min-width: 0; overflow: hidden; }
-.property-dialog-media > img { display: block; height: 330px; max-height: 48vh; object-fit: cover; width: 100%; }
+.property-dialog-media { display: flex; flex-direction: column; min-height: 0; }
+.dialog-main-image { position: relative; }
+.dialog-main-image > img { display: block; height: 330px; max-height: 48vh; object-fit: cover; width: 100%; }
 .dialog-gallery { display: flex; gap: 8px; overflow-x: auto; padding: 10px; scrollbar-width: thin; }
-.dialog-gallery img { aspect-ratio: 1.45; border: 2px solid transparent; flex: 0 0 92px; height: 62px; object-fit: cover; width: 92px; }
-.dialog-gallery img:first-child { border-color: #d95f42; }
+.dialog-gallery-thumb { background: transparent; border: 2px solid transparent; flex: 0 0 92px; height: 62px; padding: 0; transition: border-color .18s, transform .16s cubic-bezier(.23,1,.32,1); }
+.dialog-gallery-thumb img { display: block; height: 100%; object-fit: cover; width: 100%; }
+.dialog-gallery-thumb.is-active { border-color: #d95f42; }
+.dialog-gallery-thumb:active { transform: scale(.96); }
+.dialog-gallery-control { align-items: center; background: rgba(255,253,248,.92); border: 1px solid #d5d0c7; border-radius: 50%; color: #112f3f; display: flex; height: 38px; justify-content: center; position: absolute; top: 50%; transform: translateY(-50%); width: 38px; z-index: 2; }
+.dialog-gallery-control:hover { background: #d95f42; color: #fffdf8; }
+.dialog-gallery-control--prev { left: 12px; }
+.dialog-gallery-control--next { right: 12px; }
+.load-more-button { align-items: center; background: #d95f42; border: 0; color: #fffdf8; display: flex; font-size: 11px; font-weight: 800; gap: 8px; justify-content: center; letter-spacing: .08em; margin: 28px auto 0; min-height: 48px; padding: 0 24px; text-transform: uppercase; transition: background .18s, transform .16s cubic-bezier(.23,1,.32,1); }
+.load-more-button:hover { background: #112f3f; }
+.load-more-button:active { transform: scale(.97); }
 .dialog-copy { align-self: center; padding: clamp(35px, 5vw, 66px); }
 .dialog-copy h2 { font-size: clamp(38px, 4vw, 57px); line-height: .92; margin: 0; }
 .dialog-price { color: #d95f42; font-size: 16px; font-weight: 800; margin: 14px 0 20px; }
@@ -322,6 +333,9 @@ h2 em { color: #d95f42; font-style: italic; }
   .section-heading h2 { font-size: 58px; }
   .collection-meta { align-items: flex-start; }
   .property-grid { grid-template-columns: 1fr; gap: 24px; }
+  .load-more-button { width: 100%; }
+  .dialog-main-image > img { height: 260px; max-height: 42vh; }
+  .dialog-gallery-control { height: 34px; width: 34px; }
   .property-card:nth-child(1), .property-card:nth-child(2), .property-card:nth-child(3) { grid-column: auto; margin-top: 0; }
   .property-info { padding: 21px 19px 18px; }
   .method-section { grid-template-columns: 1fr; }

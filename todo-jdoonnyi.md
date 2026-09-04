@@ -255,3 +255,12 @@
 - [x] Importar todas las fichas disponibles en https://lrcostahomes.com/es/ con sus fotos y vídeos cuando existan, manteniéndolos en almacenamiento propio. Resultado verificado: 109 fichas, 109 con galería local; el catálogo no expuso vídeos de ficha copiables.
 - [ ] Traducir las tarjetas visibles al idioma seleccionado, incluyendo título, zona, tipo, descripción y etiquetas. Parcial verificado: 70 de 109 fichas tienen traducciones guardadas en los 12 idiomas; 39 conservan español hasta que el servicio vuelva a estar disponible, sin inventar contenido.
 - [x] Diseñar la importación total para no duplicar fichas existentes y para dejar trazabilidad de la fuente original solo en el panel privado.
+
+## Mejoras aprobadas tras prueba Safari
+
+- [x] Agrupar visitas cercanas en el mapa y desplegar el grupo al pulsarlo con puntos separados y líneas direccionales.
+- [x] Mejorar el mapa mundial con una base cartográfica más detallada sin exponer ubicaciones precisas.
+- [x] Limitar sesiones, viviendas y tarjetas a bloques de 10 en PC y móvil con botón «Ver 10 más».
+- [x] Hacer que la galería del detalle cambie de imagen al pulsar miniaturas y funcione con controles táctiles.
+- [x] Evitar cualquier scroll interminable en listados y detalles, manteniendo scroll interno limitado.
+- [x] Añadir pruebas de regresión para agrupación del mapa, paginación, galería y navegación táctil.
