@@ -272,9 +272,9 @@
 
 ## Nueva paginación y orden del catálogo
 
-- [ ] Cambiar la cuadrícula pública a bloques completos de 9 propiedades en PC y móvil, sin dejar tarjetas sueltas.
-- [ ] Sustituir «Ver más» por paginación horizontal de puntos numerados que reemplace el bloque visible sin alargar la página.
-- [ ] Añadir modo de orden «Destacadas primero» para priorizar playa, chalets, villas y viviendas visualmente atractivas.
-- [ ] Añadir modo «Orden manual» editable desde el administrador para decidir qué propiedades ocupan las primeras posiciones.
-- [ ] Persistir el orden elegido y mantenerlo al cambiar de idioma o recorrer los bloques paginados.
-- [ ] Añadir pruebas para bloques de 9, paginación por puntos y los dos modos de orden.
+- [x] Cambiar la cuadrícula pública a bloques completos de 9 propiedades en PC y móvil, sin dejar tarjetas sueltas.
+- [x] Sustituir «Ver más» por paginación horizontal de puntos numerados que reemplace el bloque visible sin alargar la página.
+- [x] Añadir modo de orden «Destacadas primero» para priorizar playa, chalets, villas y viviendas visualmente atractivas.
+- [x] Añadir modo «Orden manual» editable desde el administrador para decidir qué propiedades ocupan las primeras posiciones.
+- [x] Persistir el orden elegido y mantenerlo al cambiar de idioma o recorrer los bloques paginados.
+- [x] Añadir pruebas para bloques de 9, paginación por puntos y los dos modos de orden.
