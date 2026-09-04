@@ -42,6 +42,7 @@ export function getDefaultPublicSiteSettings() {
     contactPhone: "",
     ownerName: "Vivienda Nova",
     businessMode: "real_estate" as const,
+    propertyOrder: "[]",
     midPageCta: "Compra con claridad · Información directa del vendedor",
   };
 }

@@ -183,6 +183,8 @@ export const siteSettings = mysqlTable("siteSettings", {
   ownerName: varchar("ownerName", { length: 160 }).default("Vivienda Nova").notNull(),
   /** Determina si el escaparate opera como promoción inmobiliaria o catálogo comercial. */
   businessMode: mysqlEnum("businessMode", ["real_estate", "catalog"]).default("real_estate").notNull(),
+  /** Orden manual JSON de IDs de viviendas; solo se usa dentro del panel y la portada pública. */
+  propertyOrder: text("propertyOrder"),
   /** Destinatarios privados separados por comas; nunca se exponen en la portada. */
   notificationPhones: text("notificationPhones"),
   notificationEmail: varchar("notificationEmail", { length: 320 }),

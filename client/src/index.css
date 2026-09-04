@@ -266,9 +266,13 @@ h2 em { color: #d95f42; font-style: italic; }
 .dialog-gallery-control:hover { background: #d95f42; color: #fffdf8; }
 .dialog-gallery-control--prev { left: 12px; }
 .dialog-gallery-control--next { right: 12px; }
-.load-more-button { align-items: center; background: #d95f42; border: 0; color: #fffdf8; display: flex; font-size: 11px; font-weight: 800; gap: 8px; justify-content: center; letter-spacing: .08em; margin: 28px auto 0; min-height: 48px; padding: 0 24px; text-transform: uppercase; transition: background .18s, transform .16s cubic-bezier(.23,1,.32,1); }
-.load-more-button:hover { background: #112f3f; }
-.load-more-button:active { transform: scale(.97); }
+.property-pagination { align-items: center; display: flex; flex-wrap: wrap; gap: 9px; justify-content: center; margin: 30px auto 0; max-width: 100%; }
+.property-pagination > span { color: #6a777a; font-size: 9px; font-weight: 800; letter-spacing: .1em; margin-right: 4px; text-transform: uppercase; }
+.property-pagination button { align-items: center; background: #d9d6ce; border: 0; border-radius: 50%; color: #112f3f; display: inline-flex; font-size: 10px; font-weight: 800; height: 28px; justify-content: center; min-width: 28px; padding: 0; transition: background .18s, color .18s, transform .16s cubic-bezier(.23,1,.32,1); }
+.property-pagination button:hover, .property-pagination button:focus-visible { background: #e4775e; color: #fffdf8; outline: none; }
+.property-pagination button.is-active { background: #112f3f; color: #fffdf8; }
+.property-pagination button:active { transform: scale(.94); }
+.load-more-button { display: none; }
 .dialog-copy { align-self: center; padding: clamp(35px, 5vw, 66px); }
 .dialog-copy h2 { font-size: clamp(38px, 4vw, 57px); line-height: .92; margin: 0; }
 .dialog-price { color: #d95f42; font-size: 16px; font-weight: 800; margin: 14px 0 20px; }
@@ -333,7 +337,7 @@ h2 em { color: #d95f42; font-style: italic; }
   .section-heading h2 { font-size: 58px; }
   .collection-meta { align-items: flex-start; }
   .property-grid { grid-template-columns: 1fr; gap: 24px; }
-  .load-more-button { width: 100%; }
+  .property-pagination { gap: 7px; margin-top: 24px; }
   .dialog-main-image > img { height: 260px; max-height: 42vh; }
   .dialog-gallery-control { height: 34px; width: 34px; }
   .property-card:nth-child(1), .property-card:nth-child(2), .property-card:nth-child(3) { grid-column: auto; margin-top: 0; }

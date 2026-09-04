@@ -269,3 +269,12 @@
 
 - [x] Capturar y guardar evidencia reproducible del aviso inferior en `notes/oauth-warning-evidence-2026-09-04.txt` mediante logs de navegador, servidor y red.
 - [x] Documentar en una nota técnica la evidencia usada para diagnosticar el aviso inferior y relacionarla con las redirecciones OAuth residuales durante el desmontaje.
+
+## Nueva paginación y orden del catálogo
+
+- [ ] Cambiar la cuadrícula pública a bloques completos de 9 propiedades en PC y móvil, sin dejar tarjetas sueltas.
+- [ ] Sustituir «Ver más» por paginación horizontal de puntos numerados que reemplace el bloque visible sin alargar la página.
+- [ ] Añadir modo de orden «Destacadas primero» para priorizar playa, chalets, villas y viviendas visualmente atractivas.
+- [ ] Añadir modo «Orden manual» editable desde el administrador para decidir qué propiedades ocupan las primeras posiciones.
+- [ ] Persistir el orden elegido y mantenerlo al cambiar de idioma o recorrer los bloques paginados.
+- [ ] Añadir pruebas para bloques de 9, paginación por puntos y los dos modos de orden.
