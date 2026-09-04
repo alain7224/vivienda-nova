@@ -1,43 +1,19 @@
 import { useState } from "react";
+import worldMap from "@svg-maps/world";
 import { Globe2, MapPin, X } from "lucide-react";
 import "./VisitGeoPanel.css";
 
 type GeoAggregate = { name: string; visits: number; uniqueVisitors: number };
 export type GeoLocation = { country: string | null; region: string | null; city: string | null; latitude: number | null; longitude: number | null; visits: number; uniqueVisitors: number; pages: string[]; locales: string[]; lastVisited: Date };
-
 export type VisitGeoData = { locations: GeoLocation[]; countries: GeoAggregate[]; regions: GeoAggregate[]; cities: GeoAggregate[] };
 
 const dateFormatter = new Intl.DateTimeFormat("es-ES", { dateStyle: "medium", timeStyle: "short" });
-
-export function getGeoPoints(locations: GeoLocation[]) {
-  return locations.filter((location) => location.latitude !== null && location.longitude !== null);
-}
-
-export function getGeoMapState(locations: GeoLocation[]) {
-  return getGeoPoints(locations).length ? "ready" : "empty";
-}
-
-function markerPosition(latitude: number, longitude: number) {
-  return { left: `${Math.min(96, Math.max(4, ((longitude + 180) / 360) * 100))}%`, top: `${Math.min(92, Math.max(8, ((90 - latitude) / 180) * 100))}%` };
-}
-
-export function clusterLocations(points: GeoLocation[]) {
-  const clusters = new Map<string, GeoLocation[]>();
-  points.forEach((point) => {
-    const key = `${Math.round((point.latitude as number) * 4) / 4}:${Math.round((point.longitude as number) * 4) / 4}`;
-    clusters.set(key, [...(clusters.get(key) ?? []), point]);
-  });
-  return Array.from(clusters.values());
-}
-
-function clusterPosition(cluster: GeoLocation[]) {
-  return cluster.reduce((sum, point) => ({ latitude: sum.latitude + (point.latitude as number), longitude: sum.longitude + (point.longitude as number) }), { latitude: 0, longitude: 0 });
-}
-
-function formatVisitedPage(page: string) {
-  const property = new URLSearchParams(page.split("?")[1] || "").get("property");
-  return property ? `Vivienda: ${property}` : page || "Inicio";
-}
+export function getGeoPoints(locations: GeoLocation[]) { return locations.filter((location) => location.latitude !== null && location.longitude !== null); }
+export function getGeoMapState(locations: GeoLocation[]) { return getGeoPoints(locations).length ? "ready" : "empty"; }
+function markerPosition(latitude: number, longitude: number) { return { left: `${Math.min(96, Math.max(4, ((longitude + 180) / 360) * 100))}%`, top: `${Math.min(92, Math.max(8, ((90 - latitude) / 180) * 100))}%` }; }
+export function clusterLocations(points: GeoLocation[]) { const clusters = new Map<string, GeoLocation[]>(); points.forEach((point) => { const key = `${Math.round((point.latitude as number) * 4) / 4}:${Math.round((point.longitude as number) * 4) / 4}`; clusters.set(key, [...(clusters.get(key) ?? []), point]); }); return Array.from(clusters.values()); }
+function clusterPosition(cluster: GeoLocation[]) { return cluster.reduce((sum, point) => ({ latitude: sum.latitude + (point.latitude as number), longitude: sum.longitude + (point.longitude as number) }), { latitude: 0, longitude: 0 }); }
+function formatVisitedPage(page: string) { const property = new URLSearchParams(page.split("?")[1] || "").get("property"); return property ? `Vivienda: ${property}` : page || "Inicio"; }
 
 export default function VisitGeoPanel({ data, onClose }: { data?: VisitGeoData; onClose: () => void }) {
   const locations = data?.locations ?? [];
@@ -48,10 +24,10 @@ export default function VisitGeoPanel({ data, onClose }: { data?: VisitGeoData; 
   const selected = points.find((location) => `${location.country}-${location.region}-${location.city}` === selectedKey) ?? null;
   return <section className="visit-geo-panel" aria-labelledby="visit-geo-title">
     <div className="visit-geo-heading"><div><p className="admin-kicker"><span /> Procedencia agregada</p><h2 id="visit-geo-title">Desde dónde <em>llegan.</em></h2><p className="visit-geo-note">Solo muestra ubicación general aproximada, páginas o viviendas consultadas y fechas. La IP, la calle, el número de vivienda y la identidad del visitante no se muestran ni se conservan.</p></div><button className="editor-close" type="button" onClick={onClose}><X size={16} /> Cerrar mapa</button></div>
-    <div className="visit-geo-map" role="img" aria-label="Mapa aproximado de procedencia de las visitas">
+    <div className="visit-geo-map" role="img" aria-label="Mapa mundial detallado y aproximado de procedencia de las visitas">
       <div className="visit-geo-map__grid" />
-      <svg className="visit-geo-map__world" viewBox="0 0 1000 500" aria-hidden="true" focusable="false"><path className="world-land world-land--north-america" d="M76 128 116 76 190 61 245 91 278 144 250 183 202 166 178 208 135 186 105 226 74 196Z" /><path className="world-land world-land--south-america" d="M287 237 328 254 348 310 327 362 296 423 266 389 274 334 252 288Z" /><path className="world-land world-land--europe" d="M470 126 512 101 557 113 582 143 554 166 514 157 486 179 455 158Z" /><path className="world-land world-land--africa" d="M478 194 535 184 581 222 570 292 532 358 491 322 468 263Z" /><path className="world-land world-land--asia" d="M574 114 646 83 757 103 836 150 810 204 735 190 692 222 622 188 582 165Z" /><path className="world-land world-land--oceania" d="M785 330 838 314 883 339 862 374 808 368Z" /></svg>
-      {clusters.map((cluster, clusterIndex) => { const clusterKey = cluster.map((location) => `${location.country}-${location.region}-${location.city}`).join("|"); const center = clusterPosition(cluster); const centerPosition = markerPosition(center.latitude / cluster.length, center.longitude / cluster.length); if (cluster.length === 1) { const location = cluster[0]; const key = `${location.country}-${location.region}-${location.city}`; return <button key={clusterKey} type="button" className={`visit-geo-marker ${selectedKey === key ? "is-selected" : ""}`} style={markerPosition(location.latitude as number, location.longitude as number)} onClick={() => setSelectedKey(key)} aria-label={`Seleccionar ${location.city || location.region || location.country || "ubicación general"}`}><MapPin size={17} /><span>{location.city || location.region || location.country || "Ubicación"}<b>{location.visits}</b></span></button>; } return <div key={clusterKey} className={`visit-geo-cluster ${expandedCluster === clusterKey ? "is-expanded" : ""}`} style={centerPosition}><button type="button" className="visit-geo-cluster__button" onClick={() => setExpandedCluster(expandedCluster === clusterKey ? null : clusterKey)} aria-expanded={expandedCluster === clusterKey} aria-label={`Abrir ${cluster.length} ubicaciones cercanas`}><MapPin size={17} /><b>{cluster.length}</b><span>{cluster.reduce((total, location) => total + location.visits, 0)} visitas</span></button>{expandedCluster === clusterKey && <div className="visit-geo-cluster__children">{cluster.map((location, childIndex) => { const key = `${location.country}-${location.region}-${location.city}`; const angle = (childIndex / cluster.length) * Math.PI * 2 - Math.PI / 2; const offset = 11 + Math.min(7, cluster.length); const childStyle = { left: `${50 + Math.cos(angle) * offset}%`, top: `${50 + Math.sin(angle) * offset}%` }; return <div className="visit-geo-cluster__child" key={key}><span className="visit-geo-connector" aria-hidden="true" /><button type="button" className={`visit-geo-marker ${selectedKey === key ? "is-selected" : ""}`} style={childStyle} onClick={() => setSelectedKey(key)} aria-label={`Seleccionar ${location.city || location.region || location.country || "ubicación general"}`}><MapPin size={15} /><span>{location.city || location.region || location.country || "Ubicación"}<b>{location.visits}</b></span></button></div>; })}</div>}</div>; })}
+      <svg className="visit-geo-map__world" viewBox={worldMap.viewBox} aria-hidden="true" focusable="false">{worldMap.locations.map((location: { id: string; path: string }) => <path key={location.id} className="world-land" d={location.path} />)}</svg>
+      {clusters.map((cluster) => { const clusterKey = cluster.map((location) => `${location.country}-${location.region}-${location.city}`).join("|"); const center = clusterPosition(cluster); const centerPosition = markerPosition(center.latitude / cluster.length, center.longitude / cluster.length); if (cluster.length === 1) { const location = cluster[0]; const key = `${location.country}-${location.region}-${location.city}`; return <button key={clusterKey} type="button" className={`visit-geo-marker ${selectedKey === key ? "is-selected" : ""}`} style={markerPosition(location.latitude as number, location.longitude as number)} onClick={() => setSelectedKey(key)} aria-label={`Seleccionar ${location.city || location.region || location.country || "ubicación general"}`}><MapPin size={17} /><span>{location.city || location.region || location.country || "Ubicación"}<b>{location.visits}</b></span></button>; } return <div key={clusterKey} className={`visit-geo-cluster ${expandedCluster === clusterKey ? "is-expanded" : ""}`} style={centerPosition}><button type="button" className="visit-geo-cluster__button" onClick={() => setExpandedCluster(expandedCluster === clusterKey ? null : clusterKey)} aria-expanded={expandedCluster === clusterKey} aria-label={`Abrir ${cluster.length} ubicaciones cercanas`}><MapPin size={17} /><b>{cluster.length}</b><span>{cluster.reduce((total, location) => total + location.visits, 0)} visitas</span></button>{expandedCluster === clusterKey && <div className="visit-geo-cluster__children">{cluster.map((location, childIndex) => { const key = `${location.country}-${location.region}-${location.city}`; const angle = (childIndex / cluster.length) * Math.PI * 2 - Math.PI / 2; const offset = 11 + Math.min(7, cluster.length); const childStyle = { left: `${50 + Math.cos(angle) * offset}%`, top: `${50 + Math.sin(angle) * offset}%` }; return <div className="visit-geo-cluster__child" key={key}><span className="visit-geo-connector" aria-hidden="true" /><button type="button" className={`visit-geo-marker ${selectedKey === key ? "is-selected" : ""}`} style={childStyle} onClick={() => setSelectedKey(key)} aria-label={`Seleccionar ${location.city || location.region || location.country || "ubicación general"}`}><MapPin size={15} /><span>{location.city || location.region || location.country || "Ubicación"}<b>{location.visits}</b></span></button></div>; })}</div>}</div>; })}
       {getGeoMapState(locations) === "empty" && <div className="visit-geo-empty"><Globe2 size={28} /><strong>Aún no hay coordenadas disponibles</strong><span>Las próximas visitas consentidas se agruparán aquí.</span></div>}
       <span className="visit-geo-label visit-geo-label--north">N · PROCEDENCIA GLOBAL</span><span className="visit-geo-label visit-geo-label--south">DATOS AGREGADOS · PRECISIÓN APROXIMADA</span>
     </div>

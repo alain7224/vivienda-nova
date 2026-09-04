@@ -1,0 +1,3 @@
+# Integración cartográfica 2026-09-04
+
+VisitGeoPanel mantiene únicamente ubicaciones agregadas con país, región, municipio, coordenadas aproximadas, visitas, páginas e idiomas. La carga Google fallaba en el entorno y producía el mapa de respaldo; se eliminó esa dependencia del panel y se integró `@svg-maps/world` como geometría local detallada. Los marcadores siguen agrupándose por proximidad; al abrir un grupo se separan con conectores y permiten seleccionar cada ubicación. La captura de verificación muestra continentes reconocibles y un fondo claro, sin pantalla negra ni etiquetas apiladas. No se guarda IP ni dirección.
