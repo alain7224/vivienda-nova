@@ -112,7 +112,7 @@
 
 ## Verificación honesta pendiente de producción
 
-- [ ] Confirmar /admin autenticado en el dominio público con una sesión limpia; el navegador remoto anterior agotó el tiempo.
+- [x] Confirmar /admin autenticado en el dominio público con una sesión limpia; la prueba HTTP pública devolvió cookie admin, auth.me con role admin y admin.overview correcto.
 - [x] Auditar y normalizar las URLs de medios persistidas en viviendas y configuración para que solo usen recursos publicados válidos; la configuración real usa `/manus-storage/` y no hay viviendas publicadas con URLs antiguas que normalizar.
 - [ ] Reprobar en Safari/iPhone del usuario la carga de fotos y reproducción del vídeo tras limpiar caché y cookies.
 
@@ -170,7 +170,7 @@
 ## Evidencia posterior del flujo completo
 
 - [ ] Reprobar en el iPhone/Safari afectado que al salir de /admin la portada no muestra avisos residuales ni medios rotos.
-- [ ] Capturar logs o evidencia concreta del aviso inferior para confirmar su causa exacta.
+- [x] Capturar logs o evidencia concreta del aviso inferior para confirmar su causa exacta; la evidencia identifica redirecciones OAuth residuales durante el desmontaje de consultas privadas.
 - [x] Añadir una verificación reproducible del flujo logout admin → portada sin redirección OAuth ni error residual.
 - [x] Confirmar en producción que el nuevo botón «Mapa de visitas» y `/admin?view=geo` muestran un estado vacío claro o datos reales; la consulta pública devuelve 4 ubicaciones agregadas.
 
@@ -264,3 +264,8 @@
 - [x] Hacer que la galería del detalle cambie de imagen al pulsar miniaturas y funcione con controles táctiles.
 - [x] Evitar cualquier scroll interminable en listados y detalles, manteniendo scroll interno limitado.
 - [x] Añadir pruebas de regresión para agrupación del mapa, paginación, galería y navegación táctil.
+
+## Evidencia concreta del aviso residual
+
+- [x] Capturar y guardar evidencia reproducible del aviso inferior en `notes/oauth-warning-evidence-2026-09-04.txt` mediante logs de navegador, servidor y red.
+- [x] Documentar en una nota técnica la evidencia usada para diagnosticar el aviso inferior y relacionarla con las redirecciones OAuth residuales durante el desmontaje.
