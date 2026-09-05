@@ -278,3 +278,11 @@
 - [x] Añadir modo «Orden manual» editable desde el administrador para decidir qué propiedades ocupan las primeras posiciones.
 - [x] Persistir el orden elegido y mantenerlo al cambiar de idioma o recorrer los bloques paginados.
 - [x] Añadir pruebas para bloques de 9, paginación por puntos y los dos modos de orden.
+
+## Actualización desde Google Drive: precios L & R
+
+- [x] Comparar las 109 fichas actuales de L & R con `LRCOSTAHOMES_CATALOGO_COMPLETO_109.csv` de Drive.
+- [x] Sustituir el precio genérico de 1.000 € por el precio real del CSV cuando exista y sea numérico.
+- [x] Mantener sin precio la ficha que el PDF identifica como no verificable y dejarla para revisión humana.
+- [x] Validar que no se creen duplicados, que se conserven galerías y URLs internas, y que los filtros públicos usen los precios corregidos.
+- [x] Revisar el ZIP de Drive sin sobrescribir autenticación, secretos, dominio ni cambios más recientes del proyecto.
